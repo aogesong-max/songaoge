@@ -43,22 +43,56 @@
     <div class="boot-panel boot-panel--top"></div>
     <div class="boot-panel boot-panel--bottom"></div>
     <div class="boot-grid" aria-hidden="true"></div>
+    <div class="boot-stars" aria-hidden="true"></div>
+    <div class="boot-aurora" aria-hidden="true"></div>
+    <div class="temporal-stage" aria-hidden="true">
+      <div class="temporal-readout temporal-readout--left">
+        <span>TIME AXIS</span>
+        <b>00 : 00 : 00</b>
+      </div>
+      <div class="temporal-readout temporal-readout--right">
+        <span>TEMPORAL SIGNAL</span>
+        <b>CHRONO / 01</b>
+      </div>
+      <div class="clock-system">
+        <span class="clock-ring clock-ring--outer"></span>
+        <span class="clock-ticks"></span>
+        <span class="clock-ring clock-ring--inner"></span>
+        <span class="clock-hand clock-hand--hour"></span>
+        <span class="clock-hand clock-hand--minute"></span>
+        <span class="clock-pulse"></span>
+      </div>
+      <span class="time-axis time-axis--left"></span>
+      <span class="time-axis time-axis--right"></span>
+    </div>
     <div class="boot-center">
-      <span class="boot-kicker">PORTFOLIO / 2026</span>
+      <div class="boot-creator">
+        <span class="boot-creator__mark" aria-hidden="true">✦</span>
+        <span class="boot-kicker"><strong>AIGC创作者</strong><small>AIGC CREATOR / TEMPORAL SIGNAL</small></span>
+        <span class="boot-timecode">
+          <span id="boot-date">2026.11.12</span>
+          <strong id="boot-clock">00:00:00.000</strong>
+        </span>
+      </div>
       <div class="boot-copy" data-text="SONGAOGE" aria-label="SONGAOGE">
         <span>S</span><span>O</span><span>N</span><span>G</span><span>A</span><span>O</span><span>G</span><span>E</span>
       </div>
+      <p class="boot-welcome">欢迎回来，创作者</p>
+      <p class="boot-welcome-en">WELCOME BACK, CREATOR</p>
       <div class="boot-progress" aria-hidden="true">
         <div class="boot-progress__track">
           <span class="boot-progress__fill" id="boot-progress-fill"></span>
         </div>
         <span class="boot-progress__meta">
-          <span>LOADING VISUAL WORLD</span>
+          <span>SYNCHRONIZING TEMPORAL SIGNAL</span>
           <span id="boot-percent">0%</span>
         </span>
       </div>
     </div>
     <div class="boot-line" aria-hidden="true"></div>
+    <div class="boot-horizon" aria-hidden="true"></div>
+    <span class="boot-coordinate boot-coordinate--bl" aria-hidden="true">SONGAOGE / ORIGIN 00.01</span>
+    <span class="boot-coordinate boot-coordinate--br" aria-hidden="true">AIGC CREATOR / 2026</span>
     <button class="boot-skip" id="boot-skip" type="button" onclick="window.__bootDismiss &amp;&amp; window.__bootDismiss(true)">跳过 SKIP <span aria-hidden="true">→</span></button>
   </div>
 

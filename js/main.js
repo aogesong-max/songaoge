@@ -7,10 +7,13 @@
   const bootSkip = document.getElementById("boot-skip");
   const bootFill = document.getElementById("boot-progress-fill");
   const bootPercent = document.getElementById("boot-percent");
+  const bootClock = document.getElementById("boot-clock");
+  const bootDate = document.getElementById("boot-date");
+  const bootAxisTime = document.querySelector(".temporal-readout--left b");
   const bootLetters = Array.from(document.querySelectorAll(".boot-copy span"));
   const hero = document.querySelector(".hero");
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const bootStorageKey = "songaoge-boot-played-v1";
+  const bootStorageKey = "songaoge-boot-played-v2";
   let bootFrame = 0;
   let bootFinished = false;
 
@@ -123,6 +126,21 @@
     );
   }
 
+  function updateBootTime() {
+    const now = new Date();
+    const pad = (value, length = 2) => String(value).padStart(length, "0");
+    const hours = pad(now.getHours());
+    const minutes = pad(now.getMinutes());
+    const seconds = pad(now.getSeconds());
+    const milliseconds = pad(now.getMilliseconds(), 3);
+
+    if (bootClock) bootClock.textContent = `${hours}:${minutes}:${seconds}.${milliseconds}`;
+    if (bootAxisTime) bootAxisTime.textContent = `${hours} : ${minutes} : ${seconds}`;
+    if (bootDate) {
+      bootDate.textContent = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())}`;
+    }
+  }
+
   function startBootSequence() {
     if (!bootLayer) {
       fullyDismissBoot();
@@ -139,11 +157,13 @@
     safeSession.set(bootStorageKey, "1");
     body.classList.add("boot-locked");
     root.classList.add("boot-active");
+    updateBootTime();
 
     const startedAt = performance.now();
     let gridVisible = false;
     let lineOpen = false;
     let lettersEntered = false;
+    let welcomeVisible = false;
     let sweepStarted = false;
     let curtainStarted = false;
     let heroRevealed = false;
@@ -166,10 +186,16 @@
         lettersEntered = true;
       }
 
+      if (!welcomeVisible && elapsed >= 1200) {
+        bootLayer.classList.add("is-welcomed");
+        welcomeVisible = true;
+      }
+
       if (elapsed >= 400) {
         const progress = Math.max(0, Math.min(100, ((elapsed - 400) / 1500) * 100));
         if (bootFill) bootFill.style.width = `${progress}%`;
         if (bootPercent) bootPercent.textContent = `${Math.round(progress)}%`;
+        updateBootTime();
       }
 
       if (!sweepStarted && elapsed >= 1900) {

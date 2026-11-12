@@ -210,14 +210,284 @@ p {
   opacity: 1;
 }
 
+.boot-stars {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(120, 232, 255, 0.62) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(143, 105, 255, 0.54) 0 0.8px, transparent 1.2px);
+  background-position: 18px 32px, 74px 112px, 40px 86px;
+  background-size: 178px 178px, 251px 251px, 122px 122px;
+  mask-image: radial-gradient(ellipse at center, #000 8%, transparent 76%);
+  opacity: 0;
+  transition: opacity 900ms ease;
+  pointer-events: none;
+}
+
+.boot-layer.is-grid .boot-stars {
+  opacity: 0.72;
+}
+
+.boot-aurora {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 53%;
+  width: min(72vw, 980px);
+  aspect-ratio: 1.35;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center, rgba(120, 232, 255, 0.16), transparent 42%),
+    radial-gradient(ellipse at 64% 44%, rgba(143, 105, 255, 0.13), transparent 52%),
+    radial-gradient(ellipse at 38% 58%, rgba(244, 92, 188, 0.07), transparent 48%);
+  filter: blur(38px);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+  transition: opacity 900ms ease, transform 1400ms var(--ease-out);
+  pointer-events: none;
+}
+
+.boot-layer.is-line-open .boot-aurora {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: aurora-breathe 4.8s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-breathe {
+  to {
+    filter: blur(50px);
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.temporal-stage {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 900ms ease, transform 1400ms var(--ease-out);
+  pointer-events: none;
+}
+
+.boot-layer.is-line-open .temporal-stage {
+  opacity: 0.88;
+  transform: scale(1);
+}
+
+.boot-layer.is-curtain .temporal-stage {
+  opacity: 0;
+}
+
+.clock-system {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  width: min(68vw, 860px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.clock-system::before,
+.clock-system::after {
+  position: absolute;
+  inset: 12%;
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.clock-system::before {
+  border: 1px solid rgba(120, 232, 255, 0.1);
+  box-shadow: 0 0 70px rgba(120, 232, 255, 0.05);
+}
+
+.clock-system::after {
+  inset: 36%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.clock-ring {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.clock-ring--outer {
+  inset: 0;
+  border: 1px solid rgba(120, 232, 255, 0.22);
+  background: conic-gradient(
+    from -30deg,
+    transparent 0deg 38deg,
+    rgba(120, 232, 255, 0.62) 39deg 43deg,
+    transparent 44deg 160deg,
+    rgba(143, 105, 255, 0.45) 162deg 166deg,
+    transparent 167deg 278deg,
+    rgba(244, 92, 188, 0.34) 280deg 284deg,
+    transparent 285deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 72%, #000 72.4% 73.2%, transparent 73.6%);
+  mask: radial-gradient(circle, transparent 0 72%, #000 72.4% 73.2%, transparent 73.6%);
+  animation: clock-turn 32s linear infinite;
+}
+
+.clock-ticks {
+  position: absolute;
+  inset: 5.5%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from -0.4deg,
+    rgba(255, 255, 255, 0.42) 0 0.7deg,
+    transparent 0.8deg 6deg
+  );
+  -webkit-mask: radial-gradient(circle, transparent 0 84%, #000 84.5% 86.5%, transparent 87%);
+  mask: radial-gradient(circle, transparent 0 84%, #000 84.5% 86.5%, transparent 87%);
+  opacity: 0.44;
+  animation: clock-turn 90s linear infinite reverse;
+}
+
+.clock-ring--inner {
+  inset: 20%;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-right-color: rgba(120, 232, 255, 0.45);
+  border-bottom-color: rgba(143, 105, 255, 0.22);
+  box-shadow: inset 0 0 48px rgba(120, 232, 255, 0.035);
+  animation: clock-turn 18s linear infinite reverse;
+}
+
+.clock-hand {
+  position: absolute;
+  z-index: 2;
+  left: calc(50% - 0.5px);
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(218, 252, 255, 0.79));
+  transform-origin: 50% 100%;
+  box-shadow: 0 0 12px rgba(120, 232, 255, 0.5);
+}
+
+.clock-hand::after {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c8faFF;
+  box-shadow: 0 0 14px rgba(120, 232, 255, 0.85);
+  content: "";
+}
+
+.clock-hand--hour {
+  top: 25%;
+  height: 25%;
+  animation: clock-hour 48s linear infinite;
+}
+
+.clock-hand--minute {
+  top: 17%;
+  height: 33%;
+  opacity: 0.65;
+  animation: clock-minute 12s linear infinite;
+}
+
+.clock-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  background: #0a0c10;
+  box-shadow:
+    0 0 0 9px rgba(120, 232, 255, 0.035),
+    0 0 32px rgba(120, 232, 255, 0.38);
+  transform: translate(-50%, -50%);
+}
+
+@keyframes clock-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes clock-hour {
+  from {
+    transform: rotate(24deg);
+  }
+  to {
+    transform: rotate(384deg);
+  }
+}
+
+@keyframes clock-minute {
+  from {
+    transform: rotate(214deg);
+  }
+  to {
+    transform: rotate(574deg);
+  }
+}
+
+.time-axis {
+  position: absolute;
+  top: 23%;
+  width: 1px;
+  height: 54%;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 14px),
+    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.07), transparent);
+  opacity: 0.55;
+}
+
+.time-axis--left {
+  left: 9.5%;
+}
+
+.time-axis--right {
+  right: 9.5%;
+}
+
+.temporal-readout {
+  position: absolute;
+  top: 24%;
+  display: flex;
+  flex-direction: column;
+  color: #5f6570;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  line-height: 1.8;
+}
+
+.temporal-readout b {
+  color: rgba(190, 229, 238, 0.64);
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.temporal-readout--left {
+  left: 11.5%;
+}
+
+.temporal-readout--right {
+  right: 11.5%;
+  align-items: flex-end;
+  text-align: right;
+}
+
 .boot-center {
   position: absolute;
   z-index: 4;
   top: 50%;
-  left: 50%;
-  width: min(1180px, calc(100vw - 56px));
-  transform: translate(-50%, -50%);
-  text-align: center;
+  left: var(--page-gutter);
+  width: min(1280px, calc(100vw - 2 * var(--page-gutter)));
+  transform: translateY(-50%);
+  text-align: left;
   transition: opacity 340ms ease;
 }
 
@@ -229,22 +499,94 @@ p {
 }
 
 .boot-kicker {
-  display: block;
-  margin-bottom: 24px;
-  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  color: #c8cbd2;
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.boot-kicker strong {
+  color: #eef9fc;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+}
+
+.boot-kicker small {
+  margin-top: 3px;
+  color: #747b87;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+}
+
+.boot-creator {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  width: min(720px, 100%);
+  margin-bottom: clamp(28px, 4vh, 48px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease 80ms, transform 800ms var(--ease-out) 80ms;
+}
+
+.boot-layer.is-line-open .boot-creator {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.boot-creator__mark {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: none;
+  place-items: center;
+  border: 1px solid rgba(120, 232, 255, 0.34);
+  color: #dffcff;
+  font-size: 16px;
+  transform: rotate(45deg);
+}
+
+.boot-creator__mark::first-letter {
+  transform: rotate(-45deg);
+}
+
+.boot-timecode {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: flex-end;
+  margin-left: auto;
+  color: #5f6671;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 8px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+
+.boot-timecode strong {
+  color: #b9dce5;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
 }
 
 .boot-copy {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
   color: #fff;
   font-family: var(--display);
-  font-size: clamp(4.5rem, 15.5vw, 15rem);
+  font-size: clamp(4.4rem, 14.4vw, 14.5rem);
   font-weight: 900;
   letter-spacing: -0.075em;
   line-height: 0.88;
@@ -266,7 +608,7 @@ p {
   inset: -8% -4%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   background: var(--accent);
   background-size: 280% 100%;
   background-position: 115% 0;
@@ -284,6 +626,7 @@ p {
   mask-position: -40% 0;
   -webkit-mask-size: 250% 100%;
   mask-size: 250% 100%;
+  text-align: left;
 }
 
 .boot-layer.is-sweeping .boot-copy::after {
@@ -310,7 +653,7 @@ p {
 
 .boot-progress {
   width: min(580px, 72vw);
-  margin: 42px auto 0;
+  margin: 34px 0 0;
 }
 
 .boot-progress__track {
@@ -348,6 +691,35 @@ p {
   letter-spacing: 0.13em;
 }
 
+.boot-welcome {
+  margin: 30px 0 0;
+  color: #d9e4e8;
+  font-size: clamp(18px, 1.75vw, 27px);
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 800ms var(--ease-out);
+}
+
+.boot-welcome-en {
+  margin: 7px 0 0;
+  color: #68737f;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 600ms ease 80ms, transform 800ms var(--ease-out) 80ms;
+}
+
+.boot-layer.is-welcomed .boot-welcome,
+.boot-layer.is-welcomed .boot-welcome-en {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .boot-progress__meta span:last-child {
   color: #d7d7dd;
   font-size: 11px;
@@ -371,6 +743,54 @@ p {
 .boot-layer.is-line-open .boot-line {
   width: 100vw;
   opacity: 1;
+}
+
+.boot-horizon {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(1080px, 86vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(120, 232, 255, 0.32), rgba(255, 255, 255, 0.4), rgba(143, 105, 255, 0.26), transparent);
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(0.1);
+  transition: opacity 500ms ease, transform 1100ms var(--ease-out);
+  pointer-events: none;
+}
+
+.boot-layer.is-line-open .boot-horizon {
+  opacity: 0.72;
+  transform: translate(-50%, -50%) scaleX(1);
+}
+
+.boot-coordinate {
+  position: absolute;
+  z-index: 5;
+  bottom: 24px;
+  color: #505963;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 7px;
+  letter-spacing: 0.15em;
+  pointer-events: none;
+}
+
+.boot-coordinate--bl {
+  left: var(--page-gutter);
+}
+
+.boot-coordinate--br {
+  right: var(--page-gutter);
+}
+
+.boot-layer.is-curtain .boot-creator,
+.boot-layer.is-curtain .boot-welcome,
+.boot-layer.is-curtain .boot-welcome-en,
+.boot-layer.is-curtain .temporal-readout,
+.boot-layer.is-curtain .time-axis,
+.boot-layer.is-curtain .boot-coordinate,
+.boot-layer.is-curtain .boot-horizon {
+  opacity: 0;
 }
 
 .boot-skip {
@@ -2242,12 +2662,53 @@ p {
   }
 
   .boot-copy {
-    font-size: clamp(3.5rem, 15.7vw, 8rem);
+    font-size: clamp(3.4rem, 15.2vw, 7.2rem);
+  }
+
+  .boot-creator {
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .boot-kicker strong {
+    font-size: 14px;
+  }
+
+  .boot-kicker small {
+    font-size: 6px;
+  }
+
+  .boot-timecode {
+    font-size: 7px;
+  }
+
+  .boot-timecode strong {
+    font-size: 9px;
+  }
+
+  .boot-welcome {
+    margin-top: 24px;
+    font-size: 16px;
+  }
+
+  .boot-welcome-en {
+    font-size: 7px;
   }
 
   .boot-progress {
     width: min(440px, 76vw);
-    margin-top: 32px;
+    margin-top: 26px;
+  }
+
+  .clock-system {
+    left: 50%;
+    width: min(118vw, 740px);
+  }
+
+  .temporal-readout,
+  .time-axis,
+  .boot-coordinate {
+    display: none;
   }
 
   .boot-skip {
@@ -2334,13 +2795,38 @@ p {
   }
 
   .boot-kicker {
-    margin-bottom: 18px;
     font-size: 8px;
   }
 
+  .boot-creator {
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .boot-creator__mark {
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .boot-timecode > span {
+    display: none;
+  }
+
+  .boot-copy {
+    font-size: clamp(52px, 15.2vw, 70px);
+    letter-spacing: -0.09em;
+  }
+
+  .boot-welcome {
+    font-size: 15px;
+    letter-spacing: 0.08em;
+  }
+
   .boot-progress__meta span:first-child {
-    max-width: 130px;
+    max-width: 156px;
     overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
 }
