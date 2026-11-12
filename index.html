@@ -9,6 +9,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050507'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='25' font-weight='900' fill='%23ffffff'%3ESG%3C/text%3E%3C/svg%3E">
   <style>html,body{margin:0;min-height:100%;background:#050507;color:#f6f6f7}</style>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/intro.css">
   <script>
     document.documentElement.classList.add("js");
     window.__bootDismiss = function (recordSession) {
@@ -31,70 +32,268 @@
     window.__bootSafetyTimer = window.setTimeout(function () {
       window.__bootDismiss(false);
     }, 4000);
+    try {
+      if (window.sessionStorage.getItem("songaoge-intro-seen") === "1") {
+        document.documentElement.classList.add("intro-session-seen");
+        var hideSeenIntro = function () {
+          var seenIntro = document.getElementById("intro");
+          if (seenIntro) seenIntro.style.display = "none";
+        };
+        document.addEventListener("DOMContentLoaded", hideSeenIntro, { once: true });
+      }
+    } catch (error) {
+      // Storage can be unavailable in strict privacy modes.
+    }
+    window.__introSafetyTimer = window.setTimeout(function () {
+      var intro = document.getElementById("intro");
+      if (!intro) return;
+      document.documentElement.classList.remove("intro-active", "intro-running");
+      intro.style.display = "none";
+    }, 6500);
   </script>
   <noscript>
-    <style>.boot-layer{display:none!important}</style>
+    <style>.boot-layer,#intro{display:none!important}</style>
   </noscript>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <div id="intro" role="dialog" aria-label="SONGAOGE 线稿苏醒启动动画">
+    <canvas id="intro-stars" class="intro-stars" aria-hidden="true"></canvas>
+    <div class="intro-cloud intro-cloud--one" aria-hidden="true"></div>
+    <div class="intro-cloud intro-cloud--two" aria-hidden="true"></div>
+    <div class="intro-image-layer" id="intro-image-layer" aria-hidden="true">
+      <img id="intro-line-image" alt="">
+      <img id="intro-color-image" alt="">
+    </div>
+    <svg id="intro-svg" class="intro-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="intro-hair-fill" x1="0" y1="0" x2="0.32" y2="1">
+          <stop offset="0%" stop-color="#EAF6FF"/>
+          <stop offset="44%" stop-color="#9FD8F2"/>
+          <stop offset="100%" stop-color="#1D4E9E"/>
+        </linearGradient>
+        <linearGradient id="intro-skin-fill" x1="0" y1="0" x2="0.8" y2="1">
+          <stop offset="0%" stop-color="#FFF9F5"/>
+          <stop offset="54%" stop-color="#F7ECE8"/>
+          <stop offset="100%" stop-color="#EADDE2"/>
+        </linearGradient>
+        <linearGradient id="intro-collar-fill" x1="0" y1="0" x2="0.8" y2="1">
+          <stop offset="0%" stop-color="#1D3158"/>
+          <stop offset="100%" stop-color="#0F1930"/>
+        </linearGradient>
+        <linearGradient id="intro-lapel-fill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#F3FAFF"/>
+          <stop offset="100%" stop-color="#A7C7DF"/>
+        </linearGradient>
+        <radialGradient id="intro-iris-fill" cx="48%" cy="42%" r="62%">
+          <stop offset="0%" stop-color="#07152D"/>
+          <stop offset="28%" stop-color="#0B67A8"/>
+          <stop offset="66%" stop-color="#35D9FF"/>
+          <stop offset="100%" stop-color="#1E3E91"/>
+        </radialGradient>
+        <linearGradient id="intro-wing-near" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#A9F6FF"/>
+          <stop offset="46%" stop-color="#38B6FF"/>
+          <stop offset="100%" stop-color="#8E64FF"/>
+        </linearGradient>
+        <linearGradient id="intro-wing-far" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#74D6FF"/>
+          <stop offset="100%" stop-color="#5A49C9"/>
+        </linearGradient>
+        <linearGradient id="intro-gem-fill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#E7FFFF"/>
+          <stop offset="46%" stop-color="#72E4FF"/>
+          <stop offset="100%" stop-color="#2A68D5"/>
+        </linearGradient>
+        <filter id="intro-soft-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="intro-eye-glow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="2.6" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
 
-  <div class="boot-layer" id="boot-layer" aria-hidden="false">
-    <div class="boot-panel boot-panel--top"></div>
-    <div class="boot-panel boot-panel--bottom"></div>
-    <div class="boot-grid" aria-hidden="true"></div>
-    <div class="boot-stars" aria-hidden="true"></div>
-    <div class="boot-aurora" aria-hidden="true"></div>
-    <div class="temporal-stage" aria-hidden="true">
-      <div class="temporal-readout temporal-readout--left">
-        <span>TIME AXIS</span>
-        <b>00 : 00 : 00</b>
+      <g id="intro-character">
+        <path id="intro-hair-fill-path" class="intro-color-fill" data-max-opacity="0.92" fill="url(#intro-hair-fill)" fill-opacity="0"
+          d="M1542 76 C1450 58 1362 106 1320 196 C1293 258 1326 319 1298 386 C1268 457 1233 505 1188 562 C1110 665 1068 791 1088 1080 L1740 1080 C1770 932 1758 824 1719 704 C1690 614 1719 518 1758 423 C1797 325 1764 200 1689 118 C1643 66 1592 66 1542 76 Z"/>
+        <path class="intro-color-fill intro-hair-shade" data-max-opacity="0.42" fill="#06152D" fill-opacity="0"
+          d="M1568 118 C1448 104 1342 178 1312 302 C1290 393 1307 449 1242 541 C1162 654 1100 824 1118 1080 L1418 1080 C1360 907 1319 745 1385 613 C1430 524 1512 495 1578 408 C1631 340 1640 213 1568 118 Z"/>
+        <path class="intro-color-fill intro-hair-lock" data-max-opacity="0.72" fill="url(#intro-hair-fill)" fill-opacity="0"
+          d="M1392 154 C1342 229 1322 319 1277 396 C1207 518 1132 617 1089 760 C1057 866 1059 982 1078 1080 L1234 1080 C1204 926 1224 799 1292 670 C1360 540 1430 469 1455 340 C1468 274 1450 205 1392 154 Z"/>
+        <path class="intro-color-fill intro-hair-lock" data-max-opacity="0.52" fill="#BEEFFF" fill-opacity="0"
+          d="M1494 104 C1434 202 1436 297 1397 392 C1352 501 1274 566 1207 674 C1151 764 1131 886 1134 990 C1143 830 1185 718 1267 630 C1369 521 1450 458 1497 346 C1531 265 1528 178 1494 104 Z"/>
+        <path class="intro-color-fill intro-hair-lock" data-max-opacity="0.56" fill="url(#intro-hair-fill)" fill-opacity="0"
+          d="M1601 120 C1560 247 1590 372 1570 496 C1546 644 1492 777 1472 920 C1459 1014 1460 1052 1465 1080 L1544 1080 C1516 925 1554 771 1591 645 C1633 503 1633 340 1693 215 C1649 162 1627 135 1601 120 Z"/>
+        <path class="intro-color-fill intro-hair-lock" data-max-opacity="0.66" fill="#73C7F0" fill-opacity="0"
+          d="M1688 171 C1693 310 1727 422 1704 563 C1681 702 1628 812 1592 918 C1565 998 1555 1044 1550 1080 L1643 1080 C1655 933 1707 841 1724 709 C1745 544 1761 480 1785 373 C1753 282 1735 217 1688 171 Z"/>
+        <path class="intro-color-fill intro-hair-lock" data-max-opacity="0.34" fill="#F1FBFF" fill-opacity="0"
+          d="M1459 129 C1424 203 1422 296 1390 375 C1354 463 1304 518 1268 589 C1235 653 1218 722 1218 790 C1230 680 1274 601 1332 535 C1410 447 1490 394 1516 292 C1534 221 1514 164 1459 129 Z"/>
+        <path class="intro-color-fill intro-bang-fill" data-max-opacity="0.82" fill="url(#intro-hair-fill)" fill-opacity="0"
+          d="M1419 160 C1375 207 1356 272 1340 344 C1370 290 1416 255 1454 230 C1488 207 1510 181 1515 150 C1484 143 1450 146 1419 160 Z"/>
+        <path class="intro-color-fill intro-bang-fill" data-max-opacity="0.76" fill="url(#intro-hair-fill)" fill-opacity="0"
+          d="M1490 120 C1460 183 1435 251 1400 315 C1443 276 1492 247 1535 213 C1560 192 1583 170 1601 148 C1565 122 1527 112 1490 120 Z"/>
+        <path class="intro-color-fill intro-bang-fill" data-max-opacity="0.68" fill="#DDF5FF" fill-opacity="0"
+          d="M1560 112 C1535 182 1501 247 1463 302 C1505 270 1557 244 1600 208 C1630 184 1655 158 1664 132 C1633 109 1599 103 1560 112 Z"/>
+        <path class="intro-color-fill intro-bang-fill" data-max-opacity="0.54" fill="url(#intro-hair-fill)" fill-opacity="0"
+          d="M1375 218 C1355 274 1348 322 1343 367 C1361 321 1388 289 1419 264 C1437 248 1446 229 1449 208 C1425 200 1398 204 1375 218 Z"/>
+
+        <g id="intro-hair-strands" class="intro-hair-strands" filter="url(#intro-soft-glow)">
+          <path class="intro-draw intro-hair-path" d="M1430 160 C1398 226 1384 302 1350 372 C1288 505 1216 562 1138 642 C1056 726 1002 832 972 1010"/>
+          <path class="intro-draw intro-hair-path" d="M1464 142 C1435 230 1414 322 1368 412 C1312 520 1242 584 1180 682 C1124 766 1092 884 1086 1036"/>
+          <path class="intro-draw intro-hair-path" d="M1500 118 C1468 218 1460 328 1428 424 C1387 543 1320 616 1264 716 C1216 802 1194 910 1190 1036"/>
+          <path class="intro-draw intro-hair-path" d="M1538 100 C1512 207 1518 320 1492 446 C1464 574 1418 680 1384 798 C1354 903 1349 990 1353 1062"/>
+          <path class="intro-draw intro-hair-path" d="M1576 98 C1562 226 1580 354 1560 490 C1539 632 1504 748 1486 872 C1472 969 1470 1028 1470 1065"/>
+          <path class="intro-draw intro-hair-path" d="M1612 110 C1607 250 1636 395 1622 536 C1608 680 1576 808 1553 933 C1538 1010 1531 1043 1528 1070"/>
+          <path class="intro-draw intro-hair-path" d="M1650 138 C1658 275 1682 422 1675 566 C1668 695 1639 805 1612 912 C1598 968 1587 1018 1582 1056"/>
+          <path class="intro-draw intro-hair-path" d="M1685 178 C1708 316 1724 470 1710 613 C1698 732 1672 822 1642 926"/>
+          <path class="intro-draw intro-hair-path" d="M1378 202 C1348 280 1318 345 1272 416 C1211 507 1167 590 1130 688 C1098 774 1078 884 1072 990"/>
+          <path class="intro-draw intro-hair-path" d="M1410 190 C1368 268 1342 350 1303 430 C1245 552 1199 640 1175 755 C1153 864 1156 952 1160 1033"/>
+          <path class="intro-draw intro-hair-path" d="M1510 220 C1470 322 1443 408 1409 506 C1366 630 1328 730 1300 846 C1283 918 1274 981 1272 1040"/>
+          <path class="intro-draw intro-hair-path" d="M1554 220 C1535 344 1540 464 1512 584 C1484 702 1450 796 1426 905 C1412 968 1405 1020 1403 1064"/>
+          <path class="intro-draw intro-hair-path" d="M1600 238 C1596 358 1610 490 1588 610 C1567 726 1536 820 1516 928"/>
+          <path class="intro-draw intro-hair-path" d="M1646 266 C1654 392 1670 510 1653 632 C1637 742 1606 844 1586 943"/>
+          <path class="intro-draw intro-hair-path" d="M1314 260 C1264 338 1222 414 1177 498 C1128 588 1102 692 1088 790 C1079 854 1076 930 1080 1007"/>
+          <path class="intro-draw intro-hair-path" d="M1444 210 C1402 304 1374 382 1334 468 C1287 571 1252 660 1230 760 C1211 844 1205 938 1204 1010"/>
+          <path class="intro-hair-accent" d="M1396 252 C1349 318 1326 370 1294 427 C1262 486 1257 540 1235 603"/>
+          <path class="intro-hair-accent" d="M1518 248 C1463 307 1433 357 1408 412 C1385 466 1377 523 1363 569"/>
+          <path class="intro-hair-accent" d="M1590 208 C1538 278 1500 326 1472 386 C1447 439 1444 496 1426 554"/>
+          <path class="intro-hair-accent" d="M1342 182 C1300 232 1270 284 1247 338 C1220 402 1208 462 1187 528"/>
+        </g>
+
+        <path id="intro-neck-fill" class="intro-color-fill" data-max-opacity="0.94" fill="url(#intro-skin-fill)" fill-opacity="0"
+          d="M1452 619 C1480 641 1510 662 1551 670 C1567 705 1557 750 1531 791 C1501 838 1480 893 1472 958 L1407 958 C1394 865 1407 777 1452 619 Z"/>
+        <path id="intro-collar-fill-path" class="intro-color-fill" data-max-opacity="1" fill="url(#intro-collar-fill)" fill-opacity="0"
+          d="M1447 625 C1515 652 1594 690 1698 782 C1761 840 1785 949 1790 1080 L1280 1080 C1328 987 1369 872 1390 755 C1401 698 1418 652 1447 625 Z"/>
+        <path id="intro-face-fill-path" class="intro-draw intro-face-line intro-color-fill" data-max-opacity="0.98" fill="url(#intro-skin-fill)" fill-opacity="0"
+          d="M1422 184 C1388 214 1364 266 1352 326 C1346 354 1322 382 1287 401 C1268 412 1273 426 1293 432 C1317 440 1335 450 1347 462 C1358 474 1353 488 1332 497 C1315 504 1319 517 1342 526 C1368 536 1385 553 1391 580 C1397 609 1420 633 1448 650 C1475 667 1506 679 1536 669 C1571 658 1597 621 1607 575 C1620 519 1630 456 1622 390 C1614 319 1587 259 1547 220 C1513 187 1474 171 1422 184 Z"/>
+        <path class="intro-draw intro-face-line" d="M1442 446 C1412 473 1388 489 1364 493"/>
+        <path class="intro-draw intro-face-line" d="M1361 329 C1378 320 1397 322 1412 332"/>
+        <path class="intro-draw intro-face-line" d="M1468 363 C1482 357 1498 359 1510 368"/>
+        <path class="intro-draw intro-face-line intro-nose-line" d="M1289 431 C1273 436 1274 442 1291 447"/>
+        <path class="intro-draw intro-face-line intro-ear-line" d="M1568 397 C1590 389 1602 408 1593 431 C1586 450 1570 452 1559 436"/>
+        <path class="intro-draw intro-lip-line" id="intro-lip-line" fill="#D98A94" fill-opacity="0"
+          d="M1327 501 C1340 495 1353 500 1361 507 C1350 516 1338 515 1327 509 Z"/>
+        <path class="intro-face-shadow intro-color-fill" data-max-opacity="0.2" fill="#D7A8B2" fill-opacity="0"
+          d="M1332 420 C1353 430 1366 446 1357 470 C1349 493 1325 504 1305 497 C1320 474 1323 447 1332 420 Z"/>
+
+        <g id="eye-closed" class="intro-eye intro-eye--closed">
+          <path class="intro-draw intro-eye-line" d="M1347 366 C1373 383 1404 382 1429 361"/>
+          <path class="intro-draw intro-eye-line" d="M1460 374 C1478 385 1498 383 1513 370"/>
+          <path class="intro-eye-line intro-lash" d="M1355 376 C1347 382 1343 389 1341 395"/>
+          <path class="intro-eye-line intro-lash" d="M1372 382 C1369 391 1368 397 1368 402"/>
+          <path class="intro-eye-line intro-lash" d="M1391 385 C1392 393 1394 399 1397 404"/>
+          <path class="intro-eye-line intro-lash" d="M1411 382 C1415 390 1419 395 1424 400"/>
+          <path class="intro-eye-line intro-lash" d="M1425 374 C1431 379 1436 384 1441 389"/>
+          <path class="intro-eye-line intro-lash" d="M1469 382 C1468 388 1468 393 1470 398"/>
+          <path class="intro-eye-line intro-lash" d="M1485 386 C1487 392 1490 396 1494 400"/>
+          <path class="intro-eye-line intro-lash" d="M1500 382 C1505 386 1509 389 1514 391"/>
+        </g>
+        <g id="eye-open" class="intro-eye intro-eye--open" filter="url(#intro-eye-glow)">
+          <path class="intro-eye-white" d="M1347 367 C1374 345 1403 347 1429 363 C1408 392 1374 396 1347 367 Z"/>
+          <path class="intro-eye-line intro-upper-lash" d="M1347 367 C1374 345 1403 347 1429 363"/>
+          <ellipse cx="1391" cy="369" rx="12.5" ry="13.5" fill="url(#intro-iris-fill)" stroke="#8DEBFF" stroke-width="1.5"/>
+          <circle cx="1391" cy="370" r="5.2" fill="#031024"/>
+          <circle cx="1386" cy="363" r="3.2" fill="#FFFFFF"/>
+          <path class="intro-eye-white" d="M1459 375 C1477 362 1498 361 1514 371 C1496 389 1476 391 1459 375 Z"/>
+          <path class="intro-eye-line intro-upper-lash" d="M1459 375 C1477 362 1498 361 1514 371"/>
+          <ellipse cx="1488" cy="374" rx="9" ry="9.7" fill="url(#intro-iris-fill)" stroke="#8DEBFF" stroke-width="1.2"/>
+          <circle cx="1488" cy="375" r="3.8" fill="#031024"/>
+          <circle cx="1484.5" cy="370.5" r="2.3" fill="#FFFFFF"/>
+          <path class="intro-eye-line intro-lash" d="M1349 366 C1341 359 1335 355 1329 351"/>
+          <path class="intro-eye-line intro-lash" d="M1357 356 C1352 348 1349 342 1347 336"/>
+          <path class="intro-eye-line intro-lash" d="M1372 348 C1369 341 1368 335 1368 329"/>
+          <path class="intro-eye-line intro-lash" d="M1415 352 C1421 346 1425 341 1429 335"/>
+          <path class="intro-eye-line intro-lash" d="M1510 367 C1516 363 1521 358 1525 352"/>
+        </g>
+
+        <path id="intro-neck-line" class="intro-draw intro-face-line" d="M1536 669 C1552 713 1542 757 1518 801 C1498 840 1482 893 1476 948"/>
+        <path class="intro-draw intro-collar-line" d="M1403 740 C1474 779 1558 814 1641 875 C1689 910 1723 959 1745 1012"/>
+        <path class="intro-draw intro-collar-line" d="M1431 653 C1464 720 1481 792 1483 881 C1484 947 1473 1010 1452 1080"/>
+        <path id="intro-lapel-fill-path" class="intro-color-fill" data-max-opacity="0.98" fill="url(#intro-lapel-fill)" fill-opacity="0"
+          d="M1450 635 C1512 700 1545 800 1549 918 C1552 983 1545 1037 1532 1080 L1483 1080 C1505 988 1506 886 1480 796 C1465 745 1446 703 1415 675 Z"/>
+        <path class="intro-draw intro-lapel-line" d="M1450 635 C1512 700 1545 800 1549 918 C1552 983 1545 1037 1532 1080"/>
+        <path class="intro-draw intro-lapel-line" d="M1415 675 C1446 703 1465 745 1480 796 C1506 886 1505 988 1483 1080"/>
+        <path class="intro-ruffle intro-color-fill" data-max-opacity="0.84" fill="#ECF7FC" fill-opacity="0"
+          d="M1424 641 C1441 673 1460 687 1482 694 C1495 678 1501 663 1504 647 C1520 674 1529 697 1534 726 C1512 730 1491 724 1471 713 C1454 740 1436 752 1417 749 C1422 713 1424 678 1424 641 Z"/>
+        <path class="intro-ruffle intro-color-fill" data-max-opacity="0.72" fill="#BBDCE9" fill-opacity="0"
+          d="M1401 759 C1435 771 1466 767 1492 747 C1515 782 1532 803 1541 832 C1511 833 1480 824 1453 805 C1430 835 1404 851 1377 847 C1384 816 1392 786 1401 759 Z"/>
+        <path class="intro-draw intro-lapel-line" d="M1452 619 C1479 641 1510 662 1551 670"/>
+
+        <g id="intro-gem">
+          <path d="M1497 638 L1511 650 L1504 669 L1489 657 Z" fill="url(#intro-gem-fill)" stroke="#C8F8FF" stroke-width="1.5"/>
+          <path d="M1494 648 C1502 644 1508 648 1511 653" fill="none" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round" opacity="0.86"/>
+        </g>
+
+        <g id="intro-hairpin">
+          <path d="M1591 157 L1608 211 L1653 184 L1632 231 L1690 243 L1637 263 L1666 316 L1616 286 L1591 343 L1579 290 L1521 306 L1555 263 L1506 226 L1561 222 L1549 171 Z" fill="#0C111A" stroke="#E3EDF5" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M1592 193 L1608 229 L1644 232 L1615 252 L1622 291 L1591 268 L1560 291 L1568 251 L1538 232 L1575 228 Z" fill="#26384C" stroke="#B8D4E7" stroke-width="1.8"/>
+          <path d="M1592 216 L1605 230 L1593 261 L1581 230 Z" fill="url(#intro-gem-fill)" stroke="#EAFFFF" stroke-width="1.5"/>
+          <path d="M1610 247 C1604 261 1604 274 1611 287 M1588 159 C1597 146 1605 141 1618 138" fill="none" stroke="#B7D1E1" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M1559 222 C1583 209 1598 205 1618 204" fill="none" stroke="#738CA1" stroke-width="1.1" stroke-linecap="round"/>
+          <circle cx="1647" cy="171" r="3.1" fill="#DFFFFF"/>
+        </g>
+
+        <g id="intro-hair-sparkles" opacity="0">
+          <path d="M1545 414 L1549 427 L1562 431 L1549 435 L1545 448 L1541 435 L1528 431 L1541 427 Z" fill="#E8FEFF"/>
+          <path d="M1662 519 L1665 529 L1675 532 L1665 535 L1662 545 L1659 535 L1649 532 L1659 529 Z" fill="#A9F6FF"/>
+          <path d="M1311 671 L1314 681 L1324 684 L1314 687 L1311 697 L1308 687 L1298 684 L1308 681 Z" fill="#8BEAFF"/>
+        </g>
+      </g>
+
+      <g id="intro-butterfly" class="intro-butterfly" opacity="0" filter="url(#intro-eye-glow)">
+        <g class="intro-wing-group intro-wing-group--far">
+          <path class="intro-wing intro-wing--far intro-wing--upper" d="M-.5 -9 C-36 -56 -76 -52 -67 -18 C-61 8 -30 19 -6 8 Z" fill="url(#intro-wing-far)" stroke="#A3ECFF" stroke-width="1.1"/>
+          <path class="intro-wing intro-wing--far intro-wing--lower" d="M-3 11 C-38 19 -48 53 -29 67 C-11 80 7 49 4 25 Z" fill="url(#intro-wing-far)" stroke="#8EDFFF" stroke-width="1"/>
+          <path d="M-7 -5 C-28 -30 -50 -34 -59 -22 M-6 14 C-24 25 -32 43 -26 55" fill="none" stroke="#D5FAFF" stroke-width="1" stroke-linecap="round" opacity="0.68"/>
+        </g>
+        <path d="M-3 -18 C3 -9 4 15 -1 30" fill="none" stroke="#C7FAFF" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M-4 -20 C-13 -27 -19 -24 -22 -18" fill="none" stroke="#B6F3FF" stroke-width="1.2" stroke-linecap="round"/>
+        <g class="intro-wing-group intro-wing-group--near">
+          <path class="intro-wing intro-wing--near intro-wing--upper" d="M2 -8 C35 -69 88 -65 82 -20 C77 15 34 18 5 3 Z" fill="url(#intro-wing-near)" stroke="#BFF8FF" stroke-width="1.5"/>
+          <path class="intro-wing intro-wing--near intro-wing--lower" d="M3 11 C43 10 60 46 37 68 C15 88 -7 57 1 25 Z" fill="url(#intro-wing-near)" stroke="#A9F5FF" stroke-width="1.2"/>
+          <path d="M7 -3 C29 -35 55 -49 76 -31 M7 14 C25 27 37 42 34 59 M7 17 C17 42 18 53 16 64" fill="none" stroke="#E1FBFF" stroke-width="1.1" stroke-linecap="round" opacity="0.82"/>
+          <path d="M63 -49 C66 -36 70 -26 77 -17 M38 65 C29 52 19 40 8 29" fill="none" stroke="#4B7DE3" stroke-width="0.9" stroke-linecap="round" opacity="0.84"/>
+        </g>
+        <circle cx="-1" cy="-5" r="2" fill="#FFFFFF"/>
+      </g>
+
+      <g id="intro-forehead-star" transform="translate(1396 302)" opacity="0">
+        <path d="M0 -22 L5 -5 L22 0 L5 5 L0 22 L-5 5 L-22 0 L-5 -5 Z" fill="#DFFCFF"/>
+        <circle r="4" fill="#FFFFFF"/>
+      </g>
+    </svg>
+
+    <div class="intro-vignette" aria-hidden="true"></div>
+    <div class="intro-copy" id="intro-copy">
+      <h1>SONGAOGE</h1>
+      <span class="intro-rule" aria-hidden="true"></span>
+      <div class="intro-status">
+        <p class="intro-status__item intro-status__item--awakening">
+          <strong>SONGAOGE 正在苏醒…</strong>
+          <small>SONGAOGE IS AWAKENING.</small>
+        </p>
+        <p class="intro-status__item intro-status__item--welcome">
+          <strong>欢迎回来，访客。</strong>
+          <small>WELCOME BACK, VISITOR.</small>
+        </p>
+        <i class="intro-status__sweep" aria-hidden="true"></i>
       </div>
-      <div class="temporal-readout temporal-readout--right">
-        <span>TEMPORAL SIGNAL</span>
-        <b>CHRONO / 01</b>
-      </div>
-      <div class="clock-system">
-        <span class="clock-ring clock-ring--outer"></span>
-        <span class="clock-ticks"></span>
-        <span class="clock-ring clock-ring--inner"></span>
-        <span class="clock-hand clock-hand--hour"></span>
-        <span class="clock-hand clock-hand--minute"></span>
-        <span class="clock-pulse"></span>
-      </div>
-      <span class="time-axis time-axis--left"></span>
-      <span class="time-axis time-axis--right"></span>
     </div>
-    <div class="boot-center">
-      <div class="boot-creator">
-        <span class="boot-creator__mark" aria-hidden="true">✦</span>
-        <span class="boot-kicker"><strong>AIGC创作者</strong><small>AIGC CREATOR / TEMPORAL SIGNAL</small></span>
-        <span class="boot-timecode">
-          <span id="boot-date">2026.11.12</span>
-          <strong id="boot-clock">00:00:00.000</strong>
-        </span>
-      </div>
-      <div class="boot-copy" data-text="SONGAOGE" aria-label="SONGAOGE">
-        <span>S</span><span>O</span><span>N</span><span>G</span><span>A</span><span>O</span><span>G</span><span>E</span>
-      </div>
-      <p class="boot-welcome">欢迎回来，创作者</p>
-      <p class="boot-welcome-en">WELCOME BACK, CREATOR</p>
-      <div class="boot-progress" aria-hidden="true">
-        <div class="boot-progress__track">
-          <span class="boot-progress__fill" id="boot-progress-fill"></span>
-        </div>
-        <span class="boot-progress__meta">
-          <span>SYNCHRONIZING TEMPORAL SIGNAL</span>
-          <span id="boot-percent">0%</span>
-        </span>
-      </div>
+    <div class="intro-signature" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 1 L14 10 L23 12 L14 14 L12 23 L10 14 L1 12 L10 10 Z"/></svg>
+      <span>SONGAOGE × PORTFOLIO</span>
     </div>
-    <div class="boot-line" aria-hidden="true"></div>
-    <div class="boot-horizon" aria-hidden="true"></div>
-    <span class="boot-coordinate boot-coordinate--bl" aria-hidden="true">SONGAOGE / ORIGIN 00.01</span>
-    <span class="boot-coordinate boot-coordinate--br" aria-hidden="true">AIGC CREATOR / 2026</span>
-    <button class="boot-skip" id="boot-skip" type="button" onclick="window.__bootDismiss &amp;&amp; window.__bootDismiss(true)">跳过 SKIP <span aria-hidden="true">→</span></button>
+    <button class="intro-skip" id="intro-skip" type="button">ESC / 点击 跳过并进入</button>
   </div>
+
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
 
   <header class="site-header" id="site-header">
     <a class="brand" href="#home" aria-label="SONGAOGE 首页">SONGAOGE</a>
@@ -517,6 +716,7 @@
     <i><b id="scroll-line"></b></i>
   </div>
 
+  <script src="./js/intro.js" defer></script>
   <script src="./js/main.js" defer></script>
 </body>
 </html>
