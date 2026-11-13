@@ -806,6 +806,7 @@ p {
   font-weight: 700;
   letter-spacing: 0.14em;
   pointer-events: auto;
+  touch-action: manipulation;
   transition: color 180ms ease;
 }
 
@@ -922,11 +923,12 @@ p {
 .menu-toggle {
   display: none;
   justify-self: end;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   padding: 12px 8px;
   background: transparent;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .menu-toggle span:not(.sr-only) {
@@ -1355,6 +1357,7 @@ p {
   font-weight: 700;
   letter-spacing: -0.06em;
   line-height: 1.04;
+  text-wrap: balance;
 }
 
 .section-intro p {
@@ -2646,6 +2649,17 @@ p {
     padding: 25px;
   }
 
+  .form-row input,
+  .form-row textarea {
+    font-size: 16px;
+  }
+
+  .works-tabs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
   .footer-meta {
     flex-direction: column;
     gap: 12px;
@@ -2828,6 +2842,39 @@ p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+@media (max-width: 374px) {
+  :root {
+    --page-gutter: 16px;
+  }
+
+  .section {
+    width: calc(100% - 32px);
+  }
+
+  .marquee-section {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .hero {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 15.6vw, 58px);
+    letter-spacing: -0.1em;
+  }
+
+  .boot-copy {
+    font-size: clamp(46px, 15vw, 56px);
+  }
+
+  .footer-word {
+    font-size: clamp(44px, 15vw, 56px);
   }
 }
 
