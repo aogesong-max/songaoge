@@ -44,6 +44,12 @@ python -m http.server 8080
 
 替换视频时请保持 MP4（H.264）格式和 `muted + playsinline` 属性，避免移动浏览器阻止自动播放。同步替换 `poster.jpg` 可避免视频加载期间出现空白。
 
+## 首页背景视频
+
+首页 Hero 使用 `assets/hero/urban-jungle.mp4`，参考自 MotionSites 的 Urban Jungle 页面背景。视频默认静音循环播放，移动端使用裁切铺满；开启“减少动态效果”后改为展示 `urban-jungle-poster.jpg` 静态海报。
+
+该素材仅按当前站长要求接入。正式商业使用或再次分发前，请向素材权利方确认授权；也可以直接替换同名文件来更换背景视频。
+
 ## 替换作品
 
 作品卡片目前直接写在 `index.html` 中，六个分类各有三张固定占位卡。替换时保留卡片结构与封面比例即可：

@@ -146,6 +146,33 @@
     fullyDismissBoot();
   }
 
+  const heroBackgroundVideo = document.querySelector(".hero-video");
+  if (heroBackgroundVideo) {
+    if (reduceMotionQuery.matches) {
+      heroBackgroundVideo.pause();
+    } else {
+      const startHeroBackgroundVideo = () => {
+        const heroPlayback = heroBackgroundVideo.play();
+        if (heroPlayback && typeof heroPlayback.catch === "function") {
+          heroPlayback.catch(() => {
+            // The poster remains visible if the browser refuses autoplay.
+          });
+        }
+      };
+
+      if (root.classList.contains("boot-active")) {
+        const bootObserver = new MutationObserver(() => {
+          if (root.classList.contains("boot-active")) return;
+          bootObserver.disconnect();
+          startHeroBackgroundVideo();
+        });
+        bootObserver.observe(root, { attributes: true, attributeFilter: ["class"] });
+      } else {
+        startHeroBackgroundVideo();
+      }
+    }
+  }
+
   // Header state and right-edge scroll meter.
   const header = document.getElementById("site-header");
   const scrollPercent = document.getElementById("scroll-percent");
