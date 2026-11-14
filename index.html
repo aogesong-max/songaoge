@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./css/interactions.css">
   <link rel="stylesheet" href="./css/about-basic.css">
   <link rel="stylesheet" href="./css/core-skills.css">
+  <link rel="stylesheet" href="./css/design-overview.css">
   <script>
     document.documentElement.classList.add("js");
     window.__bootDismiss = function (recordSession) {
@@ -299,12 +300,82 @@
 
     <section class="works-section design-section" id="design" aria-labelledby="design-title">
       <div class="section-heading">
-        <span class="section-heading__index">01</span>
+        <span class="section-heading__index">02</span>
         <h2 id="design-title">AI设计图</h2>
         <span class="section-heading__en">Visual <em>Archive</em></span>
       </div>
-      <div class="design-index" id="design-index"></div>
-      <div class="design-groups" id="design-groups"></div>
+      <div class="design-overview" aria-label="AI设计图分类">
+        <a class="design-overview-card" href="#design-ip" data-cursor="IP设计">
+          <span class="design-overview-card__stack design-overview-card__stack--banner">
+            <img src="./assets/works/design/ip/nake-chronos/main.jpg" alt="纳克 IP 主图" loading="lazy" decoding="async">
+            <img src="./assets/works/design/ip/qirong/main.jpg" alt="漆绒 IP 主图" loading="lazy" decoding="async">
+            <img src="./assets/works/design/ip/xingdeng/main.jpg" alt="星灯 IP 主图" loading="lazy" decoding="async">
+          </span>
+          <span class="design-overview-card__meta">
+            <span class="design-overview-card__index">01</span>
+            <strong class="design-overview-card__name">IP设计</strong>
+            <span class="design-overview-card__subtitle">纳克 · 漆绒 · 星灯</span>
+          </span>
+        </a>
+
+        <a class="design-overview-card" href="#design-creative" data-cursor="创意图设计">
+          <span class="design-overview-card__stack design-overview-card__stack--portrait">
+            <img src="./assets/works/design/hongmo.jpg" alt="红膜创意图" loading="lazy" decoding="async">
+            <img src="./assets/works/design/shendian.jpg" alt="神殿之眼创意图" loading="lazy" decoding="async">
+            <img src="./assets/works/design/qiongding.jpg" alt="穹顶天环创意图" loading="lazy" decoding="async">
+          </span>
+          <span class="design-overview-card__meta">
+            <span class="design-overview-card__index">02</span>
+            <strong class="design-overview-card__name">创意图设计</strong>
+            <span class="design-overview-card__subtitle">Midjourney 创意图</span>
+          </span>
+        </a>
+
+        <a class="design-overview-card" href="#design-ecommerce" data-cursor="电商套图">
+          <span class="design-overview-card__stack design-overview-card__stack--banner">
+            <img src="./assets/works/design/ecommerce/tom-ford/main.jpg" alt="TOM FORD 电商主图" loading="lazy" decoding="async">
+            <img src="./assets/works/design/ecommerce/gpw5/main.jpg" alt="GPW5 电商主图" loading="lazy" decoding="async">
+            <img src="./assets/works/design/ecommerce/wassup/main.jpg" alt="WASSUP 电商主图" loading="lazy" decoding="async">
+          </span>
+          <span class="design-overview-card__meta">
+            <span class="design-overview-card__index">03</span>
+            <strong class="design-overview-card__name">电商套图</strong>
+            <span class="design-overview-card__subtitle">三套电商主图</span>
+          </span>
+        </a>
+
+        <a class="design-overview-card" href="#design-workflow" data-cursor="工作流">
+          <span class="design-overview-card__stack design-overview-card__stack--banner">
+            <img src="./assets/works/design/workflow/outfit-swap/image-01.jpg" alt="换装工作流 1" loading="lazy" decoding="async">
+            <img src="./assets/works/design/workflow/outfit-swap/image-02.jpg" alt="换装工作流 2" loading="lazy" decoding="async">
+            <img src="./assets/works/design/workflow/interior-style/image-01.jpg" alt="室内风格转换工作流 1" loading="lazy" decoding="async">
+            <img src="./assets/works/design/workflow/interior-style/image-02.jpg" alt="室内风格转换工作流 2" loading="lazy" decoding="async">
+          </span>
+          <span class="design-overview-card__meta">
+            <span class="design-overview-card__index">04</span>
+            <strong class="design-overview-card__name">工作流</strong>
+            <span class="design-overview-card__subtitle">换装 · 室内风格转换</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="design-index" id="design-index" hidden></div>
+      <div class="design-groups" id="design-groups" hidden></div>
+
+      <div class="design-placeholders">
+        <section class="design-placeholder" id="design-ip" aria-labelledby="design-ip-title">
+          <h3 id="design-ip-title">IP设计</h3>
+        </section>
+        <section class="design-placeholder" id="design-creative" aria-labelledby="design-creative-title">
+          <h3 id="design-creative-title">创意图设计</h3>
+        </section>
+        <section class="design-placeholder" id="design-ecommerce" aria-labelledby="design-ecommerce-title">
+          <h3 id="design-ecommerce-title">电商套图</h3>
+        </section>
+        <section class="design-placeholder" id="design-workflow" aria-labelledby="design-workflow-title">
+          <h3 id="design-workflow-title">工作流</h3>
+        </section>
+      </div>
     </section>
 
     <section class="works-section drama-section" id="drama" aria-labelledby="drama-title">
