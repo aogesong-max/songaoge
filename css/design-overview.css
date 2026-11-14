@@ -1,13 +1,13 @@
 .design-overview {
   display: grid;
-  grid-template-columns: repeat(4, 16%);
-  column-gap: 12%;
+  grid-template-columns: 22% 17.6% 22% 22%;
+  justify-content: space-between;
+  align-items: start;
 }
 
 .design-overview-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
   min-width: 0;
   color: var(--text-1);
 }
@@ -16,24 +16,20 @@
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 9 / 10;
   overflow: hidden;
   border-radius: 16px;
-  background: transparent;
+  background: #11131b;
 }
 
 .design-overview-card__stack img {
   position: absolute;
+  inset: 0;
   display: block;
-  top: 36.875%;
-  right: 2.5%;
-  left: 2.5%;
-  width: 95%;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: 100%;
   border: 1px solid rgba(196, 184, 204, 0.2);
-  border-radius: 14px;
-  background: rgba(17, 18, 26, 0.82);
-  object-fit: contain;
+  border-radius: inherit;
+  object-fit: cover;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
   transition:
     transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -41,49 +37,51 @@
   will-change: transform;
 }
 
-.design-overview-card__stack--banner img {
-  top: 36.875%;
+.design-overview-card__stack--banner {
+  aspect-ratio: 3 / 2;
+}
+
+.design-overview-card__stack--portrait {
+  aspect-ratio: 3 / 4;
 }
 
 .design-overview-card__stack--banner img:nth-child(1) {
   z-index: 4;
-  transform: translateY(14%);
+  transform: translateY(8%);
 }
 
 .design-overview-card__stack--banner img:nth-child(2) {
   z-index: 3;
-  transform: translateY(6%) rotate(-2deg);
+  transform: translateY(4%) rotate(-2deg);
 }
 
 .design-overview-card__stack--banner img:nth-child(3) {
   z-index: 2;
-  transform: translateY(-1%) rotate(2deg);
+  transform: translateY(0) rotate(2deg);
 }
 
 .design-overview-card__stack--banner img:nth-child(4) {
   z-index: 1;
-  transform: translateY(-8%) rotate(-1deg);
+  transform: translateY(-6%) rotate(-1deg);
 }
 
 .design-overview-card__stack--portrait img {
-  left: 50%;
-  width: 95%;
   transform-origin: 50% 88%;
 }
 
 .design-overview-card__stack--portrait img:nth-child(1) {
   z-index: 4;
-  transform: translate(-50%, 14%) rotate(-1deg);
+  transform: translateX(0) rotate(0deg);
 }
 
 .design-overview-card__stack--portrait img:nth-child(2) {
   z-index: 3;
-  transform: translate(calc(-50% - 2%), 6%) rotate(-3deg);
+  transform: translateX(-2%) rotate(-3deg);
 }
 
 .design-overview-card__stack--portrait img:nth-child(3) {
   z-index: 2;
-  transform: translate(calc(-50% + 2%), -1%) rotate(3deg);
+  transform: translateX(2%) rotate(3deg);
 }
 
 .design-overview-card__meta {
@@ -151,31 +149,31 @@
 
 @media (hover: hover) and (pointer: fine) {
   .design-overview-card:hover .design-overview-card__stack--banner img:nth-child(1) {
-    transform: translateY(24%) rotate(0deg);
+    transform: translateY(14%) rotate(0deg);
   }
 
   .design-overview-card:hover .design-overview-card__stack--banner img:nth-child(2) {
-    transform: translateY(-26%) rotate(-2.5deg);
+    transform: translateY(-12%) rotate(-2.5deg);
   }
 
   .design-overview-card:hover .design-overview-card__stack--banner img:nth-child(3) {
-    transform: translateY(-76%) rotate(3deg);
+    transform: translateY(-44%) rotate(3deg);
   }
 
   .design-overview-card:hover .design-overview-card__stack--banner img:nth-child(4) {
-    transform: translateY(-126%) rotate(-1.5deg);
+    transform: translateY(-76%) rotate(-1.5deg);
   }
 
   .design-overview-card:hover .design-overview-card__stack--portrait img:nth-child(1) {
-    transform: translate(-50%, 24%) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
   }
 
   .design-overview-card:hover .design-overview-card__stack--portrait img:nth-child(2) {
-    transform: translate(calc(-50% - 8%), -26%) rotate(-7deg);
+    transform: translateX(-16%) rotate(-8deg);
   }
 
   .design-overview-card:hover .design-overview-card__stack--portrait img:nth-child(3) {
-    transform: translate(calc(-50% + 8%), -76%) rotate(7deg);
+    transform: translateX(16%) rotate(8deg);
   }
 }
 
@@ -184,11 +182,19 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 12%;
     row-gap: 34px;
+    justify-content: normal;
   }
 
   .design-overview-card__stack {
-    height: clamp(300px, 38vw, 370px);
     aspect-ratio: auto;
+  }
+
+  .design-overview-card__stack--banner {
+    aspect-ratio: 3 / 2;
+  }
+
+  .design-overview-card__stack--portrait {
+    aspect-ratio: 3 / 4;
   }
 }
 
@@ -199,7 +205,6 @@
   }
 
   .design-overview-card__stack {
-    height: clamp(300px, 82vw, 350px);
     border-radius: 15px;
   }
 
