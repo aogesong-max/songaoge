@@ -134,15 +134,15 @@
 }
 
 .ip-detail-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 56px);
+  align-items: center;
 }
 
 .ip-detail-media {
   display: block;
-  width: 100%;
+  width: 60%;
   margin: 0;
   padding: 0;
   overflow: hidden;
