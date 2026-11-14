@@ -8,9 +8,9 @@
   const bootVideo = document.getElementById("boot-video");
   const hero = document.querySelector(".hero");
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const bootStorageKey = "songaoge-boot-played-v3";
-  const bootFadeAt = 11.8;
-  const bootEndAt = 12.45;
+  const bootStorageKey = "songaoge-boot-played-v4";
+  const bootFadeAt = 5.35;
+  const bootEndAt = 5.95;
   let bootFrame = 0;
   let bootFinished = false;
 

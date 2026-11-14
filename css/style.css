@@ -814,6 +814,17 @@ p {
   color: #fff;
 }
 
+.boot-layer .boot-skip {
+  opacity: 0;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.boot-layer:hover .boot-skip,
+.boot-layer:focus-within .boot-skip,
+.boot-skip:focus-visible {
+  opacity: 0.68;
+}
+
 .boot-forced .boot-layer {
   display: none !important;
 }
@@ -836,9 +847,9 @@ p {
   width: 100%;
   height: 100%;
   background: #010103;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  transform: scale(1.2);
+  transform: none;
   transform-origin: center;
 }
 
@@ -846,9 +857,7 @@ p {
   position: absolute;
   z-index: 3;
   inset: 0;
-  background:
-    radial-gradient(ellipse at center, transparent 58%, rgba(0, 0, 0, 0.22) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.05), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.12));
+  background: transparent;
   pointer-events: none;
 }
 
@@ -895,7 +904,7 @@ p {
 
 @media (max-aspect-ratio: 4 / 3) {
   .boot-video {
-    transform: scale(1.06);
+    object-fit: cover;
   }
 }
 

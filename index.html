@@ -46,7 +46,7 @@
       if (bootLayer) bootLayer.setAttribute("aria-hidden", "true");
       if (recordSession) {
         try {
-          window.sessionStorage.setItem("songaoge-boot-played-v3", "1");
+          window.sessionStorage.setItem("songaoge-boot-played-v4", "1");
         } catch (error) {
           // The visual exit still works when browser storage is unavailable.
         }
@@ -54,9 +54,9 @@
     };
     window.__bootSafetyTimer = window.setTimeout(function () {
       window.__bootDismiss(false);
-    }, 15000);
+    }, 8500);
     try {
-      if (window.sessionStorage.getItem("songaoge-boot-played-v3") === "1") {
+      if (window.sessionStorage.getItem("songaoge-boot-played-v4") === "1") {
         document.documentElement.classList.add("boot-session-seen");
       }
     } catch (error) {
