@@ -5,15 +5,12 @@
   const body = document.body;
   const bootLayer = document.getElementById("boot-layer");
   const bootSkip = document.getElementById("boot-skip");
-  const bootFill = document.getElementById("boot-progress-fill");
-  const bootPercent = document.getElementById("boot-percent");
-  const bootClock = document.getElementById("boot-clock");
-  const bootDate = document.getElementById("boot-date");
-  const bootAxisTime = document.querySelector(".temporal-readout--left b");
-  const bootLetters = Array.from(document.querySelectorAll(".boot-copy span"));
+  const bootVideo = document.getElementById("boot-video");
   const hero = document.querySelector(".hero");
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const bootStorageKey = "songaoge-boot-played-v2";
+  const bootStorageKey = "songaoge-boot-played-v3";
+  const bootFadeAt = 11.8;
+  const bootEndAt = 12.45;
   let bootFrame = 0;
   let bootFinished = false;
 
@@ -43,10 +40,13 @@
   function fullyDismissBoot() {
     if (bootFinished) return;
     bootFinished = true;
+    window.cancelAnimationFrame(bootFrame);
+    window.clearTimeout(window.__bootSafetyTimer);
+    if (bootVideo) bootVideo.pause();
     revealHero();
     root.classList.add("boot-forced");
     if (bootLayer) bootLayer.setAttribute("aria-hidden", "true");
-    window.clearTimeout(window.__bootSafetyTimer);
+    document.removeEventListener("keydown", handleBootKeydown);
   }
 
   function skipBoot() {
@@ -54,91 +54,22 @@
     bootFinished = true;
     window.clearTimeout(window.__bootSafetyTimer);
     window.cancelAnimationFrame(bootFrame);
+    if (bootVideo) bootVideo.pause();
     safeSession.set(bootStorageKey, "1");
     revealHero();
 
     bootLayer.classList.add("is-skipped");
     bootLayer.setAttribute("aria-hidden", "true");
-    window.setTimeout(() => {
-      root.classList.add("boot-forced");
-    }, 280);
+    document.removeEventListener("keydown", handleBootKeydown);
+    root.classList.add("boot-forced");
   }
 
-  function animateBootLetter(letter, index) {
-    if (window.gsap && typeof window.gsap.fromTo === "function") {
-      window.gsap.fromTo(
-        letter,
-        {
-          autoAlpha: 0,
-          scale: 1.14,
-          filter: "blur(18px)",
-          textShadow: "0 0 42px rgba(143, 105, 255, 0.72)"
-        },
-        {
-          autoAlpha: 1,
-          scale: 1,
-          filter: "blur(0px)",
-          textShadow: "0 0 0 rgba(143, 105, 255, 0)",
-          duration: 0.8,
-          delay: index * 0.07,
-          ease: "power4.out",
-          overwrite: true
-        }
-      );
-      return;
-    }
-
-    if (typeof letter.animate !== "function") {
-      letter.style.opacity = "1";
-      letter.style.filter = "none";
-      letter.style.transform = "scale(1)";
-      return;
-    }
-
-    letter.animate(
-      [
-        {
-          opacity: 0,
-          filter: "blur(18px)",
-          transform: "scale(1.14)",
-          textShadow: "0 0 42px rgba(143, 105, 255, 0.72)"
-        },
-        {
-          opacity: 0.72,
-          filter: "blur(5px)",
-          transform: "scale(1.035)",
-          textShadow: "0 0 24px rgba(143, 105, 255, 0.36)",
-          offset: 0.66
-        },
-        {
-          opacity: 1,
-          filter: "blur(0px)",
-          transform: "scale(1)",
-          textShadow: "0 0 0 rgba(143, 105, 255, 0)"
-        }
-      ],
-      {
-        duration: 800,
-        delay: index * 70,
-        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-        fill: "both"
-      }
-    );
+  function handleBootKeydown(event) {
+    if (event.key === "Escape") skipBoot();
   }
 
-  function updateBootTime() {
-    const now = new Date();
-    const pad = (value, length = 2) => String(value).padStart(length, "0");
-    const hours = pad(now.getHours());
-    const minutes = pad(now.getMinutes());
-    const seconds = pad(now.getSeconds());
-    const milliseconds = pad(now.getMilliseconds(), 3);
-
-    if (bootClock) bootClock.textContent = `${hours}:${minutes}:${seconds}.${milliseconds}`;
-    if (bootAxisTime) bootAxisTime.textContent = `${hours} : ${minutes} : ${seconds}`;
-    if (bootDate) {
-      bootDate.textContent = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())}`;
-    }
+  function handleBootClick() {
+    skipBoot();
   }
 
   function startBootSequence() {
@@ -157,75 +88,50 @@
     safeSession.set(bootStorageKey, "1");
     body.classList.add("boot-locked");
     root.classList.add("boot-active");
-    updateBootTime();
+    bootLayer.addEventListener("click", handleBootClick);
+    document.addEventListener("keydown", handleBootKeydown);
 
-    const startedAt = performance.now();
-    let gridVisible = false;
-    let lineOpen = false;
-    let lettersEntered = false;
-    let welcomeVisible = false;
-    let sweepStarted = false;
-    let curtainStarted = false;
-    let heroRevealed = false;
+    if (!bootVideo) {
+      window.setTimeout(fullyDismissBoot, 800);
+      return;
+    }
 
-    const tick = (now) => {
-      const elapsed = now - startedAt;
-
-      if (!gridVisible && elapsed >= 40) {
-        bootLayer.classList.add("is-grid");
-        gridVisible = true;
+    let fadeStarted = false;
+    const tick = () => {
+      if (bootFinished || root.classList.contains("boot-forced")) {
+        if (!bootFinished) fullyDismissBoot();
+        return;
       }
 
-      if (!lineOpen && elapsed >= 50) {
-        bootLayer.classList.add("is-line-open");
-        lineOpen = true;
-      }
-
-      if (!lettersEntered && elapsed >= 400) {
-        bootLetters.forEach(animateBootLetter);
-        lettersEntered = true;
-      }
-
-      if (!welcomeVisible && elapsed >= 1200) {
-        bootLayer.classList.add("is-welcomed");
-        welcomeVisible = true;
-      }
-
-      if (elapsed >= 400) {
-        const progress = Math.max(0, Math.min(100, ((elapsed - 400) / 1500) * 100));
-        if (bootFill) bootFill.style.width = `${progress}%`;
-        if (bootPercent) bootPercent.textContent = `${Math.round(progress)}%`;
-        updateBootTime();
-      }
-
-      if (!sweepStarted && elapsed >= 1900) {
-        bootLayer.classList.add("is-sweeping", "is-complete");
-        if (bootFill) bootFill.style.width = "100%";
-        if (bootPercent) bootPercent.textContent = "100%";
-        sweepStarted = true;
-      }
-
-      if (!curtainStarted && elapsed >= 2400) {
-        bootLayer.classList.add("is-curtain");
-        curtainStarted = true;
-      }
-
-      if (!heroRevealed && elapsed >= 2400) {
+      const currentTime = bootVideo.currentTime || 0;
+      if (!fadeStarted && currentTime >= bootFadeAt) {
+        fadeStarted = true;
+        bootLayer.classList.add("is-video-fading");
         revealHero();
-        heroRevealed = true;
       }
 
-      if (elapsed >= 3200) {
-        bootFinished = true;
-        root.classList.add("boot-forced");
-        bootLayer.setAttribute("aria-hidden", "true");
-        window.clearTimeout(window.__bootSafetyTimer);
+      if (currentTime >= bootEndAt || bootVideo.ended) {
+        fullyDismissBoot();
         return;
       }
 
       bootFrame = window.requestAnimationFrame(tick);
     };
 
+    bootVideo.addEventListener("ended", fullyDismissBoot, { once: true });
+    bootVideo.addEventListener("error", () => {
+      bootLayer.classList.add("is-video-error");
+      window.setTimeout(fullyDismissBoot, 900);
+    }, { once: true });
+
+    bootVideo.currentTime = 0;
+    const playback = bootVideo.play();
+    if (playback && typeof playback.catch === "function") {
+      playback.catch(() => {
+        bootLayer.classList.add("is-video-error");
+        window.setTimeout(fullyDismissBoot, 900);
+      });
+    }
     bootFrame = window.requestAnimationFrame(tick);
   }
 
@@ -236,7 +142,7 @@
   try {
     startBootSequence();
   } catch (error) {
-    // The independent four-second watchdog in index.html remains the final guard.
+    // The independent watchdog in index.html remains the final guard.
     fullyDismissBoot();
   }
 
