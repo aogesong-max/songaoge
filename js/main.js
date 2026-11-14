@@ -688,19 +688,33 @@
   });
 
   const navLinks = Array.from(document.querySelectorAll(".category-nav a"));
-  if ("IntersectionObserver" in window) {
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        navLinks.forEach((link) => link.classList.toggle("is-active", link.dataset.section === visible.target.id));
-      },
-      { rootMargin: "-24% 0px -58% 0px", threshold: [0, 0.1, 0.4] }
-    );
-    document.querySelectorAll("#drama, #design").forEach((section) => navObserver.observe(section));
+  const navSections = navLinks
+    .map((link) => document.getElementById(link.dataset.section))
+    .filter(Boolean);
+  let navUpdateFrame = 0;
+
+  function updateActiveCategory() {
+    const marker = Math.min(190, window.innerHeight * 0.28);
+    let activeSection = navSections[0];
+
+    navSections.forEach((section) => {
+      if (section.getBoundingClientRect().top <= marker) activeSection = section;
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle("is-active", link.dataset.section === activeSection?.id);
+    });
+    navUpdateFrame = 0;
   }
+
+  function requestCategoryUpdate() {
+    if (navUpdateFrame) return;
+    navUpdateFrame = window.requestAnimationFrame(updateActiveCategory);
+  }
+
+  window.addEventListener("scroll", requestCategoryUpdate, { passive: true });
+  window.addEventListener("resize", requestCategoryUpdate);
+  updateActiveCategory();
 
   setupHeader();
   renderHome();
