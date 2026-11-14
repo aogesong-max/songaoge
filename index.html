@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/cursor.css">
   <link rel="stylesheet" href="./css/interactions.css">
+  <link rel="stylesheet" href="./css/about-basic.css">
   <script>
     document.documentElement.classList.add("js");
     window.__bootDismiss = function (recordSession) {
@@ -160,14 +161,49 @@
       </a>
     </section>
 
-    <section class="home-about" id="about" aria-labelledby="about-title">
-      <div class="home-about__intro">
-        <p class="home-about__label">01 / ABOUT</p>
-        <h2 id="about-title">用 AI 视觉讲故事，<br><em>让画面先有情绪。</em></h2>
-        <p class="home-about__copy">从文字剧本到人物资产、分镜与成片，把创意拆解成稳定、可执行的视觉语言。</p>
-        <span class="home-about__anchor" id="advantages" aria-hidden="true"></span>
+    <section class="about-basic" id="about" aria-label="基本信息">
+      <span class="about-basic__anchor" id="advantages" aria-hidden="true"></span>
+      <div class="about-basic__inner">
+        <div class="about-basic__profile">
+          <figure class="about-basic__photo-card">
+            <img src="./assets/about-photo.jpg" alt="宋傲阁" loading="eager" decoding="async" onerror="this.remove()">
+          </figure>
+          <div class="about-basic__identity">
+            <p class="about-basic__name">宋傲阁</p>
+            <p class="about-basic__role">AI 短剧创作者</p>
+            <p class="about-basic__location">深圳</p>
+          </div>
+        </div>
+
+        <div class="about-basic__content">
+          <p class="about-basic__eyebrow">ABOUT</p>
+          <!-- portfolio.pdf 未在仓库中提供：标题与介绍位置保留，正文留空。 -->
+          <h2 class="about-basic__title"></h2>
+          <div class="about-basic__copy">
+            <p></p>
+            <p></p>
+          </div>
+          <div class="about-basic__contact-rule" aria-hidden="true"></div>
+          <div class="about-basic__contacts">
+            <div class="about-basic__contact">
+              <p class="about-basic__contact-label">微信 <span>WECHAT</span></p>
+              <p class="about-basic__contact-value">sag20040315</p>
+            </div>
+            <div class="about-basic__contact">
+              <p class="about-basic__contact-label">手机 <span>PHONE</span></p>
+              <p class="about-basic__contact-value">19132026019</p>
+            </div>
+            <div class="about-basic__contact">
+              <p class="about-basic__contact-label">邮箱 <span>EMAIL</span></p>
+              <p class="about-basic__contact-value">1516733963@qq.com</p>
+            </div>
+            <div class="about-basic__contact">
+              <p class="about-basic__contact-label">常驻 <span>LOCATION</span></p>
+              <p class="about-basic__contact-value">深圳 Shenzhen</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="hero__identity" id="hero-profile"></div>
     </section>
 
     <section class="marquee" aria-label="作品类别">
