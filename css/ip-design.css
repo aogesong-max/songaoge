@@ -135,7 +135,7 @@
 
 .ip-detail-grid {
   display: grid;
-  grid-template-columns: repeat(var(--ip-detail-columns, 1), minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
 }
