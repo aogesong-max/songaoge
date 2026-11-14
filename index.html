@@ -2,37 +2,15 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#050507">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0d14">
   <meta name="color-scheme" content="dark">
   <meta name="author" content="SONGAOGE">
-  <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="description" content="SONGAOGE 的个人作品集 — AI 真人短剧、AI 视觉设计、剧本、分镜、IP 角色与 Seedance 2.5 视频创作。">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="zh_CN">
-  <meta property="og:site_name" content="SONGAOGE">
-  <meta property="og:title" content="SONGAOGE — AI 视觉创作者">
-  <meta property="og:description" content="用 AI 拍电影，用视觉讲故事。AI 真人短剧、视觉设计与 IP 角色作品集。">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="SONGAOGE — AI 视觉创作者">
-  <meta name="twitter:description" content="用 AI 拍电影，用视觉讲故事。AI 真人短剧、视觉设计与 IP 角色作品集。">
-  <title>SONGAOGE — AI 视觉创作者</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050507'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='25' font-weight='900' fill='%23ffffff'%3ESG%3C/text%3E%3C/svg%3E">
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "SONGAOGE",
-      "jobTitle": ["AI 真人短剧创作者", "AI 视觉设计师"],
-      "description": "专注 AI 真人短剧、视觉设计、剧本、分镜与 IP 角色创作的视觉创作者。",
-      "knowsAbout": ["AI 真人短剧", "剧本写作", "分镜拆解", "摄影运镜", "光影设计", "Seedance 2.5", "IP 角色设计", "AI 海报设计"]
-    }
-  </script>
-  <style>html,body{margin:0;min-height:100%;background:#050507;color:#f6f6f7}</style>
+  <meta name="description" content="SONGAOGE 作品集">
+  <title>SONGAOGE — Selected Works</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0d14'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='23' font-weight='900' fill='%23e8e6ec'%3ESG%3C/text%3E%3C/svg%3E">
+  <style>html,body{margin:0;min-height:100%;background:#0c0d14;color:#e8e6ec}</style>
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/cursor.css">
-  <link rel="stylesheet" href="./css/particles.css">
-  <link rel="stylesheet" href="./css/interactions.css">
   <script>
     document.documentElement.classList.add("js");
     window.__bootDismiss = function (recordSession) {
@@ -40,474 +18,129 @@
       document.documentElement.classList.remove("boot-active");
       document.documentElement.classList.add("boot-forced");
       document.body.classList.remove("boot-locked");
-      var heroElement = document.querySelector(".hero");
-      if (heroElement) heroElement.classList.add("is-revealed");
       var bootLayer = document.getElementById("boot-layer");
       if (bootLayer) bootLayer.setAttribute("aria-hidden", "true");
       if (recordSession) {
         try {
-          window.sessionStorage.setItem("songaoge-boot-played-v4", "1");
-        } catch (error) {
-          // The visual exit still works when browser storage is unavailable.
-        }
+          window.sessionStorage.setItem("songaoge-boot-played-v5", "1");
+        } catch (error) {}
       }
     };
     window.__bootSafetyTimer = window.setTimeout(function () {
       window.__bootDismiss(false);
     }, 8500);
     try {
-      if (window.sessionStorage.getItem("songaoge-boot-played-v4") === "1") {
+      if (window.sessionStorage.getItem("songaoge-boot-played-v5") === "1") {
         document.documentElement.classList.add("boot-session-seen");
       }
-    } catch (error) {
-      // Storage can be unavailable in strict privacy modes.
-    }
+    } catch (error) {}
   </script>
   <noscript>
-    <style>.boot-layer{display:none!important}</style>
+    <style>
+      .boot-layer{display:none!important}
+      .js-only{display:none!important}
+      .noscript-grid{display:grid!important}
+    </style>
   </noscript>
 </head>
 <body>
   <a class="skip-link" href="#main-content">跳到主要内容</a>
 
   <div class="boot-layer" id="boot-layer" role="dialog" aria-label="SONGAOGE 启动动画" aria-hidden="false">
-    <video
-      class="boot-video"
-      id="boot-video"
-      src="./assets/intro/startup.mp4"
-      poster="./assets/intro/poster.jpg"
-      muted
-      playsinline
-      preload="auto"
-      aria-hidden="true"
-    ></video>
-    <div class="boot-video-vignette" aria-hidden="true"></div>
-    <div class="boot-video-fallback" aria-hidden="true">
-      <strong>SONGAOGE</strong>
-      <span>AIGC CREATOR</span>
-    </div>
+    <video class="boot-video" id="boot-video" src="./assets/intro/startup.mp4" poster="./assets/intro/poster.jpg" muted playsinline preload="auto" aria-hidden="true"></video>
     <button class="boot-skip" id="boot-skip" type="button" onclick="window.__bootDismiss &amp;&amp; window.__bootDismiss(true)">跳过 SKIP <span aria-hidden="true">→</span></button>
   </div>
 
-  <header class="site-header" id="site-header">
-    <a class="brand" href="#home" aria-label="SONGAOGE 首页">SONGAOGE</a>
-    <nav class="desktop-nav" aria-label="主导航">
-      <a href="#works">作品</a>
-      <a href="#about">关于</a>
-      <a href="#skills">技能</a>
-      <a href="#advantages">优势</a>
-    </nav>
-    <a class="contact-pill" href="#contact" data-cursor="联系">联系我 <span aria-hidden="true">→</span></a>
-    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-cursor="菜单">
-      <span class="sr-only">打开菜单</span>
-      <span></span><span></span>
-    </button>
-    <nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航" aria-hidden="true">
-      <a href="#home"><span>00</span>首页</a>
-      <a href="#works"><span>01</span>作品</a>
-      <a href="#about"><span>02</span>关于</a>
-      <a href="#skills"><span>03</span>技能</a>
-      <a href="#advantages"><span>04</span>优势</a>
-      <a href="#contact"><span>05</span>联系我</a>
-    </nav>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="SONGAOGE 首页">SONGAOGE</a>
+    <span class="avatar avatar--small" aria-hidden="true"></span>
   </header>
 
   <main id="main-content">
     <section class="hero" id="home">
-      <div class="hero-video-wrap" aria-hidden="true">
-        <video class="hero-video" muted loop playsinline preload="none" poster="./assets/hero/hero-background-poster.jpg">
+      <div class="hero-video-bg" aria-hidden="true">
+        <video id="hero-background-video" muted loop playsinline preload="metadata" poster="./assets/hero/hero-background-poster.jpg">
           <source src="./assets/hero/hero-background.mp4" type="video/mp4">
         </video>
-        <span class="hero-video-shade"></span>
       </div>
-      <div class="hero-grid" aria-hidden="true"></div>
-      <span class="hero-side-label" aria-hidden="true">PORTFOLIO</span>
-      <div class="hero-copy">
-        <p class="eyebrow" data-hero-reveal>AI SHORT DRAMA · VISUAL DESIGN · IP DESIGN</p>
-        <h1 class="hero-title" data-hero-reveal>SONGAOGE</h1>
-        <p class="hero-role" data-hero-reveal>AI 真人短剧创作者 / AI 视觉设计师</p>
-        <p class="hero-statement" data-hero-reveal>用 AI 拍电影，用视觉讲故事</p>
-        <a class="text-link" href="#works" data-hero-reveal data-cursor="探索">查看作品 <span aria-hidden="true">→</span></a>
-      </div>
-      <a class="scroll-down" href="#about" aria-label="向下浏览">
-        <span aria-hidden="true">↓</span>
-      </a>
-    </section>
-
-    <section class="marquee-section" aria-label="专业领域">
-      <div class="marquee-glow" aria-hidden="true"></div>
-      <div class="marquee">
-        <div class="marquee__track">
-          <span>AI SHORT DRAMA</span><i>✦</i>
-          <span>SEEDANCE 2.5</span><i>✦</i>
-          <span>IP DESIGN</span><i>✦</i>
-          <span>TVC</span><i>✦</i>
-          <span>E-COMMERCE</span><i>✦</i>
-          <span>VISUAL DESIGN</span><i>✦</i>
-          <span aria-hidden="true">AI SHORT DRAMA</span><i aria-hidden="true">✦</i>
-          <span aria-hidden="true">SEEDANCE 2.5</span><i aria-hidden="true">✦</i>
-          <span aria-hidden="true">IP DESIGN</span><i aria-hidden="true">✦</i>
-          <span aria-hidden="true">TVC</span><i aria-hidden="true">✦</i>
-          <span aria-hidden="true">E-COMMERCE</span><i aria-hidden="true">✦</i>
-          <span aria-hidden="true">VISUAL DESIGN</span><i aria-hidden="true">✦</i>
-        </div>
+      <div class="hero__word" aria-label="SONGAOGE">SONGAOGE</div>
+      <div class="hero__portrait">
+        <span class="avatar avatar--hero"></span>
       </div>
     </section>
 
-    <section class="section about-section reveal" id="about">
+    <section class="marquee" aria-label="作品类别">
+      <div class="marquee__track">
+        <span>AI SHORT DRAMA</span><i>✦</i>
+        <span class="is-outline">IP DESIGN</span><i>✦</i>
+        <span>CREATIVE IMAGE</span><i>✦</i>
+        <span class="is-outline">E-COMMERCE</span><i>✦</i>
+        <span>GAME CG</span><i>✦</i>
+        <span class="is-outline">GIRL GROUP MV</span><i>✦</i>
+        <span aria-hidden="true">AI SHORT DRAMA</span><i aria-hidden="true">✦</i>
+        <span class="is-outline" aria-hidden="true">IP DESIGN</span><i aria-hidden="true">✦</i>
+        <span aria-hidden="true">CREATIVE IMAGE</span><i aria-hidden="true">✦</i>
+        <span class="is-outline" aria-hidden="true">E-COMMERCE</span><i aria-hidden="true">✦</i>
+        <span aria-hidden="true">GAME CG</span><i aria-hidden="true">✦</i>
+        <span class="is-outline" aria-hidden="true">GIRL GROUP MV</span><i aria-hidden="true">✦</i>
+      </div>
+    </section>
+
+    <nav class="category-nav" id="category-nav" aria-label="作品分类">
+      <a href="#drama" class="is-active" data-section="drama"><span>01</span>AI短剧</a>
+      <a href="#design" data-section="design"><span>02</span>AI设计图</a>
+    </nav>
+
+    <section class="noscript-grid" aria-label="作品封面">
+      <a href="#drama"><img src="./assets/works/drama/boxer/cover.jpg" alt="这个拳手不太冷"></a>
+      <a href="#drama"><img src="./assets/works/drama/sixth-second/cover.jpg" alt="第六秒"></a>
+      <a href="#drama"><img src="./assets/works/drama/ai-sisters/cover.jpg" alt="全世界只有我有AI"></a>
+      <a href="#drama"><img src="./assets/works/drama/dongbei-seoul/cover.jpg" alt="东北留子的首尔生活"></a>
+    </section>
+
+    <section class="works-section" id="drama" aria-labelledby="drama-title">
       <div class="section-heading">
-        <span class="section-number">01</span>
-        <span class="section-label">ABOUT / 关于</span>
+        <span class="section-heading__index">01</span>
+        <h2 id="drama-title">AI短剧</h2>
+        <span class="section-heading__en">AI <em>Short Drama</em></span>
       </div>
-      <div class="about-layout">
-        <div class="about-copy">
-          <h2>用视觉讲故事，<br>让画面有情绪。</h2>
-          <div class="about-paragraphs">
-            <p>我专注于 AI 真人短剧与视觉内容创作，从文字剧本出发，把人物关系、情绪节奏和叙事重点拆解为可执行的镜头。每一个画面都服务于故事，而不是单独存在。</p>
-            <p>我擅长把摄影运镜、光影氛围与提示词设计组合成稳定的视觉语言，并使用 Seedance 2.5 完成视频生成。从角色概念到成片质感，我希望让技术在画面里退后，让情绪被看见。</p>
-          </div>
-        </div>
-        <aside class="profile-card" aria-label="个人信息">
-          <span class="profile-card__index">PROFILE / 001</span>
-          <dl>
-            <div><dt>身份</dt><dd>AI 真人短剧创作者<br>AI 视觉设计师</dd></div>
-            <div><dt>专长</dt><dd>剧本 / 分镜 / 运镜 / 光影</dd></div>
-            <div><dt>工具</dt><dd>Seedance 2.5</dd></div>
-          </dl>
-          <div class="profile-card__mark" aria-hidden="true">SG</div>
-        </aside>
-      </div>
+      <div class="drama-list" id="drama-list"></div>
     </section>
 
-    <section class="section skills-section reveal" id="skills">
+    <section class="works-section design-section" id="design" aria-labelledby="design-title">
       <div class="section-heading">
-        <span class="section-number">02</span>
-        <span class="section-label">CORE SKILLS / 核心技能</span>
+        <span class="section-heading__index">02</span>
+        <h2 id="design-title">AI设计图</h2>
+        <span class="section-heading__en">Visual <em>Archive</em></span>
       </div>
-      <div class="section-intro">
-        <h2>从一句设定，<br>到一帧有情绪的画面。</h2>
-        <p>围绕叙事、镜头与视觉执行形成完整工作流。每一项技能，都落在一个明确的问题上。</p>
-      </div>
-      <div class="skills-grid">
-        <article class="skill-card">
-          <div class="skill-card__top"><span>01</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>剧本写作</h3>
-          <p>梳理人物动机与戏剧冲突，控制单集节奏和信息释放。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>02</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>分镜拆解</h3>
-          <p>将文字转换为可生成的镜头序列，明确景别、角度与动作节拍。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>03</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>运镜与光影提示词</h3>
-          <p>用镜头语言与光线结构建立风格，让生成画面稳定且有电影感。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>04</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>Seedance 2.5 视频生成</h3>
-          <p>从图生视频到镜头控制，兼顾角色一致性、动作连贯与画面质感。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>05</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>IP 角色设计</h3>
-          <p>建立可延展的角色设定、造型语言与视觉识别，保持跨镜头统一。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>06</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>电商视觉套图</h3>
-          <p>围绕商品卖点设计主图、场景图与详情视觉，形成一致的转化表达。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>07</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>TVC 广告</h3>
-          <p>用短时叙事与高密度画面完成产品表达，抓住开场三秒的注意力。</p>
-        </article>
-        <article class="skill-card">
-          <div class="skill-card__top"><span>08</span><i class="skill-icon" aria-hidden="true"></i></div>
-          <h3>AI 海报设计</h3>
-          <p>将概念、构图与字体关系结合，生成有明确视觉记忆点的海报画面。</p>
-        </article>
-      </div>
+      <div class="design-groups" id="design-groups"></div>
     </section>
 
-    <section class="section works-section reveal" id="works">
-      <div class="section-heading">
-        <span class="section-number">03</span>
-        <span class="section-label">SELECTED WORKS / 作品</span>
-      </div>
-      <div class="section-intro works-intro">
-        <h2>尚未定义的作品，<br>等待被画面填满。</h2>
-        <p>当前为版式预览。后续作品会按分类进入对应网格，封面、标题、标签与简介将保持统一结构。</p>
-      </div>
-
-      <nav class="works-tabs" id="works-tabs" aria-label="作品分类">
-        <a href="#work-ai-drama" class="is-active"><span>01</span>AI短剧</a>
-        <a href="#work-ip-design"><span>02</span>IP设计</a>
-        <a href="#work-mv"><span>03</span>MV</a>
-        <a href="#work-ecommerce"><span>04</span>电商套图</a>
-        <a href="#work-tvc"><span>05</span>TVC</a>
-        <a href="#work-ai-poster"><span>06</span>AI海报</a>
-      </nav>
-
-      <div class="work-groups">
-        <article class="work-group" id="work-ai-drama" data-category="work-ai-drama">
-          <div class="work-group__head">
-            <span class="work-group__number">01</span>
-            <div><h3>AI短剧</h3><p>AI 真人叙事短片与连续剧情内容预留区。</p></div>
-          </div>
-          <div class="works-grid works-grid--wide">
-            <article class="work-card" aria-label="AI短剧作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="AI短剧作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="AI短剧作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-          </div>
-        </article>
-
-        <article class="work-group" id="work-ip-design" data-category="work-ip-design">
-          <div class="work-group__head">
-            <span class="work-group__number">02</span>
-            <div><h3>IP设计</h3><p>角色设定、造型延展与 IP 视觉体系预留区。</p></div>
-          </div>
-          <div class="works-grid works-grid--portrait">
-            <article class="work-card" aria-label="IP设计作品占位">
-              <div class="work-cover ratio-3-4"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="IP设计作品占位">
-              <div class="work-cover ratio-3-4"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="IP设计作品占位">
-              <div class="work-cover ratio-3-4"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-          </div>
-        </article>
-
-        <article class="work-group" id="work-mv" data-category="work-mv">
-          <div class="work-group__head">
-            <span class="work-group__number">03</span>
-            <div><h3>MV</h3><p>音乐视觉、情绪段落与节奏化影像预留区。</p></div>
-          </div>
-          <div class="works-grid works-grid--wide">
-            <article class="work-card" aria-label="MV作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="MV作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="MV作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-          </div>
-        </article>
-
-        <article class="work-group" id="work-ecommerce" data-category="work-ecommerce">
-          <div class="work-group__head">
-            <span class="work-group__number">04</span>
-            <div><h3>电商套图</h3><p>产品视觉、场景组合与电商内容套图预留区。</p></div>
-          </div>
-          <div class="works-grid works-grid--landscape">
-            <article class="work-card" aria-label="电商套图作品占位">
-              <div class="work-cover ratio-4-3"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="电商套图作品占位">
-              <div class="work-cover ratio-4-3"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="电商套图作品占位">
-              <div class="work-cover ratio-4-3"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-          </div>
-        </article>
-
-        <article class="work-group" id="work-tvc" data-category="work-tvc">
-          <div class="work-group__head">
-            <span class="work-group__number">05</span>
-            <div><h3>TVC</h3><p>品牌短片、产品叙事与商业影像预留区。</p></div>
-          </div>
-          <div class="works-grid works-grid--wide">
-            <article class="work-card" aria-label="TVC作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="TVC作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="TVC作品占位">
-              <div class="work-cover ratio-16-9"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-          </div>
-        </article>
-
-        <article class="work-group" id="work-ai-poster" data-category="work-ai-poster">
-          <div class="work-group__head">
-            <span class="work-group__number">06</span>
-            <div><h3>AI海报</h3><p>概念海报、视觉实验与传播画面预留区。</p></div>
-          </div>
-          <div class="works-grid works-grid--portrait">
-            <article class="work-card" aria-label="AI海报作品占位">
-              <div class="work-cover ratio-3-4"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="AI海报作品占位">
-              <div class="work-cover ratio-3-4"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-            <article class="work-card" aria-label="AI海报作品占位">
-              <div class="work-cover ratio-3-4"><span>封面预留</span></div>
-              <div class="work-card__body"><h4>作品标题预留</h4><span class="work-tag">分类</span><div class="work-line"></div><span class="work-link is-disabled">查看 →</span></div>
-            </article>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section recent-section reveal" id="recent">
-      <div class="section-heading">
-        <span class="section-number">04</span>
-        <span class="section-label">RECENT WORKS / 近期创作</span>
-      </div>
-      <div class="section-intro compact-intro">
-        <h2>Recent Works</h2>
-        <p>八格近期创作预留位。放入新作品时，保持等尺寸即可维持密排版式。</p>
-      </div>
-      <div class="recent-grid" aria-label="近期创作占位网格">
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-        <div class="recent-tile"><span>预留</span></div>
-      </div>
-    </section>
-
-    <section class="poster-ring-section reveal" aria-labelledby="poster-ring-title">
-      <div class="ring-copy">
-        <span class="section-label">VISUAL ARCHIVE / 视觉档案</span>
-        <h2 id="poster-ring-title">作品，围绕一个<br>视觉中心展开。</h2>
-        <p>桌面端环形展示作品海报；悬停暂停自转。移动端自动切换为轻量横滑列表。</p>
-      </div>
-      <div class="poster-ring-stage">
-        <div class="poster-ring" aria-label="环形海报墙占位">
-          <div class="ring-poster" style="--i:0"><span>预留</span></div>
-          <div class="ring-poster" style="--i:1"><span>预留</span></div>
-          <div class="ring-poster" style="--i:2"><span>预留</span></div>
-          <div class="ring-poster" style="--i:3"><span>预留</span></div>
-          <div class="ring-poster" style="--i:4"><span>预留</span></div>
-          <div class="ring-poster" style="--i:5"><span>预留</span></div>
-          <div class="ring-poster" style="--i:6"><span>预留</span></div>
-          <div class="ring-poster" style="--i:7"><span>预留</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section advantages-section reveal" id="advantages">
-      <div class="section-heading">
-        <span class="section-number">05</span>
-        <span class="section-label">CAPABILITIES / 能力与优势</span>
-      </div>
-      <div class="advantages-grid">
-        <article class="advantage-card">
-          <span class="advantage-index">A / 01</span>
-          <div class="advantage-icon" aria-hidden="true">⌖</div>
-          <h3>锚点锁定不漂移</h3>
-          <p>用明确的角色锚点、空间关系与动作参照，降低连续生成中的形象偏移。</p>
-        </article>
-        <article class="advantage-card">
-          <span class="advantage-index">A / 02</span>
-          <div class="advantage-icon" aria-hidden="true">◷</div>
-          <h3>时长与语速精算</h3>
-          <p>根据台词字数和情绪停顿反推镜头时长，让画面节奏与表演自然贴合。</p>
-        </article>
-        <article class="advantage-card">
-          <span class="advantage-index">A / 03</span>
-          <div class="advantage-icon" aria-hidden="true">◎</div>
-          <h3>表情微操控</h3>
-          <p>把情绪拆成眼神、嘴角与呼吸节拍，以更细的提示层级获得真实表演。</p>
-        </article>
-        <article class="advantage-card">
-          <span class="advantage-index">A / 04</span>
-          <div class="advantage-icon" aria-hidden="true">▣</div>
-          <h3>双平台分镜交付</h3>
-          <p>针对横屏与竖屏重构图面信息，保证同一内容在不同平台都成立。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section contact-section reveal" id="contact">
-      <div class="section-heading">
-        <span class="section-number">06</span>
-        <span class="section-label">CONTACT / 联系</span>
-      </div>
-      <div class="contact-layout">
-        <div class="contact-copy">
-          <h2>不做模板，<br><em>做有记忆点的画面。</em></h2>
-          <p>如果你正在构思一部 AI 短剧、一个角色或一套视觉内容，欢迎把想法发给我。</p>
-          <address class="contact-list">
-            <!-- TODO: 将下方的占位文本替换为你的微信号 -->
-            <a href="#contact"><span>微信</span><strong>WECHAT TODO</strong></a>
-            <!-- TODO: 将 href 改为 mailto:你的邮箱，并替换可见文本 -->
-            <a href="#contact"><span>邮箱</span><strong>EMAIL TODO</strong></a>
-            <!-- TODO: 将 href 改为你的 GitHub 主页地址，并替换可见文本 -->
-            <a href="#contact"><span>GitHub</span><strong>GITHUB TODO</strong></a>
-          </address>
-        </div>
-        <form class="contact-form" id="contact-form" novalidate>
-          <div class="form-row">
-            <label for="name">怎么称呼你？</label>
-            <input id="name" name="name" type="text" autocomplete="name" placeholder="姓名 / 昵称" required>
-          </div>
-          <div class="form-row">
-            <label for="contact-info">联系方式</label>
-            <input id="contact-info" name="contact" type="text" autocomplete="email" placeholder="微信或邮箱" required>
-          </div>
-          <div class="form-row">
-            <label for="message">想聊什么？</label>
-            <textarea id="message" name="message" rows="4" placeholder="项目类型、内容方向或合作想法" required></textarea>
-          </div>
-          <button class="submit-button" type="submit">发送想法 <span aria-hidden="true">→</span></button>
-          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-meta">
-      <a href="#home">BACK TO TOP <span aria-hidden="true">↑</span></a>
-      <span>© 2026 SONGAOGE · AI 视觉创作</span>
-    </div>
     <div class="footer-word" aria-hidden="true">SONGAOGE</div>
   </footer>
 
-  <div class="scroll-meter" aria-hidden="true">
-    <span id="scroll-percent">0</span>
-    <i><b id="scroll-line"></b></i>
+  <div class="detail-layer" id="detail-layer" aria-hidden="true">
+    <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <div class="detail-topbar">
+        <button class="detail-back" id="detail-back" type="button"><span aria-hidden="true">←</span> 返回</button>
+        <nav class="detail-breadcrumb" id="detail-breadcrumb" aria-label="面包屑"></nav>
+        <button class="detail-close" id="detail-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <nav class="detail-toc" id="detail-toc" aria-label="详情分段"></nav>
+      <div class="detail-content" id="detail-content"></div>
+      <div class="detail-pagination" id="detail-pagination"></div>
+    </div>
   </div>
 
+  <div class="image-lightbox" id="image-lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="关闭大图">×</button>
+    <img id="lightbox-image" alt="">
+  </div>
+
+  <script src="./data/works.js" defer></script>
   <script src="./js/main.js" defer></script>
-  <script src="./js/cursor.js" defer></script>
-  <script src="./js/particles.js" defer></script>
-  <script src="./js/interactions.js" defer></script>
 </body>
 </html>
