@@ -1,0 +1,212 @@
+.site-cursor {
+  position: fixed;
+  z-index: 3000;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms ease;
+}
+
+.site-cursor.is-visible {
+  opacity: 1;
+}
+
+.site-cursor__halo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(120, 232, 255, 0.12) 0%, rgba(143, 105, 255, 0.075) 34%, transparent 70%);
+  filter: blur(10px);
+  mix-blend-mode: screen;
+  opacity: 0.72;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+}
+
+.site-cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(227, 252, 255, 0.58);
+  border-radius: 50%;
+  background: rgba(7, 13, 22, 0.12);
+  box-shadow:
+    0 0 18px rgba(120, 232, 255, 0.08),
+    inset 0 0 12px rgba(143, 105, 255, 0.05);
+  transform: translate3d(-50%, -50%, 0);
+  transition:
+    width 240ms var(--ease-out),
+    height 240ms var(--ease-out),
+    border-color 240ms ease,
+    background 240ms ease,
+    box-shadow 240ms ease;
+  will-change: transform, width, height;
+}
+
+.site-cursor__ring::before,
+.site-cursor__ring::after {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-color: rgba(159, 245, 255, 0.78);
+  border-style: solid;
+  content: "";
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.site-cursor__ring::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.site-cursor__ring::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.site-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #edfeff;
+  box-shadow: 0 0 11px rgba(120, 232, 255, 0.85);
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+}
+
+.site-cursor__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4px 7px;
+  border: 1px solid rgba(159, 245, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(5, 8, 14, 0.7);
+  color: #e7fdff;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 180ms ease;
+  white-space: nowrap;
+  will-change: transform, opacity;
+}
+
+.site-cursor.is-hovering .site-cursor__ring {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(120, 232, 255, 0.58);
+  background: rgba(20, 47, 70, 0.28);
+  box-shadow:
+    0 0 28px rgba(120, 232, 255, 0.15),
+    0 0 50px rgba(143, 105, 255, 0.08);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.site-cursor.is-hovering .site-cursor__ring::before,
+.site-cursor.is-hovering .site-cursor__ring::after {
+  opacity: 1;
+}
+
+.site-cursor.is-hovering .site-cursor__dot {
+  opacity: 0.35;
+}
+
+.site-cursor.is-hovering .site-cursor__label {
+  opacity: 1;
+}
+
+.site-cursor.is-down .site-cursor__ring {
+  width: 25px;
+  height: 25px;
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(120, 232, 255, 0.12);
+}
+
+.site-cursor__ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(120, 232, 255, 0.7);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.4);
+  animation: cursor-ripple 520ms var(--ease-out) forwards;
+  pointer-events: none;
+}
+
+@keyframes cursor-ripple {
+  18% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.3);
+  }
+}
+
+html.has-site-cursor,
+html.has-site-cursor body,
+html.has-site-cursor a,
+html.has-site-cursor button,
+html.has-site-cursor .work-card,
+html.has-site-cursor .skill-card,
+html.has-site-cursor .advantage-card,
+html.has-site-cursor .recent-tile,
+html.has-site-cursor .ring-poster {
+  cursor: none !important;
+}
+
+html.has-site-cursor input,
+html.has-site-cursor textarea {
+  cursor: text !important;
+}
+
+html.boot-active .site-cursor {
+  opacity: 0 !important;
+}
+
+html.boot-active.has-site-cursor,
+html.boot-active.has-site-cursor * {
+  cursor: auto !important;
+}
+
+html.boot-active.has-site-cursor input,
+html.boot-active.has-site-cursor textarea {
+  cursor: text !important;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .site-cursor {
+    display: none !important;
+  }
+
+  html.has-site-cursor,
+  html.has-site-cursor body,
+  html.has-site-cursor a,
+  html.has-site-cursor button,
+  html.has-site-cursor input,
+  html.has-site-cursor textarea {
+    cursor: auto !important;
+  }
+}
