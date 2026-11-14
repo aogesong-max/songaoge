@@ -104,14 +104,6 @@
       layout: "ecommerce",
       items: [
         {
-          id: "tom-ford",
-          title: "TOM FORD",
-          meta: "Tobacco Vanille",
-          cover: `${designRoot}/ecommerce/tom-ford/main.jpg`,
-          images: range(`${designRoot}/ecommerce/tom-ford`, "image", 10),
-          detail: `${designRoot}/ecommerce/tom-ford/detail-long.jpg`
-        },
-        {
           id: "rolex",
           title: "Rolex",
           meta: "Submariner",
@@ -126,6 +118,14 @@
           cover: `${designRoot}/ecommerce/louis-vuitton/main.jpg`,
           images: range(`${designRoot}/ecommerce/louis-vuitton`, "image", 12),
           detail: `${designRoot}/ecommerce/louis-vuitton/detail-long.jpg`
+        },
+        {
+          id: "chanel",
+          title: "CHANEL",
+          meta: "N°5",
+          cover: `${designRoot}/ecommerce/chanel/main.jpg`,
+          images: range(`${designRoot}/ecommerce/chanel`, "image", 14),
+          detail: `${designRoot}/ecommerce/chanel/detail-long.jpg`
         }
       ]
     },

@@ -24,7 +24,8 @@ python -m http.server 8080
 - 头像目标路径为 `assets/avatar.jpg`。当前文件不存在，页面显示不带裂图的空头像框。
 - 首页 Hero 背景继续使用 `assets/hero/hero-background.mp4` 与对应海报。
 - 开机动画继续使用 `assets/intro/startup.mp4` 与对应海报。
-- 短剧、IP、创意图、电商套图、工作流和视频资源均位于 `assets/works/`。
+- 短剧、IP、创意图、跨境电商套图、工作流和视频资源均位于 `assets/works/`。
+- 电商套图使用 Rolex、Louis Vuitton、CHANEL 三组跨境电商素材。
 - 缺失封面保持空媒体框；缺失详情图组会自动隐藏，不显示裂图或空段。
 
 ## 视频说明
