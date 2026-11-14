@@ -39,6 +39,7 @@
     <style>
       .boot-layer{display:none!important}
       .js-only{display:none!important}
+      .works-section{display:none!important}
       .noscript-grid{display:grid!important}
     </style>
   </noscript>
@@ -63,7 +64,10 @@
           <source src="./assets/hero/hero-background.mp4" type="video/mp4">
         </video>
       </div>
-      <div class="hero__word" aria-label="SONGAOGE">SONGAOGE</div>
+      <div class="hero__content">
+        <div class="hero__word" aria-label="SONGAOGE">SONGAOGE</div>
+        <div class="hero__identity" id="hero-profile"></div>
+      </div>
       <div class="hero__portrait">
         <span class="avatar avatar--hero"></span>
       </div>
@@ -87,33 +91,34 @@
     </section>
 
     <nav class="category-nav" id="category-nav" aria-label="作品分类">
-      <a href="#drama" class="is-active" data-section="drama"><span>01</span>AI短剧</a>
-      <a href="#design" data-section="design"><span>02</span>AI设计图</a>
+      <a href="#design" class="is-active" data-section="design"><span>01</span>AI设计图</a>
+      <a href="#drama" data-section="drama"><span>02</span>AI短剧</a>
     </nav>
 
-    <section class="noscript-grid" aria-label="作品封面">
-      <a href="#drama"><img src="./assets/works/drama/boxer/cover.jpg" alt="这个拳手不太冷"></a>
-      <a href="#drama"><img src="./assets/works/drama/sixth-second/cover.jpg" alt="第六秒"></a>
-      <a href="#drama"><img src="./assets/works/drama/ai-sisters/cover.jpg" alt="全世界只有我有AI"></a>
-      <a href="#drama"><img src="./assets/works/drama/dongbei-seoul/cover.jpg" alt="东北留子的首尔生活"></a>
-    </section>
-
-    <section class="works-section" id="drama" aria-labelledby="drama-title">
+    <section class="works-section design-section" id="design" aria-labelledby="design-title">
       <div class="section-heading">
         <span class="section-heading__index">01</span>
+        <h2 id="design-title">AI设计图</h2>
+        <span class="section-heading__en">Visual <em>Archive</em></span>
+      </div>
+      <div class="design-index" id="design-index"></div>
+      <div class="design-groups" id="design-groups"></div>
+    </section>
+
+    <section class="works-section drama-section" id="drama" aria-labelledby="drama-title">
+      <div class="section-heading">
+        <span class="section-heading__index">02</span>
         <h2 id="drama-title">AI短剧</h2>
         <span class="section-heading__en">AI <em>Short Drama</em></span>
       </div>
       <div class="drama-list" id="drama-list"></div>
     </section>
 
-    <section class="works-section design-section" id="design" aria-labelledby="design-title">
-      <div class="section-heading">
-        <span class="section-heading__index">02</span>
-        <h2 id="design-title">AI设计图</h2>
-        <span class="section-heading__en">Visual <em>Archive</em></span>
-      </div>
-      <div class="design-groups" id="design-groups"></div>
+    <section class="noscript-grid" aria-label="短剧封面">
+      <a href="#drama"><img src="./assets/works/drama/boxer/cover.jpg" alt="这个拳手不太冷"></a>
+      <a href="#drama"><img src="./assets/works/drama/sixth-second/cover.jpg" alt="第六秒"></a>
+      <a href="#drama"><img src="./assets/works/drama/ai-sisters/cover.jpg" alt="全世界只有我有AI"></a>
+      <a href="#drama"><img src="./assets/works/drama/dongbei-seoul/cover.jpg" alt="东北留子的首尔生活"></a>
     </section>
 
   </main>

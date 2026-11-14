@@ -6,6 +6,8 @@
   const works = window.SONGAOGE_WORKS || { dramas: [], designSections: [] };
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const dramaList = document.getElementById("drama-list");
+  const heroProfile = document.getElementById("hero-profile");
+  const designIndex = document.getElementById("design-index");
   const designGroups = document.getElementById("design-groups");
   const detailLayer = document.getElementById("detail-layer");
   const detailPanel = detailLayer?.querySelector(".detail-panel");
@@ -55,6 +57,37 @@
   }
 
   function renderHome() {
+    const profile = works.profile || {};
+    if (heroProfile) {
+      heroProfile.innerHTML = `
+        <div class="profile-block">
+          <p class="profile-label">PROFILE</p>
+          <dl class="profile-list">
+            <div><dt>姓名</dt><dd>${escapeHtml(profile.name || "")}</dd></div>
+            <div><dt>年龄</dt><dd>${escapeHtml(profile.age || "")}</dd></div>
+            <div><dt>学历</dt><dd>${escapeHtml(profile.education || "")}</dd></div>
+            <div><dt>专业</dt><dd>${escapeHtml(profile.major || "")}</dd></div>
+            <div><dt>院校</dt><dd>${escapeHtml(profile.school || "")}</dd></div>
+          </dl>
+        </div>
+        <div class="software-block">
+          <p class="software-label">SOFTWARE</p>
+          <div class="software-list">
+            ${(profile.software || [])
+              .map(
+                (software) => `
+                  <span class="software-item">
+                    <img src="${escapeHtml(software.icon)}" alt="" loading="lazy" decoding="async">
+                    <span>${escapeHtml(software.name)}</span>
+                  </span>
+                `
+              )
+              .join("")}
+          </div>
+        </div>
+      `;
+    }
+
     dramaList.innerHTML = works.dramas
       .map(
         (drama, index) => `
@@ -63,13 +96,50 @@
               ${imageMarkup(drama.cover, drama.title, index === 0 ? "eager" : "lazy")}
               <span class="play-mark" aria-hidden="true">▶</span>
             </span>
+            <span class="drama-card__copy">
+              <span class="drama-card__index">${String(index + 1).padStart(2, "0")} / AI SHORT DRAMA</span>
+              <strong class="drama-card__title">${escapeHtml(drama.title)}</strong>
+              <span class="drama-card__section">
+                <span class="drama-card__label">简介</span>
+                <span class="drama-card__text">${escapeHtml(drama.summary)}</span>
+              </span>
+              <span class="drama-card__section">
+                <span class="drama-card__label">制作流程</span>
+                <span class="drama-card__text">${escapeHtml(drama.processNote)}</span>
+              </span>
+              <span class="drama-card__link">查看作品 <span aria-hidden="true">→</span></span>
+            </span>
           </button>
         `
       )
       .join("");
 
+    const indexOrder = ["ip", "creative", "ecommerce", "workflow"];
+    designIndex.innerHTML = indexOrder
+      .map((sectionId) => works.designSections.find((section) => section.id === sectionId))
+      .filter(Boolean)
+      .map((section, index) => {
+        const representative = section.items[0];
+        const subtitle = section.items.map((item) => item.title).join(" · ");
+        return `
+          <button class="design-index-card" type="button" data-scroll-design="${escapeHtml(section.id)}">
+            <span class="design-index-card__media">
+              ${imageMarkup(representative.cover, section.title)}
+              <span class="design-index-card__line" aria-hidden="true"></span>
+            </span>
+            <span class="design-index-card__copy">
+              <span class="design-index-card__title"><span>${String(index + 1).padStart(2, "0")}</span><em>${escapeHtml(section.title)}</em></span>
+              <span class="design-index-card__subtitle">${escapeHtml(subtitle)}</span>
+              <span class="design-index-card__button">查看作品 <span aria-hidden="true">→</span></span>
+            </span>
+          </button>
+        `;
+      })
+      .join("");
+
     designGroups.innerHTML = works.designSections
       .map((section, sectionIndex) => {
+        const groupItems = section.items.map((item) => item.title).join(" · ");
         const items = section.items
           .map((item, itemIndex) => {
             const layout = section.layout;
@@ -77,14 +147,14 @@
               layout === "ip"
                 ? "ratio-4-5"
                 : layout === "ecommerce"
-                  ? "ratio-4-3"
+                  ? "ratio-ecommerce"
                   : layout === "creative"
                     ? "ratio-4-5"
                     : "ratio-16-9";
             const className =
               layout === "creative" ? "design-card creative-card" : "design-card";
             return `
-              <button class="${className}" type="button" data-design-section="${sectionIndex}" data-design-item="${itemIndex}" aria-label="打开作品 ${escapeHtml(item.title)}">
+              <button class="${className}" type="button" data-design-section="${sectionIndex}" data-design-id="${escapeHtml(section.id)}" data-design-item="${itemIndex}" aria-label="打开作品 ${escapeHtml(item.title)}">
                 <span class="media-frame ${ratio}">
                   ${imageMarkup(item.cover, item.title)}
                 </span>
@@ -97,10 +167,10 @@
           })
           .join("");
         return `
-          <section class="design-group" aria-labelledby="design-group-${escapeHtml(section.id)}">
+          <section class="design-group" id="design-section-${escapeHtml(section.id)}" aria-labelledby="design-group-${escapeHtml(section.id)}">
             <div class="design-group__heading">
               <h3 id="design-group-${escapeHtml(section.id)}">${escapeHtml(section.title)}</h3>
-              <span>${String(sectionIndex + 1).padStart(2, "0")} / ${String(works.designSections.length).padStart(2, "0")}</span>
+              <span>${String(sectionIndex + 1).padStart(2, "0")} / ${String(works.designSections.length).padStart(2, "0")} · ${escapeHtml(groupItems)}</span>
             </div>
             <div class="design-grid design-grid--${escapeHtml(section.layout)}">${items}</div>
           </section>
@@ -371,8 +441,8 @@
     `;
   }
 
-  function renderVideoDetail(item) {
-    const category = item.id === "apl" || item.id === "dance-remake" ? "创意视频" : "创意游戏 CG";
+  function renderVideoDetail(item, categoryOverride = "") {
+    const category = categoryOverride || (item.id === "apl" ? "创意视频" : "创意游戏 CG");
     detailBreadcrumb.innerHTML = `<span>SONGAOGE</span> / <span>AI设计图</span> / <span>${category}</span> / <strong>${escapeHtml(item.title)}</strong>`;
     detailToc.innerHTML = "";
     detailPagination.innerHTML = "";
@@ -450,6 +520,15 @@
   dramaList.addEventListener("click", (event) => {
     const card = event.target.closest("[data-drama-index]");
     if (card) openDramaByIndex(Number(card.dataset.dramaIndex));
+  });
+
+  designIndex.addEventListener("click", (event) => {
+    const card = event.target.closest("[data-scroll-design]");
+    if (!card) return;
+    document.getElementById(`design-section-${card.dataset.scrollDesign}`)?.scrollIntoView({
+      behavior: reduceMotion.matches ? "auto" : "smooth",
+      block: "start"
+    });
   });
 
   designGroups.addEventListener("click", (event) => {
