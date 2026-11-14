@@ -60,14 +60,13 @@
 
   function labelForTarget(target) {
     if (!(target instanceof Element)) return "";
-    const interactive = target.closest("a, button, input, textarea, [role='button'], .work-card, .skill-card, .advantage-card, .recent-tile, .ring-poster, .hero-visual, .profile-card, .contact-form");
+    const interactive = target.closest("a, button, input, textarea, [role='button'], .work-card, .skill-card, .advantage-card, .recent-tile, .ring-poster, .profile-card, .contact-form");
     if (!interactive) return "";
 
     if (interactive.dataset.cursor) return interactive.dataset.cursor;
     if (interactive.matches("input, textarea")) return "输入";
     if (interactive.matches(".work-card, .recent-tile, .ring-poster")) return "预览";
     if (interactive.matches(".skill-card, .advantage-card")) return "了解";
-    if (interactive.matches(".hero-visual")) return "主视觉";
     if (interactive.matches(".profile-card")) return "资料";
     if (interactive.matches(".contact-form")) return "填写";
     if (interactive.matches("button")) return "点击";
