@@ -1,0 +1,70 @@
+.hero-title {
+  translate: var(--hero-shift-x, 0) var(--hero-shift-y, 0);
+  transition: translate 420ms var(--ease-out);
+}
+
+.magnetic-control {
+  transform: translate3d(var(--magnet-x, 0), var(--magnet-y, 0), 0);
+  transition:
+    transform 260ms var(--ease-out),
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
+  will-change: transform;
+}
+
+.magnetic-control.is-magnetic {
+  transition-duration: 90ms;
+}
+
+html.content-motion-enabled .pointer-reactive {
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, 0, 0);
+  transform-style: preserve-3d;
+  transition:
+    transform 520ms var(--ease-out),
+    border-color 260ms ease,
+    background-color 260ms ease,
+    box-shadow 300ms ease;
+  will-change: transform;
+}
+
+html.content-motion-enabled .pointer-reactive.is-pointer-active {
+  border-color: rgba(120, 232, 255, 0.4);
+  background-image:
+    radial-gradient(
+      380px circle at var(--glow-x) var(--glow-y),
+      rgba(120, 232, 255, 0.085),
+      rgba(143, 105, 255, 0.045) 25%,
+      transparent 58%
+    );
+  box-shadow:
+    0 20px 56px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(143, 105, 255, 0.08);
+  transform:
+    perspective(900px)
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y))
+    translate3d(0, -3px, 0);
+  transition-duration: 90ms;
+}
+
+html.content-motion-enabled .pointer-reactive--spotlight {
+  transform: none;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .hero-title {
+    translate: none;
+  }
+
+  .magnetic-control,
+  html.content-motion-enabled .pointer-reactive {
+    transform: none;
+    will-change: auto;
+  }
+}
