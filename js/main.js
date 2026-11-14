@@ -7,6 +7,7 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const dramaList = document.getElementById("drama-list");
   const heroProfile = document.getElementById("hero-profile");
+  const ipShowcase = document.getElementById("ip-showcase");
   const designIndex = document.getElementById("design-index");
   const designGroups = document.getElementById("design-groups");
   const detailLayer = document.getElementById("detail-layer");
@@ -121,6 +122,32 @@
     }
   }
 
+  function getIpItems() {
+    return works.designSections.find((section) => section.layout === "ip")?.items || [];
+  }
+
+  function renderIpShowcase() {
+    if (!ipShowcase) return;
+    ipShowcase.innerHTML = getIpItems()
+      .map(
+        (item, index) => `
+          <button class="ip-card" type="button" data-ip-index="${index}" aria-label="打开 IP ${escapeHtml(item.title)}">
+            <span class="ip-card__cover">
+              ${imageMarkup(item.banner || item.cover, `${item.title} ${item.meta} 封面`, "lazy")}
+            </span>
+            <span class="ip-card__meta">
+              <span class="ip-card__name">
+                <strong>${escapeHtml(item.title)}</strong>
+                <span>${escapeHtml(item.meta)}</span>
+              </span>
+              ${item.theme ? `<span class="ip-card__theme">设计主题：${escapeHtml(item.theme)}</span>` : ""}
+            </span>
+          </button>
+        `
+      )
+      .join("");
+  }
+
   function renderHome() {
     const profile = works.profile || {};
     if (heroProfile) {
@@ -178,6 +205,8 @@
         `
       )
       .join("");
+
+    renderIpShowcase();
 
     const indexOrder = ["ip", "creative", "ecommerce", "workflow"];
     designIndex.innerHTML = indexOrder
@@ -394,22 +423,74 @@
     });
   }
 
-  function renderIp(item) {
-    detailBreadcrumb.innerHTML = `<span>SONGAOGE</span> / <span>AI设计图</span> / <span>IP 形象设计</span> / <strong>${escapeHtml(item.title)}</strong>`;
-    detailToc.innerHTML = "";
-    detailPagination.innerHTML = "";
+  function ipDetailGridMarkup(images, alt, columns = 1) {
+    if (!images?.length) return "";
+    const gridColumns = Math.min(3, Math.max(1, Number(columns) || 1));
+    return `
+      <div class="ip-detail-grid" style="--ip-detail-columns: ${gridColumns}">
+        ${images
+          .map(
+            (src, index) => `
+              <button type="button" class="ip-detail-media" data-lightbox-src="${escapeHtml(src)}" data-lightbox-alt="${escapeHtml(alt)} ${index + 1}">
+                ${imageMarkup(src, `${alt} ${index + 1}`, "lazy")}
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
+  function renderIp(index, preserveScroll = false) {
+    const items = getIpItems();
+    const item = items[index];
+    if (!item) return;
+
+    const sections = (item.detailSections || []).map((section, sectionIndex) => ({
+      id: `ip-detail-${sectionIndex + 1}`,
+      number: String(sectionIndex + 1).padStart(2, "0"),
+      title: section.title,
+      content: ipDetailGridMarkup(
+        section.images,
+        `${item.title} ${section.title}`,
+        section.columns
+      )
+    }));
+
+    const visibleSections = sections.filter((section) => Boolean(section.content));
+    detailBreadcrumb.innerHTML = `<span>SONGAOGE</span> / <span>AI设计图</span> / <span>IP设计</span> / <strong>${escapeHtml(item.title)}</strong>`;
+    detailToc.innerHTML = visibleSections
+      .map((section) => `<a href="#${escapeHtml(section.id)}">${escapeHtml(section.number)} ${escapeHtml(section.title)}</a>`)
+      .join("");
     detailContent.dataset.kind = "ip";
     detailContent.innerHTML = `
       <h1 class="detail-title" id="detail-title">${escapeHtml(item.title)}<em>${escapeHtml(item.meta)}</em></h1>
       <section class="detail-section">
-        <div class="gallery-hero">
-          <span class="media-frame">${imageMarkup(item.cover, item.title, "eager")}</span>
+        <div class="ip-detail-hero">
+          ${imageMarkup(item.hero || item.banner || item.cover, `${item.title} ${item.meta} 主视觉`, "eager")}
         </div>
+        ${item.theme || item.concept
+          ? `<div class="ip-detail-intro">
+              ${item.theme ? `<p class="ip-detail-theme">设计主题：${escapeHtml(item.theme)}</p>` : ""}
+              ${item.concept ? `<p class="ip-detail-concept">${escapeHtml(item.concept)}</p>` : ""}
+            </div>`
+          : ""}
       </section>
-      ${sectionMarkup("ip-views", "01", "三视图", mediaGridMarkup(item.views, `${item.title} 三视图`, "ratio-4-3"))}
-      ${sectionMarkup("ip-details", "02", "细节图", mediaGridMarkup(item.details, `${item.title} 细节`, "ratio-4-3"))}
+      ${visibleSections.map((section) => sectionMarkup(section.id, section.number, section.title, section.content)).join("")}
     `;
-    detailPanel.scrollTop = 0;
+    detailPagination.innerHTML = `
+      <button type="button" data-ip-step="-1">
+        <small>PREVIOUS</small>
+        <strong>← ${escapeHtml(items[(index - 1 + items.length) % items.length].title)}</strong>
+      </button>
+      <button type="button" data-ip-step="1">
+        <small>NEXT</small>
+        <strong>${escapeHtml(items[(index + 1) % items.length].title)} →</strong>
+      </button>
+    `;
+    detailPagination.dataset.ipIndex = String(index);
+    delete detailPagination.dataset.dramaIndex;
+    if (!preserveScroll) detailPanel.scrollTop = 0;
     primeImageFallbacks(detailContent);
   }
 
@@ -587,6 +668,13 @@
     if (card) openDramaByIndex(Number(card.dataset.dramaIndex));
   });
 
+  ipShowcase?.addEventListener("click", (event) => {
+    const card = event.target.closest("[data-ip-index]");
+    if (!card) return;
+    renderIp(Number(card.dataset.ipIndex));
+    openDetail(card);
+  });
+
   designIndex.addEventListener("click", (event) => {
     const card = event.target.closest("[data-scroll-design]");
     if (!card) return;
@@ -607,7 +695,7 @@
       openLightbox(item.cover, item.title);
       return;
     }
-    if (section.layout === "ip") renderIp(item);
+    if (section.layout === "ip") renderIp(Number(card.dataset.designItem));
     if (section.layout === "ecommerce") renderEcommerce(item);
     if (section.layout === "workflow") renderWorkflow(item);
     if (section.layout === "game" || section.layout === "video") renderVideoDetail(item);
@@ -641,6 +729,14 @@
   });
 
   detailPagination.addEventListener("click", (event) => {
+    const ipButton = event.target.closest("[data-ip-step]");
+    if (ipButton) {
+      const current = Number(detailPagination.dataset.ipIndex);
+      const step = Number(ipButton.dataset.ipStep);
+      const items = getIpItems();
+      renderIp((current + step + items.length) % items.length);
+      return;
+    }
     const button = event.target.closest("[data-drama-step]");
     if (!button) return;
     const current = Number(detailPagination.dataset.dramaIndex);

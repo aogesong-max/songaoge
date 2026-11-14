@@ -80,24 +80,141 @@
           title: "纳克",
           meta: "CHRONOS",
           cover: `${designRoot}/ip/nake-chronos/main.jpg`,
+          banner: `${designRoot}/ip/nake-chronos/banner.jpg`,
+          hero: `${designRoot}/ip/nake-chronos/banner.jpg`,
+          theme: "时光回溯 × 机械守望",
+          concept:
+            "纳克（ ）是一位以时间守护为核心概念的原创潮玩角色，整体设计围绕「时间、机械、守护」三个核心意象展开。他拥有银白色蓬松发型、冷灰色眼眸与额头独特伤痕，搭配黑色机能战术服及金属质感武士刀，塑造出冷静、克制而敏锐的角色气质。设计以深冷蓝、深灰、黄铜金为主色调，融合发光时钟、机械齿轮与未来都市等视觉元素，营造出神秘而富有科技感的时间幻想氛围。",
           views: [`${designRoot}/ip/nake-chronos/view-01.jpg`],
-          details: range(`${designRoot}/ip/nake-chronos`, "detail", 6)
+          details: range(`${designRoot}/ip/nake-chronos`, "detail", 6),
+          detailSections: [
+            {
+              title: "三视图",
+              columns: 1,
+              images: [`${designRoot}/ip/nake-chronos/view-01.jpg`]
+            },
+            {
+              title: "表情包",
+              columns: 1,
+              images: [`${designRoot}/ip/nake-chronos/detail-05.jpg`]
+            },
+            {
+              title: "设计元素",
+              columns: 1,
+              images: [`${designRoot}/ip/nake-chronos/detail-02.jpg`]
+            },
+            {
+              title: "色彩 / 角色档案",
+              columns: 1,
+              images: [`${designRoot}/ip/nake-chronos/detail-01.jpg`]
+            },
+            {
+              title: "应用 / 周边",
+              columns: 2,
+              images: [
+                `${designRoot}/ip/nake-chronos/detail-04.jpg`,
+                `${designRoot}/ip/nake-chronos/detail-03.jpg`
+              ]
+            },
+            {
+              title: "海报",
+              columns: 1,
+              images: [`${designRoot}/ip/nake-chronos/detail-06.jpg`]
+            }
+          ]
         },
         {
           id: "qirong",
           title: "漆绒",
           meta: "QIRONG",
           cover: `${designRoot}/ip/qirong/main.jpg`,
+          banner: `${designRoot}/ip/qirong/banner.jpg`,
+          hero: `${designRoot}/ip/qirong/banner.jpg`,
+          theme: "绒彩绘梦 × 毛绒治愈",
+          concept:
+            "漆绒（ ）是一位以“把灵感画出来”为核心概念的原创潮玩角色，整体设计围绕「毛绒、颜料、治愈」三个核心意象展开。他拥有奶白色的蓬松毛绒身体、薄荷绿的尖耳朵内耳与大圆眼睛，带着一点小坏笑的小牙，背着橙色南瓜包、手里永远拿一支沾着薄荷绿颜料的画笔，塑造出鬼马、可爱、又有点小倔强的角色气质。设计以奶白、薄荷绿、南瓜橙为主色调，融合颜料泼溅、调色盘、云朵与南瓜等视觉元素，营造出温暖、柔软、又有动手感的创作氛围。",
           views: [`${designRoot}/ip/qirong/view-01.jpg`],
-          details: range(`${designRoot}/ip/qirong`, "detail", 6)
+          details: range(`${designRoot}/ip/qirong`, "detail", 6),
+          detailSections: [
+            {
+              title: "三视图",
+              columns: 1,
+              images: [`${designRoot}/ip/qirong/view-01.jpg`]
+            },
+            {
+              title: "表情包",
+              columns: 1,
+              images: [`${designRoot}/ip/qirong/detail-02.jpg`]
+            },
+            {
+              title: "设计元素 / 色彩",
+              columns: 1,
+              images: [`${designRoot}/ip/qirong/detail-01.jpg`]
+            },
+            {
+              title: "应用 / 周边",
+              columns: 2,
+              images: [
+                `${designRoot}/ip/qirong/detail-03.jpg`,
+                `${designRoot}/ip/qirong/detail-04.jpg`
+              ]
+            },
+            {
+              title: "设计总览",
+              columns: 1,
+              images: [`${designRoot}/ip/qirong/detail-06.jpg`]
+            },
+            {
+              title: "海报",
+              columns: 1,
+              images: [`${designRoot}/ip/qirong/detail-05.jpg`]
+            }
+          ]
         },
         {
           id: "xingdeng",
           title: "星灯",
           meta: "XINGDENG",
           cover: `${designRoot}/ip/xingdeng/main.jpg`,
+          banner: `${designRoot}/ip/xingdeng/banner.jpg`,
+          hero: `${designRoot}/ip/xingdeng/banner.jpg`,
+          theme: "星夜守梦 × 暖光治愈",
+          concept:
+            "星灯（ ）是一位以夜晚守护为核心概念的原创潮玩角色，整体设计围绕「星空、灯光、睡眠」三个核心意象展开。他拥有圆滚滚深蓝星空毛绒身体、大星星眼眸与暖黄发光脸颊，搭配深蓝睡帽、黄毛球及手提小灯、灯笼尾巴，塑造出困倦却可靠、温柔而安静的角色气质。",
           views: [`${designRoot}/ip/xingdeng/view-01.jpg`],
-          details: range(`${designRoot}/ip/xingdeng`, "detail", 5)
+          details: range(`${designRoot}/ip/xingdeng`, "detail", 5),
+          detailSections: [
+            {
+              title: "三视图",
+              columns: 1,
+              images: [`${designRoot}/ip/xingdeng/view-01.jpg`]
+            },
+            {
+              title: "表情包",
+              columns: 1,
+              images: [`${designRoot}/ip/xingdeng/detail-02.jpg`]
+            },
+            {
+              title: "换装",
+              columns: 1,
+              images: [`${designRoot}/ip/xingdeng/detail-03.jpg`]
+            },
+            {
+              title: "设计元素 / 色彩",
+              columns: 1,
+              images: [`${designRoot}/ip/xingdeng/detail-01.jpg`]
+            },
+            {
+              title: "应用 / 周边",
+              columns: 1,
+              images: [`${designRoot}/ip/xingdeng/detail-04.jpg`]
+            },
+            {
+              title: "海报",
+              columns: 1,
+              images: [`${designRoot}/ip/xingdeng/detail-05.jpg`]
+            }
+          ]
         }
       ]
     },
