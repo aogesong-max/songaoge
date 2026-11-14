@@ -46,7 +46,7 @@ python -m http.server 8080
 
 ## 首页背景视频
 
-首页 Hero 使用 `assets/hero/urban-jungle.mp4`，参考自 MotionSites 的 Urban Jungle 页面背景。视频默认静音循环播放，移动端使用裁切铺满；开启“减少动态效果”后改为展示 `urban-jungle-poster.jpg` 静态海报。
+首页 Hero 使用 `assets/hero/hero-background.mp4`。视频默认静音循环播放，移动端使用裁切铺满；开启“减少动态效果”后改为展示 `hero-background-poster.jpg` 静态海报。
 
 该素材仅按当前站长要求接入。正式商业使用或再次分发前，请向素材权利方确认授权；也可以直接替换同名文件来更换背景视频。
 
