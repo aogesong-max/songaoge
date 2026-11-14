@@ -6,8 +6,12 @@
 
 - `index.html`：首页与详情层容器
 - `data/works.js`：全部作品名称、分类、路径和详情图组
-- `css/style.css`：全站视觉、断点与详情层样式
-- `js/main.js`：首页渲染、详情层、灯箱、轮播、视频和开机动画
+- `css/style.css`：首页编辑式版式、全站视觉、断点与详情层样式
+- `css/cursor.css`：旋转粒子光标、悬停状态与点击爆发效果
+- `css/interactions.css`：标题视差、磁吸按钮与作品卡片倾斜效果
+- `js/main.js`：首页渲染、导航菜单、详情层、灯箱、轮播、视频和开机动画
+- `js/cursor.js`：自定义粒子光标的指针跟踪与反馈
+- `js/interactions.js`：首页及作品列表的轻量鼠标交互
 
 ## 本地预览
 

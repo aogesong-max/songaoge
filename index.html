@@ -11,6 +11,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0d14'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='23' font-weight='900' fill='%23e8e6ec'%3ESG%3C/text%3E%3C/svg%3E">
   <style>html,body{margin:0;min-height:100%;background:#0c0d14;color:#e8e6ec}</style>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/cursor.css">
+  <link rel="stylesheet" href="./css/interactions.css">
   <script>
     document.documentElement.classList.add("js");
     window.__bootDismiss = function (recordSession) {
@@ -52,9 +54,59 @@
     <button class="boot-skip" id="boot-skip" type="button" onclick="window.__bootDismiss &amp;&amp; window.__bootDismiss(true)">跳过 SKIP <span aria-hidden="true">→</span></button>
   </div>
 
-  <header class="site-header">
-    <a class="wordmark" href="#home" aria-label="SONGAOGE 首页">SONGAOGE</a>
-    <span class="avatar avatar--small" aria-hidden="true"></span>
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__nav">
+        <a class="wordmark" href="#home" aria-label="SONGAOGE 首页" data-cursor="首页">
+          <span class="wordmark__mark">SG</span>
+          <span class="wordmark__name">SONGAOGE</span>
+        </a>
+        <div class="works-menu" id="works-menu">
+          <button class="works-menu__trigger" id="works-menu-trigger" type="button" aria-expanded="false" aria-controls="works-menu-panel" data-cursor="展开">
+            作品
+            <svg width="8" height="8" viewBox="0 0 8 8" fill="none" aria-hidden="true">
+              <path d="M1 2.5 4 5.5 7 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <nav class="works-menu__panel" id="works-menu-panel" aria-label="作品分类" aria-hidden="true">
+            <a href="#design-section-ip"><span>01</span>IP 形象设计</a>
+            <a href="#design-section-creative"><span>02</span>AI 创意图</a>
+            <a href="#design-section-ecommerce"><span>03</span>电商套图</a>
+            <a href="#design-section-workflow"><span>04</span>工作流</a>
+            <a href="#design-section-video"><span>05</span>视频作品</a>
+            <a href="#drama"><span>06</span>AI 短剧</a>
+          </nav>
+        </div>
+        <nav class="desktop-nav" aria-label="主导航">
+          <a href="#about" data-cursor="了解">关于</a>
+          <a href="#advantages" data-cursor="了解">优势</a>
+        </nav>
+      </div>
+      <div class="site-header__actions">
+        <span class="header-signal" aria-hidden="true"><i></i><i></i><i></i></span>
+        <a class="ghost-pill" href="#design" data-cursor="浏览">
+          <span aria-hidden="true">✦</span> 作品集
+        </a>
+        <a class="contact-pill" href="#about" data-cursor="了解">
+          关于我 <span aria-hidden="true">→</span>
+        </a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="打开菜单" data-cursor="菜单">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航" aria-hidden="true">
+      <p>作品</p>
+      <a href="#design-section-ip"><span>01</span>IP 形象设计</a>
+      <a href="#design-section-creative"><span>02</span>AI 创意图</a>
+      <a href="#design-section-ecommerce"><span>03</span>电商套图</a>
+      <a href="#design-section-workflow"><span>04</span>工作流</a>
+      <a href="#design-section-video"><span>05</span>视频作品</a>
+      <a href="#drama"><span>06</span>AI 短剧</a>
+      <div class="mobile-menu__rule"></div>
+      <a href="#about"><span>07</span>关于</a>
+      <a href="#advantages"><span>08</span>优势</a>
+    </nav>
   </header>
 
   <main id="main-content">
@@ -64,13 +116,58 @@
           <source src="./assets/hero/hero-background.mp4" type="video/mp4">
         </video>
       </div>
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__side" aria-label="作品集">
+        <span>PORTFOLIO</span>
+      </div>
+      <span class="hero__corner hero__corner--tl" aria-hidden="true"></span>
+      <span class="hero__corner hero__corner--tr" aria-hidden="true"></span>
+      <span class="hero__corner hero__corner--bl" aria-hidden="true"></span>
+      <span class="hero__corner hero__corner--br" aria-hidden="true"></span>
+
       <div class="hero__content">
-        <div class="hero__word" aria-label="SONGAOGE">SONGAOGE</div>
-        <div class="hero__identity" id="hero-profile"></div>
+        <p class="hero__eyebrow">
+          <span class="hero__dot" aria-hidden="true"></span>
+          <span>VISUAL DESIGNER &amp; AI CREATIVE</span>
+          <i aria-hidden="true"></i>
+        </p>
+        <h1 class="hero__word" data-cursor="主视觉">SONGAOGE</h1>
+        <p class="hero__role">AI SHORT DRAMA · VISUAL DESIGN · IP CREATIVE</p>
+        <p class="hero__statement">BOLD · AI · CRAFT</p>
+        <a class="hero__cta" href="#design" data-cursor="探索">
+          <span>VIEW WORKS</span>
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
-      <div class="hero__portrait">
-        <span class="avatar avatar--hero"></span>
+
+      <figure class="hero-sigil" aria-label="宋傲阁个人视觉标识" data-cursor="主视觉">
+        <span class="hero-sigil__orbit" aria-hidden="true"></span>
+        <span class="hero-sigil__label">AI CREATIVE</span>
+        <div class="hero-sigil__portrait" aria-hidden="true">
+          <img src="./assets/hero/hero-background-poster.jpg" alt="" loading="eager" decoding="async">
+          <span>宋</span>
+        </div>
+        <figcaption>
+          <strong>宋傲阁</strong>
+          <span>SONGAOGE · 2026</span>
+        </figcaption>
+      </figure>
+
+      <a class="hero__scroll" href="#about" aria-label="向下浏览">
+        <span>SCROLL</span>
+        <i aria-hidden="true">↓</i>
+      </a>
+    </section>
+
+    <section class="home-about" id="about" aria-labelledby="about-title">
+      <div class="home-about__intro">
+        <p class="home-about__label">01 / ABOUT</p>
+        <h2 id="about-title">用 AI 视觉讲故事，<br><em>让画面先有情绪。</em></h2>
+        <p class="home-about__copy">从文字剧本到人物资产、分镜与成片，把创意拆解成稳定、可执行的视觉语言。</p>
+        <span class="home-about__anchor" id="advantages" aria-hidden="true"></span>
       </div>
+      <div class="hero__identity" id="hero-profile"></div>
     </section>
 
     <section class="marquee" aria-label="作品类别">
@@ -146,6 +243,8 @@
   </div>
 
   <script src="./data/works.js" defer></script>
+  <script src="./js/cursor.js" defer></script>
+  <script src="./js/interactions.js" defer></script>
   <script src="./js/main.js" defer></script>
 </body>
 </html>

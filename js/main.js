@@ -20,6 +20,12 @@
   const lightbox = document.getElementById("image-lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const lightboxClose = document.getElementById("lightbox-close");
+  const siteHeader = document.getElementById("site-header");
+  const worksMenu = document.getElementById("works-menu");
+  const worksMenuTrigger = document.getElementById("works-menu-trigger");
+  const worksMenuPanel = document.getElementById("works-menu-panel");
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
 
   const detailState = {
     open: false,
@@ -54,6 +60,65 @@
       image.addEventListener("error", hideMissing, { once: true });
       if (image.complete && image.naturalWidth === 0) hideMissing();
     });
+  }
+
+  function setWorksMenuOpen(open) {
+    if (!worksMenu || !worksMenuTrigger) return;
+    worksMenu.classList.toggle("is-open", open);
+    worksMenuTrigger.setAttribute("aria-expanded", String(open));
+    worksMenuPanel?.setAttribute("aria-hidden", String(!open));
+  }
+
+  function setMobileMenuOpen(open) {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
+    mobileMenu.classList.toggle("is-open", open);
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    body.classList.toggle("mobile-menu-open", open);
+    siteHeader?.classList.toggle("is-menu-open", open);
+  }
+
+  function setupHeader() {
+    if (siteHeader) {
+      const updateHeader = () => {
+        siteHeader.classList.toggle("is-scrolled", window.scrollY > 36);
+      };
+      window.addEventListener("scroll", updateHeader, { passive: true });
+      updateHeader();
+    }
+
+    if (worksMenu && worksMenuTrigger) {
+      const closeWorksMenu = () => setWorksMenuOpen(false);
+      worksMenu.addEventListener("mouseenter", () => {
+        if (window.matchMedia("(min-width: 769px)").matches) setWorksMenuOpen(true);
+      });
+      worksMenu.addEventListener("mouseleave", () => {
+        if (window.matchMedia("(min-width: 769px)").matches) closeWorksMenu();
+      });
+      worksMenuTrigger.addEventListener("click", () => {
+        setWorksMenuOpen(!worksMenu.classList.contains("is-open"));
+      });
+      worksMenu.addEventListener("focusout", (event) => {
+        if (!worksMenu.contains(event.relatedTarget)) closeWorksMenu();
+      });
+      worksMenu.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeWorksMenu));
+      document.addEventListener("click", (event) => {
+        if (!worksMenu.contains(event.target)) closeWorksMenu();
+      });
+    }
+
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener("click", () => {
+        setMobileMenuOpen(!mobileMenu.classList.contains("is-open"));
+      });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => setMobileMenuOpen(false));
+      });
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) setMobileMenuOpen(false);
+      });
+    }
   }
 
   function renderHome() {
@@ -596,6 +661,12 @@
       closeLightbox();
     } else if (detailState.open) {
       closeDetail();
+    } else if (mobileMenu?.classList.contains("is-open")) {
+      setMobileMenuOpen(false);
+      menuToggle?.focus();
+    } else if (worksMenu?.classList.contains("is-open")) {
+      setWorksMenuOpen(false);
+      worksMenuTrigger?.focus();
     }
   });
 
@@ -631,6 +702,7 @@
     document.querySelectorAll("#drama, #design").forEach((section) => navObserver.observe(section));
   }
 
+  setupHeader();
   renderHome();
   primeImageFallbacks();
 
