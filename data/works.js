@@ -130,7 +130,92 @@
         "全片人物资产由 GPT Image 2.5 制作，环境资产由 Midjourney 和 Image 2.5 制作，全片由小云雀 Seedance 2.5 制作。",
       cover: `${dramaRoot}/ai-sisters/cover.jpg`,
       video: `${dramaRoot}/ai-sisters/video.mp4`,
-      stills: range(`${dramaRoot}/ai-sisters`, "still", 3),
+      assetGallery: {
+        layout: "category-rows",
+        lightboxGroup: "ai-sisters-assets",
+        groups: [
+          {
+            label: "人物",
+            images: [
+              {
+                src: `${dramaRoot}/ai-sisters/assets/character-01-doubao.jpg`,
+                name: "豆包",
+                aspect: 2560 / 1440
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/character-02-songao.jpg`,
+                name: "宋奥",
+                aspect: 4096 / 2304
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/character-03-claude.jpg`,
+                name: "Claude",
+                aspect: 4096 / 2304
+              }
+            ]
+          },
+          {
+            label: "人物",
+            images: [
+              {
+                src: `${dramaRoot}/ai-sisters/assets/character-04-deepseek.jpg`,
+                name: "Deepseek",
+                aspect: 2560 / 1440
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/character-05-gpt.jpg`,
+                name: "GPT",
+                aspect: 4096 / 2304
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/character-06-grok.jpg`,
+                name: "grok",
+                aspect: 2560 / 1440
+              }
+            ]
+          },
+          {
+            label: "环境",
+            images: [
+              {
+                src: `${dramaRoot}/ai-sisters/assets/environment-01-office.jpg`,
+                name: "办公室",
+                aspect: 4096 / 2304
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/environment-02-street.jpg`,
+                name: "街道",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/environment-03-bedroom.jpg`,
+                name: "卧室",
+                aspect: 4096 / 2313
+              }
+            ]
+          },
+          {
+            label: "道具",
+            images: [
+              {
+                src: `${dramaRoot}/ai-sisters/assets/prop-01-car.jpg`,
+                name: "车",
+                aspect: 1792 / 1344
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/prop-02-claude-book.jpg`,
+                name: "Claude的书",
+                aspect: 1792 / 1344
+              },
+              {
+                src: `${dramaRoot}/ai-sisters/assets/prop-03-deepseek-plush.jpg`,
+                name: "Deepseek玩偶",
+                aspect: 2048 / 2048
+              }
+            ]
+          }
+        ]
+      },
       process: [],
       workflow: [`${dramaRoot}/ai-sisters/workflow/workflow-01.jpg`],
       assets: []
