@@ -1965,6 +1965,12 @@ a {
   margin-top: 0;
 }
 
+.detail-section--assets {
+  width: min(1632px, calc(100vw - 48px));
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 .detail-section__heading {
   display: flex;
   gap: 16px;
@@ -2133,6 +2139,10 @@ a {
 }
 
 @media (max-width: 768px) {
+  .detail-section--assets {
+    width: calc(100vw - 44px);
+  }
+
   .drama-asset-grid,
   .drama-asset-row {
     gap: 16px;
@@ -3132,6 +3142,10 @@ a {
   .detail-title {
     margin-bottom: 42px;
     font-size: 42px;
+  }
+
+  .detail-section--assets {
+    width: calc(100vw - 36px);
   }
 
   .asset-masonry {

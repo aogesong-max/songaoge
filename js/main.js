@@ -391,7 +391,8 @@
         id: "detail-assets",
         number: "02",
         title: "资产图",
-        content: dramaAssetGalleryMarkup(drama.assetGallery, drama.title)
+        content: dramaAssetGalleryMarkup(drama.assetGallery, drama.title),
+        className: "detail-section--assets"
       });
     } else if (drama.stills?.length) {
       sections.push({
@@ -445,7 +446,7 @@
     detailBreadcrumb.innerHTML = `<span>SONGAOGE</span> / <span>AI短剧</span> / <strong>${escapeHtml(drama.title)}</strong>`;
     detailContent.innerHTML = `
       <h1 class="detail-title" id="detail-title">${escapeHtml(drama.title)}</h1>
-      ${visibleSections.map((section) => sectionMarkup(section.id, section.number, section.title, section.content)).join("")}
+      ${visibleSections.map((section) => sectionMarkup(section.id, section.number, section.title, section.content, section.className)).join("")}
     `;
     detailToc.innerHTML = visibleSections
       .map((section) => `<a href="#${escapeHtml(section.id)}">${escapeHtml(section.number)} ${escapeHtml(section.title)}</a>`)
