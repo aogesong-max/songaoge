@@ -295,10 +295,13 @@ body.workflow-detail-open {
 
 .workflow-detail__gallery {
   display: grid;
+  justify-items: center;
   gap: 16px;
 }
 
 .workflow-detail__gallery figure {
+  width: fit-content;
+  max-width: 100%;
   margin: 0;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -308,9 +311,30 @@ body.workflow-detail-open {
 
 .workflow-detail__gallery img {
   display: block;
-  width: 100%;
+  width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: 440px;
   object-fit: contain;
+}
+
+.workflow-detail__process-column {
+  position: sticky;
+  top: 92px;
+  max-height: calc(100vh - 112px);
+  padding-right: 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(196, 184, 204, 0.28) transparent;
+}
+
+.workflow-detail__process-column > h2 {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  background: var(--bg);
 }
 
 .workflow-detail__process {
@@ -368,6 +392,18 @@ html.has-site-cursor .workflow-detail button {
   .workflow-detail__columns {
     grid-template-columns: 1fr;
     gap: 58px;
+  }
+
+  .workflow-detail__process-column {
+    position: static;
+    top: auto;
+    max-height: none;
+    padding-right: 0;
+    overflow-y: visible;
+  }
+
+  .workflow-detail__process-column > h2 {
+    position: static;
   }
 }
 
