@@ -1,0 +1,13 @@
+.dance-remake-block {
+  margin-top: clamp(84px, 9vw, 124px);
+}
+
+.dance-remake-card {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .dance-remake-block {
+    margin-top: 72px;
+  }
+}

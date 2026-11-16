@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="./css/tvc.css?v=1">
   <link rel="stylesheet" href="./css/workflow.css?v=1">
   <link rel="stylesheet" href="./css/ai-video.css?v=1">
+  <link rel="stylesheet" href="./css/dance-remake.css?v=1">
   <link rel="stylesheet" href="./css/ip-design.css">
   <script>
     document.documentElement.classList.add("js");
@@ -625,6 +626,26 @@
           </button>
         </div>
       </div>
+      <div class="game-cg-block dance-remake-block" aria-labelledby="dance-remake-title">
+        <h3 class="game-cg-block__title" id="dance-remake-title">爆火舞蹈复刻</h3>
+        <div class="drama-list game-cg-list">
+          <button class="drama-card game-cg-card dance-remake-card" type="button" data-dance-remake-open data-cursor="播放" aria-label="打开作品 爆火舞蹈复刻">
+            <span class="media-frame ratio-16-9">
+              <img src="./assets/works/design/ai-video/dance-remake/cover.jpg" alt="爆火舞蹈复刻 封面" loading="lazy" decoding="async">
+              <span class="play-mark" aria-hidden="true">▶</span>
+            </span>
+            <span class="drama-card__copy">
+              <span class="drama-card__index">舞蹈复刻 / DANCE REMAKE</span>
+              <strong class="drama-card__title">爆火舞蹈复刻</strong>
+              <span class="drama-card__section">
+                <span class="drama-card__label">内容介绍</span>
+                <span class="drama-card__text">把一支爆火舞蹈短视频逐帧复刻出来：先把原片的动作捕捉成白膜，只留动作与运动轨迹当锚点，再换上原创的男女主角和赛博朋克小巷——前景男主近景、后景女主在巷口光区内起舞，前后景构图与原片同步还原，动作一帧不差、人物全换新。</span>
+              </span>
+              <span class="drama-card__link">查看作品 <span aria-hidden="true">→</span></span>
+            </span>
+          </button>
+        </div>
+      </div>
     </section>
 
     <section class="works-section drama-section" id="drama" aria-labelledby="drama-title">
@@ -900,6 +921,54 @@
     </button>
   </div>
 
+  <div class="game-cg-detail dance-remake-detail" id="dance-remake-detail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="dance-remake-detail-title">
+    <div class="game-cg-detail__panel">
+      <div class="game-cg-detail__topbar">
+        <button class="game-cg-detail__back" type="button">← 返回</button>
+        <div class="game-cg-detail__breadcrumb">SONGAOGE / AI视频 / 舞蹈复刻 / 爆火舞蹈复刻</div>
+      </div>
+      <div class="game-cg-detail__content">
+        <header class="game-cg-detail__header">
+          <span class="game-cg-detail__tag">舞蹈复刻</span>
+          <h1 id="dance-remake-detail-title">爆火舞蹈复刻</h1>
+        </header>
+        <div class="game-cg-detail__columns">
+          <section class="game-cg-detail__video-column" aria-labelledby="dance-remake-video-title">
+            <h2 id="dance-remake-video-title"><span>01</span>视频</h2>
+            <div class="tvc-player" id="dance-remake-player">
+              <video class="tvc-player__video" id="dance-remake-video" playsinline preload="metadata" poster="./assets/works/design/ai-video/dance-remake/cover.jpg">
+                <source src="./assets/works/design/ai-video/dance-remake/video.mp4" type="video/mp4">
+              </video>
+              <button class="tvc-player__center-play" type="button" aria-label="播放视频">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+              </button>
+              <div class="tvc-player__controls">
+                <button class="tvc-player__button tvc-player__play" type="button" aria-label="播放视频">
+                  <svg class="tvc-player__icon tvc-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"></path></svg>
+                </button>
+                <span class="tvc-player__time"><span id="dance-remake-current">00:00</span><span aria-hidden="true"> / </span><span id="dance-remake-duration">00:00</span></span>
+                <input class="tvc-player__range tvc-player__seek" id="dance-remake-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="播放进度">
+                <button class="tvc-player__button tvc-player__mute" type="button" aria-label="静音">
+                  <svg class="tvc-player__icon tvc-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="M17 9a4 4 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="m17 10 4 4M21 10l-4 4"></path></svg>
+                </button>
+                <input class="tvc-player__range tvc-player__volume" id="dance-remake-volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+                <button class="tvc-player__button tvc-player__fullscreen" type="button" aria-label="全屏">
+                  <svg class="tvc-player__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4"></path></svg>
+                </button>
+              </div>
+            </div>
+          </section>
+          <section class="game-cg-detail__intro-column" aria-labelledby="dance-remake-process-title">
+            <h2 id="dance-remake-process-title"><span>02</span>制作过程</h2>
+            <p>爆火舞蹈复刻短视频，先用 LibTV 中的深度捕捉功能捕捉原舞蹈视频的动作，并将原视频处理为白膜视频——剥离原人物的长相、服装与背景，只保留白色模型人体的动作与运动轨迹，作为全片的动作锚点；再以 Image 2.5 锁定男女主角人物资产、以 Image 2.5 锁定赛博朋克小巷场景资产，随后在 LibTV 视频平台以 Seedance 2.5 模型生成——将白膜视频与人物、场景资产共同绑定输入，由白膜逐帧驱动人物完成原片舞蹈，前景男主近景、后景女主在巷口光区内起舞的前后景构图同步还原；成片逐帧校验动作与白膜轨迹的同步度及人物面孔、肢体的跨段一致性。</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="./data/works.js" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
@@ -910,5 +979,6 @@
   <script src="./js/tvc.js?v=1" defer></script>
   <script src="./js/workflow.js?v=1" defer></script>
   <script src="./js/ai-video.js?v=1" defer></script>
+  <script src="./js/dance-remake.js?v=1" defer></script>
 </body>
 </html>
