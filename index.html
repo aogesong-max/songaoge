@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="./css/design-overview.css">
   <link rel="stylesheet" href="./css/creative-showcase.css">
   <link rel="stylesheet" href="./css/ecommerce.css?v=rolex2">
+  <link rel="stylesheet" href="./css/tvc.css?v=1">
   <link rel="stylesheet" href="./css/ip-design.css">
   <script>
     document.documentElement.classList.add("js");
@@ -485,6 +486,70 @@
               </span>
             </button>
           </div>
+          <div class="tvc-showcase" aria-labelledby="tvc-showcase-title">
+            <div class="tvc-showcase__heading">
+              <h4 id="tvc-showcase-title">TVC视频</h4>
+              <span>04 FILMS</span>
+            </div>
+            <div class="tvc-grid">
+              <button class="tvc-card" type="button" data-tvc-index="0" aria-label="播放 TOM FORD TVC 视频" data-cursor="播放">
+                <span class="tvc-card__media">
+                  <video class="tvc-card__video" data-tvc-preview muted loop playsinline preload="none" poster="./assets/works/design/ecommerce/tvc/tom-ford.jpg" aria-hidden="true">
+                    <source src="./assets/works/design/ecommerce/tvc/tom-ford.mp4" type="video/mp4">
+                  </video>
+                  <span class="tvc-card__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  </span>
+                </span>
+                <span class="tvc-card__meta">
+                  <strong>TOM FORD</strong>
+                  <span>香水 TVC · Tobacco Vanille</span>
+                </span>
+              </button>
+              <button class="tvc-card" type="button" data-tvc-index="1" aria-label="播放 GPW5 TVC 视频" data-cursor="播放">
+                <span class="tvc-card__media">
+                  <video class="tvc-card__video" data-tvc-preview muted loop playsinline preload="none" poster="./assets/works/design/ecommerce/tvc/gpw5.jpg" aria-hidden="true">
+                    <source src="./assets/works/design/ecommerce/tvc/gpw5.mp4" type="video/mp4">
+                  </video>
+                  <span class="tvc-card__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  </span>
+                </span>
+                <span class="tvc-card__meta">
+                  <strong>GPW5</strong>
+                  <span>电竞外设 TVC · 雪豹 Snow Leopard</span>
+                </span>
+              </button>
+              <button class="tvc-card" type="button" data-tvc-index="2" aria-label="播放 WASSUP TVC 视频" data-cursor="播放">
+                <span class="tvc-card__media">
+                  <video class="tvc-card__video" data-tvc-preview muted loop playsinline preload="none" poster="./assets/works/design/ecommerce/tvc/wassup.jpg" aria-hidden="true">
+                    <source src="./assets/works/design/ecommerce/tvc/wassup.mp4" type="video/mp4">
+                  </video>
+                  <span class="tvc-card__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  </span>
+                </span>
+                <span class="tvc-card__meta">
+                  <strong>WASSUP</strong>
+                  <span>潮牌服装 TVC · 轰炸机夹克</span>
+                </span>
+              </button>
+              <button class="tvc-card" type="button" data-tvc-index="3" aria-label="播放 劳力士 ROLEX TVC 视频" data-cursor="播放">
+                <span class="tvc-card__media">
+                  <video class="tvc-card__video" data-tvc-preview muted loop playsinline preload="none" poster="./assets/works/design/ecommerce/tvc/rolex.jpg" aria-hidden="true">
+                    <source src="./assets/works/design/ecommerce/tvc/rolex.mp4" type="video/mp4">
+                  </video>
+                  <span class="tvc-card__play" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  </span>
+                </span>
+                <span class="tvc-card__meta">
+                  <strong>劳力士 ROLEX</strong>
+                  <span>腕表 TVC · Submariner Date</span>
+                </span>
+              </button>
+            </div>
+          </div>
         </section>
         <section class="design-placeholder" id="design-workflow" aria-labelledby="design-workflow-title">
           <h3 id="design-workflow-title">工作流</h3>
@@ -597,6 +662,53 @@
     </div>
   </div>
 
+  <div class="tvc-detail" id="tvc-detail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="tvc-detail-title">
+    <div class="tvc-detail__panel">
+      <div class="tvc-detail__topbar">
+        <button class="tvc-detail__back" type="button">← 返回</button>
+        <div class="tvc-detail__breadcrumb" id="tvc-detail-breadcrumb"></div>
+      </div>
+      <div class="tvc-detail__content">
+        <header class="tvc-detail__header">
+          <span class="tvc-detail__tag">TVC视频</span>
+          <h1 id="tvc-detail-title"></h1>
+          <p id="tvc-detail-subtitle"></p>
+        </header>
+        <div class="tvc-detail__columns">
+          <section class="tvc-detail__video-column" aria-labelledby="tvc-detail-video-title">
+            <h2 id="tvc-detail-video-title"><span>01</span>TVC视频</h2>
+            <div class="tvc-player" id="tvc-player">
+              <video class="tvc-player__video" id="tvc-detail-video" playsinline preload="metadata"></video>
+              <button class="tvc-player__center-play" type="button" aria-label="播放视频">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+              </button>
+              <div class="tvc-player__controls">
+                <button class="tvc-player__button tvc-player__play" type="button" aria-label="播放视频">
+                  <svg class="tvc-player__icon tvc-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"></path></svg>
+                </button>
+                <span class="tvc-player__time"><span id="tvc-player-current">00:00</span><span aria-hidden="true"> / </span><span id="tvc-player-duration">00:00</span></span>
+                <input class="tvc-player__range tvc-player__seek" id="tvc-player-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="播放进度">
+                <button class="tvc-player__button tvc-player__mute" type="button" aria-label="静音">
+                  <svg class="tvc-player__icon tvc-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="M17 9a4 4 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="m17 10 4 4M21 10l-4 4"></path></svg>
+                </button>
+                <input class="tvc-player__range tvc-player__volume" id="tvc-player-volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+                <button class="tvc-player__button tvc-player__fullscreen" type="button" aria-label="全屏">
+                  <svg class="tvc-player__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4"></path></svg>
+                </button>
+              </div>
+            </div>
+          </section>
+          <section class="tvc-detail__concept-column" aria-labelledby="tvc-detail-concept-title">
+            <h2 id="tvc-detail-concept-title"><span>02</span>设计理念</h2>
+            <div class="tvc-detail__concept" id="tvc-detail-concept"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="./data/works.js" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
@@ -604,5 +716,6 @@
   <script src="./js/main.js" defer></script>
   <script src="./js/creative-lightbox.js" defer></script>
   <script src="./js/ecommerce.js?v=rolex2" defer></script>
+  <script src="./js/tvc.js?v=1" defer></script>
 </body>
 </html>
