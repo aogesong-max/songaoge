@@ -332,6 +332,15 @@ a {
   backdrop-filter: blur(24px);
 }
 
+.works-menu__panel::before {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 12px;
+  content: "";
+}
+
 .works-menu.is-open .works-menu__panel {
   opacity: 1;
   pointer-events: auto;

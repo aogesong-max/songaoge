@@ -27,6 +27,7 @@
   const worksMenu = document.getElementById("works-menu");
   const worksMenuTrigger = document.getElementById("works-menu-trigger");
   const worksMenuPanel = document.getElementById("works-menu-panel");
+  let worksMenuCloseTimer = 0;
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
 
@@ -72,6 +73,10 @@
 
   function setWorksMenuOpen(open) {
     if (!worksMenu || !worksMenuTrigger) return;
+    if (open) {
+      window.clearTimeout(worksMenuCloseTimer);
+      worksMenuCloseTimer = 0;
+    }
     worksMenu.classList.toggle("is-open", open);
     worksMenuTrigger.setAttribute("aria-expanded", String(open));
     worksMenuPanel?.setAttribute("aria-hidden", String(!open));
@@ -97,14 +102,29 @@
     }
 
     if (worksMenu && worksMenuTrigger) {
-      const closeWorksMenu = () => setWorksMenuOpen(false);
+      const cancelWorksMenuClose = () => {
+        window.clearTimeout(worksMenuCloseTimer);
+        worksMenuCloseTimer = 0;
+      };
+      const closeWorksMenu = () => {
+        cancelWorksMenuClose();
+        setWorksMenuOpen(false);
+      };
+      const scheduleWorksMenuClose = () => {
+        cancelWorksMenuClose();
+        worksMenuCloseTimer = window.setTimeout(() => {
+          worksMenuCloseTimer = 0;
+          setWorksMenuOpen(false);
+        }, 300);
+      };
       worksMenu.addEventListener("mouseenter", () => {
         if (window.matchMedia("(min-width: 769px)").matches) setWorksMenuOpen(true);
       });
       worksMenu.addEventListener("mouseleave", () => {
-        if (window.matchMedia("(min-width: 769px)").matches) closeWorksMenu();
+        if (window.matchMedia("(min-width: 769px)").matches) scheduleWorksMenuClose();
       });
       worksMenuTrigger.addEventListener("click", () => {
+        cancelWorksMenuClose();
         setWorksMenuOpen(!worksMenu.classList.contains("is-open"));
       });
       worksMenu.addEventListener("focusout", (event) => {
