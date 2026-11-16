@@ -15,6 +15,9 @@
   const muteButton = detail.querySelector(".tvc-player__mute");
   const volume = document.getElementById("game-cg-volume");
   const fullscreenButton = detail.querySelector(".tvc-player__fullscreen");
+  const timelineViewport = document.getElementById("game-cg-timeline");
+  const timelineTrack = document.getElementById("game-cg-timeline-track");
+  const timelineFrames = Array.from(timelineTrack.querySelectorAll("[data-game-cg-time]"));
   const stillsSection = document.getElementById("game-cg-stills");
   const stillsGrid = document.getElementById("game-cg-stills-grid");
   const lightbox = document.getElementById("game-cg-lightbox");
@@ -34,6 +37,16 @@
     scrollY: 0,
     detailTrigger: null,
     galleryTrigger: null
+  };
+
+  const timelineState = {
+    activeIndex: -1,
+    dragging: false,
+    dragStartX: 0,
+    dragStartScroll: 0,
+    dragged: false,
+    suppressClick: false,
+    lastManualInteraction: 0
   };
 
   function formatTime(value) {
@@ -78,6 +91,55 @@
     currentTime.textContent = formatTime(current);
     duration.textContent = formatTime(total);
     updateRangeFill(seek, Number(seek.value));
+    syncTimelineFrame(!video.paused);
+  }
+
+  function ensureTimelineFrameVisible(frame) {
+    const viewportRect = timelineViewport.getBoundingClientRect();
+    const frameRect = frame.getBoundingClientRect();
+    const edge = 30;
+    if (frameRect.left < viewportRect.left + edge) {
+      timelineViewport.scrollBy({
+        left: frameRect.left - viewportRect.left - edge,
+        behavior: "smooth"
+      });
+    } else if (frameRect.right > viewportRect.right - edge) {
+      timelineViewport.scrollBy({
+        left: frameRect.right - viewportRect.right + edge,
+        behavior: "smooth"
+      });
+    }
+  }
+
+  function syncTimelineFrame(ensureVisible) {
+    if (!timelineFrames.length) return;
+    const current = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+    let nearestIndex = 0;
+    let nearestDistance = Infinity;
+    timelineFrames.forEach((frame, index) => {
+      const distance = Math.abs(Number(frame.dataset.gameCgTime) - current);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestIndex = index;
+      }
+    });
+
+    if (timelineState.activeIndex !== nearestIndex) {
+      timelineState.activeIndex = nearestIndex;
+      timelineFrames.forEach((frame, index) => {
+        const active = index === nearestIndex;
+        frame.classList.toggle("is-active", active);
+        frame.setAttribute("aria-current", active ? "true" : "false");
+      });
+    }
+
+    if (
+      ensureVisible &&
+      !timelineState.dragging &&
+      performance.now() - timelineState.lastManualInteraction > 1500
+    ) {
+      ensureTimelineFrameVisible(timelineFrames[nearestIndex]);
+    }
   }
 
   function renderStills() {
@@ -102,6 +164,9 @@
     seek.value = "0";
     updateRangeFill(seek, 0);
     updateRangeFill(volume, 1);
+    timelineViewport.scrollLeft = 0;
+    timelineState.activeIndex = -1;
+    syncTimelineFrame(false);
     syncPlaybackState();
     syncVolumeState();
     document.body.classList.add("game-cg-detail-open");
@@ -201,6 +266,75 @@
     syncVolumeState();
   });
 
+  timelineTrack.addEventListener("click", (event) => {
+    if (timelineState.suppressClick) {
+      timelineState.suppressClick = false;
+      return;
+    }
+    const frame = event.target.closest("[data-game-cg-time]");
+    if (!frame) return;
+    video.currentTime = Number(frame.dataset.gameCgTime);
+    syncProgress();
+    video.play().catch(() => {});
+  });
+
+  timelineViewport.addEventListener("wheel", (event) => {
+    const maxScroll = timelineViewport.scrollWidth - timelineViewport.clientWidth;
+    if (maxScroll <= 0) return;
+    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+      ? event.deltaX
+      : event.deltaY;
+    if (
+      (delta < 0 && timelineViewport.scrollLeft <= 0) ||
+      (delta > 0 && timelineViewport.scrollLeft >= maxScroll - 1)
+    ) {
+      return;
+    }
+    event.preventDefault();
+    timelineState.lastManualInteraction = performance.now();
+    timelineViewport.scrollLeft += delta;
+  }, { passive: false });
+
+  timelineViewport.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    timelineState.dragging = true;
+    timelineState.dragStartX = event.clientX;
+    timelineState.dragStartScroll = timelineViewport.scrollLeft;
+    timelineState.dragged = false;
+  });
+
+  timelineViewport.addEventListener("pointermove", (event) => {
+    if (!timelineState.dragging) return;
+    const distance = event.clientX - timelineState.dragStartX;
+    if (Math.abs(distance) > 4 && !timelineState.dragged) {
+      timelineState.dragged = true;
+      timelineViewport.classList.add("is-dragging");
+      timelineViewport.setPointerCapture?.(event.pointerId);
+    }
+    if (!timelineState.dragged) return;
+    event.preventDefault();
+    timelineState.lastManualInteraction = performance.now();
+    timelineViewport.scrollLeft = timelineState.dragStartScroll - distance;
+  });
+
+  function endTimelineDrag(event) {
+    if (!timelineState.dragging) return;
+    timelineState.dragging = false;
+    timelineViewport.classList.remove("is-dragging");
+    if (timelineState.dragged && timelineViewport.hasPointerCapture?.(event.pointerId)) {
+      timelineViewport.releasePointerCapture(event.pointerId);
+    }
+    if (timelineState.dragged) {
+      timelineState.suppressClick = true;
+      window.setTimeout(() => {
+        timelineState.suppressClick = false;
+      }, 0);
+    }
+  }
+
+  timelineViewport.addEventListener("pointerup", endTimelineDrag);
+  timelineViewport.addEventListener("pointercancel", endTimelineDrag);
+
   stillsGrid.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-game-still]");
     if (trigger) openLightbox(Number(trigger.dataset.gameStill), trigger);
@@ -217,6 +351,7 @@
   });
 
   video.addEventListener("loadedmetadata", syncProgress);
+  video.addEventListener("seeked", syncProgress);
   video.addEventListener("timeupdate", syncProgress);
   video.addEventListener("durationchange", syncProgress);
   video.addEventListener("play", syncPlaybackState);
