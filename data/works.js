@@ -51,7 +51,72 @@
         "本片全部人物资产由 GPT Image 2.5 生成与定妆，环境资产由 Midjourney 与 Image 2.5 协同制作，全片视频由小云雀 Seedance 2.5 生成。作品以预告片形式呈现，综合运用多种镜头语言，并以倒叙、插叙交织的叙事手法推进剧情，完成从资产设计、分镜生成到剪辑成片的完整 AI 影视制作流程。",
       cover: `${dramaRoot}/sixth-second/cover.jpg`,
       video: `${dramaRoot}/sixth-second/video.mp4`,
-      stills: range(`${dramaRoot}/sixth-second`, "still", 3),
+      assetGallery: {
+        layout: "category-rows",
+        lightboxGroup: "sixth-second-assets",
+        groups: [
+          {
+            label: "人物",
+            images: [
+              {
+                src: `${dramaRoot}/sixth-second/assets/character-01-liya.jpg`,
+                name: "莉娅",
+                aspect: 1792 / 2400
+              },
+              {
+                src: `${dramaRoot}/sixth-second/assets/character-02-nake.jpg`,
+                name: "纳克",
+                aspect: 1086 / 1448
+              },
+              {
+                src: `${dramaRoot}/sixth-second/assets/character-03-calibrator.jpg`,
+                name: "校准者",
+                aspect: 1536 / 2048
+              }
+            ]
+          },
+          {
+            label: "环境",
+            images: [
+              {
+                src: `${dramaRoot}/sixth-second/assets/environment-01-broken-bridge.jpg`,
+                name: "断桥视角2",
+                aspect: 2400 / 1350
+              },
+              {
+                src: `${dramaRoot}/sixth-second/assets/environment-02-market.jpg`,
+                name: "集市角度2",
+                aspect: 2400 / 1350
+              },
+              {
+                src: `${dramaRoot}/sixth-second/assets/environment-03-city.jpg`,
+                name: "视角2",
+                aspect: 2400 / 1350
+              }
+            ]
+          },
+          {
+            label: "道具",
+            images: [
+              {
+                src: `${dramaRoot}/sixth-second/assets/prop-01-bread-basket.jpg`,
+                name: "面包篮",
+                aspect: 1792 / 1344
+              },
+              {
+                src: `${dramaRoot}/sixth-second/assets/prop-02-milk-jug.jpg`,
+                name: "牛奶壶",
+                aspect: 1792 / 1344
+              },
+              {
+                src: `${dramaRoot}/sixth-second/assets/prop-03-time-blade.jpg`,
+                name: "时滞刃",
+                aspect: 1344 / 1792
+              }
+            ]
+          }
+        ]
+      },
       process: [],
       workflow: [`${dramaRoot}/sixth-second/workflow/workflow-01.jpg`],
       assets: []

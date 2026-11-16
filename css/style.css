@@ -2133,6 +2133,26 @@ a {
   object-fit: contain;
 }
 
+.drama-asset-grid--category-rows .drama-asset-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.drama-asset-grid--category-rows .drama-asset-card {
+  flex: var(--asset-aspect, 1) 1 0;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+.drama-asset-grid--category-rows .drama-asset-slot {
+  flex: 1 1 0;
+}
+
+.drama-asset-card--proportional img {
+  height: auto;
+  object-fit: initial;
+}
+
 .drama-asset-slot {
   visibility: hidden;
   pointer-events: none;

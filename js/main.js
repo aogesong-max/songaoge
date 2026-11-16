@@ -333,35 +333,46 @@
   function dramaAssetGalleryMarkup(gallery, title) {
     if (!gallery) return "";
 
-    const groups = [
-      { label: "人物", images: gallery.characters || [] },
-      { label: "环境", images: gallery.environments || [] }
-    ];
-    const rows = groups.flatMap((group) =>
-      Array.from({ length: 2 }, (_, rowIndex) => ({
-        ...group,
-        imageOffset: rowIndex * 3,
-        images: group.images.slice(rowIndex * 3, rowIndex * 3 + 3)
-      }))
-    );
+    const isCategoryRows = gallery.layout === "category-rows";
+    const rows = isCategoryRows
+      ? (gallery.groups || []).map((group) => ({
+          ...group,
+          imageOffset: 0,
+          images: group.images || []
+        }))
+      : [
+          { label: "人物", images: gallery.characters || [] },
+          { label: "环境", images: gallery.environments || [] }
+        ].flatMap((group) =>
+          Array.from({ length: 2 }, (_, rowIndex) => ({
+            ...group,
+            imageOffset: rowIndex * 3,
+            images: group.images.slice(rowIndex * 3, rowIndex * 3 + 3)
+          }))
+        );
+    const lightboxGroup = gallery.lightboxGroup || "boxer-assets";
 
     return `
-      <div class="drama-asset-grid" data-lightbox-group="boxer-assets">
+      <div class="drama-asset-grid${isCategoryRows ? " drama-asset-grid--category-rows" : ""}">
         ${rows
           .map(
             (row) => `
               <div class="drama-asset-row">
                 ${Array.from({ length: 3 }, (_, columnIndex) => {
-                  const src = row.images[columnIndex];
+                  const image = row.images[columnIndex];
+                  const src = typeof image === "string" ? image : image?.src;
                   if (!src) return `<span class="drama-asset-slot" aria-hidden="true"></span>`;
-                  const alt = `${title} ${row.label}资产 ${row.imageOffset + columnIndex + 1}`;
+                  const imageName = typeof image === "string" ? "" : image?.name;
+                  const imageAspect = Number(image?.aspect) > 0 ? Number(image.aspect) : 1;
+                  const alt = `${title} ${row.label}资产 ${imageName || row.imageOffset + columnIndex + 1}`;
                   return `
                     <button
                       type="button"
-                      class="drama-asset-card"
+                      class="drama-asset-card${isCategoryRows ? " drama-asset-card--proportional" : ""}"
+                      ${isCategoryRows ? `style="--asset-aspect: ${imageAspect}"` : ""}
                       data-lightbox-src="${escapeHtml(src)}"
                       data-lightbox-alt="${escapeHtml(alt)}"
-                      data-lightbox-group="boxer-assets"
+                      data-lightbox-group="${escapeHtml(lightboxGroup)}"
                       aria-label="查看${escapeHtml(alt)}"
                     >
                       ${imageMarkup(src, alt)}
