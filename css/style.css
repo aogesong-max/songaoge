@@ -45,6 +45,7 @@
   --red: #b06a7a;
   --cyan: #6b8fb5;
   --gutter: max(24px, calc((100vw - 1280px) / 2));
+  --page-content-inset: 7%;
   --header-height: 74px;
   --sans: "Space Grotesk", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   --serif: "Fraunces", Georgia, "Songti SC", serif;
@@ -1208,9 +1209,9 @@ a {
 .works-section {
   position: relative;
   z-index: 1;
-  width: min(1280px, calc(100% - 2 * var(--gutter)));
+  width: 100%;
   margin: 0 auto;
-  padding: 138px 0 28px;
+  padding: 138px var(--page-content-inset) 28px;
 }
 
 .design-section {
@@ -1791,7 +1792,7 @@ a {
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 150px var(--gutter) 18px;
+  padding: 150px var(--page-content-inset) 18px;
   overflow: hidden;
   border-top: 1px solid var(--line);
   margin-top: 140px;
@@ -2890,7 +2891,7 @@ a {
   }
 
   .works-section {
-    width: calc(100% - 36px);
+    width: 100%;
     padding-top: 84px;
   }
 
@@ -2993,8 +2994,8 @@ a {
   }
 
   .site-footer {
-    padding-right: 14px;
-    padding-left: 14px;
+    padding-right: var(--page-content-inset);
+    padding-left: var(--page-content-inset);
   }
 
   .footer-word {

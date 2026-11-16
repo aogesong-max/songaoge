@@ -2,7 +2,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: clamp(96px, 10vw, 148px) var(--gutter) clamp(84px, 9vw, 132px);
+  padding: clamp(96px, 10vw, 148px) var(--page-content-inset) clamp(84px, 9vw, 132px);
   scroll-margin-top: 88px;
 }
 
@@ -17,7 +17,7 @@
   grid-template-columns: minmax(240px, 0.43fr) minmax(0, 1fr);
   gap: clamp(54px, 7vw, 118px);
   align-items: start;
-  width: min(100%, 1320px);
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -166,7 +166,7 @@
 
 @media (max-width: 768px) {
   .about-basic {
-    padding: 88px 22px 90px;
+    padding: 88px var(--page-content-inset) 90px;
   }
 
   .about-basic__inner {
@@ -185,7 +185,7 @@
 
 @media (max-width: 560px) {
   .about-basic {
-    padding: 78px 18px 82px;
+    padding: 78px var(--page-content-inset) 82px;
   }
 
   .about-basic__inner {
