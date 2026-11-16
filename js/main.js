@@ -403,7 +403,7 @@
         number: "02",
         title: "资产图",
         content: dramaAssetGalleryMarkup(drama.assetGallery, drama.title),
-        className: "detail-section--assets"
+        className: `detail-section--assets ${drama.assetGallery.sectionClassName || ""}`.trim()
       });
     } else if (drama.stills?.length) {
       sections.push({

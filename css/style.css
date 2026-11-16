@@ -1971,6 +1971,14 @@ a {
   transform: translateX(-50%);
 }
 
+.detail-section--assets-dongbei {
+  width: min(1500px, calc(100vw - 48px));
+}
+
+.detail-section--assets-dongbei .drama-asset-card {
+  border-radius: 12px;
+}
+
 .detail-section__heading {
   display: flex;
   gap: 16px;
@@ -2160,6 +2168,10 @@ a {
 
 @media (max-width: 768px) {
   .detail-section--assets {
+    width: calc(100vw - 44px);
+  }
+
+  .detail-section--assets-dongbei {
     width: calc(100vw - 44px);
   }
 

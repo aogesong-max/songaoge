@@ -229,6 +229,93 @@
         "全片人物资产由 GPT Image 2.5 制作，环境资产由 Midjourney 和 Image 2.5 制作，全片由小云雀 Seedance 2.5 制作。",
       cover: `${dramaRoot}/dongbei-seoul/cover.jpg`,
       video: `${dramaRoot}/dongbei-seoul/video.mp4`,
+      assetGallery: {
+        layout: "category-rows",
+        lightboxGroup: "dongbei-seoul-assets",
+        sectionClassName: "detail-section--assets-dongbei",
+        groups: [
+          {
+            label: "人物",
+            images: [
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/character-01-cui-xiuya1.png`,
+                name: "崔秀雅1",
+                aspect: 1536 / 2048
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/character-02-quan-taijun.png`,
+                name: "权泰俊",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/character-03-wang-zhenbei.png`,
+                name: "王振北",
+                aspect: 2048 / 1152
+              }
+            ]
+          },
+          {
+            label: "人物",
+            images: [
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/character-04-yin-shilin.png`,
+                name: "尹世凛",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/character-05-zheng-xialin.png`,
+                name: "郑夏琳",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/character-06-d.png`,
+                name: "D",
+                aspect: 2848 / 1600
+              }
+            ]
+          },
+          {
+            label: "环境",
+            images: [
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/environment-01-reverse-angle.png`,
+                name: "教室反向机位",
+                aspect: 2816 / 1584
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/environment-02-main-view.png`,
+                name: "教室主视角",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/environment-03-corridor.png`,
+                name: "教室走廊",
+                aspect: 4096 / 2304
+              }
+            ]
+          },
+          {
+            label: "道具",
+            images: [
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/prop-01-pink-folder.png`,
+                name: "粉色文件夹",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/prop-02-girls-uniform.png`,
+                name: "女生校服",
+                aspect: 2048 / 1152
+              },
+              {
+                src: `${dramaRoot}/dongbei-seoul/assets/prop-03-boys-uniform.png`,
+                name: "校服",
+                aspect: 2048 / 1152
+              }
+            ]
+          }
+        ]
+      },
       stills: range(`${dramaRoot}/dongbei-seoul`, "still", 3),
       process: [],
       workflow: [`${dramaRoot}/dongbei-seoul/workflow/workflow-01.jpg`],
