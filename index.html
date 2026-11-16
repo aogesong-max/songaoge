@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="./css/ecommerce.css?v=rolex2">
   <link rel="stylesheet" href="./css/tvc.css?v=1">
   <link rel="stylesheet" href="./css/workflow.css?v=1">
+  <link rel="stylesheet" href="./css/ai-video.css?v=1">
   <link rel="stylesheet" href="./css/ip-design.css">
   <script>
     document.documentElement.classList.add("js");
@@ -600,6 +601,30 @@
         <h2 id="ai-video-title">AI视频</h2>
         <span class="section-heading__en">AI <em>Video</em></span>
       </div>
+      <div class="game-cg-block" aria-labelledby="game-cg-title">
+        <h3 class="game-cg-block__title" id="game-cg-title">游戏CG</h3>
+        <div class="drama-list game-cg-list">
+          <button class="drama-card game-cg-card" type="button" data-game-cg-open data-cursor="播放" aria-label="打开作品 地平线6 · 东京GTR">
+            <span class="media-frame ratio-16-9">
+              <img src="./assets/works/design/game-cg/forza-gtr/cover.jpg" alt="地平线6 · 东京GTR 封面" loading="lazy" decoding="async">
+              <span class="play-mark" aria-hidden="true">▶</span>
+            </span>
+            <span class="drama-card__copy">
+              <span class="drama-card__index">游戏CG / GAME CG</span>
+              <strong class="drama-card__title">地平线6 · 东京GTR</strong>
+              <span class="drama-card__section">
+                <span class="drama-card__label">简介</span>
+                <span class="drama-card__text">《极限竞速：地平线 6》同人游戏 CG，全长 20 秒。一台日产 GTR 贯穿两段东京：先在涩谷的雨夜里漂移过弯，再上首都高速迎着日出收尾。</span>
+              </span>
+              <span class="drama-card__section">
+                <span class="drama-card__label">制作流程</span>
+                <span class="drama-card__text">遵循「策划—资产—分镜—生成—校验—后期」六步：先用 ChatGPT 完成创意与脚本结构，锁定主展示车日产 GTR 与东京场景资产，按宣传片镜头语言拆分分镜、逐镜撰写提示词，在 LibTV 分段生成，成片逐帧校验跨段一致性，最后在 Premiere Pro 中拼接与节奏剪辑，在 DaVinci Resolve 中统一调色并加上标题卡包装。</span>
+              </span>
+              <span class="drama-card__link">查看作品 <span aria-hidden="true">→</span></span>
+            </span>
+          </button>
+        </div>
+      </div>
     </section>
 
     <section class="works-section drama-section" id="drama" aria-labelledby="drama-title">
@@ -772,6 +797,71 @@
     </div>
   </div>
 
+  <div class="game-cg-detail" id="game-cg-detail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="game-cg-detail-title">
+    <div class="game-cg-detail__panel">
+      <div class="game-cg-detail__topbar">
+        <button class="game-cg-detail__back" type="button">← 返回</button>
+        <div class="game-cg-detail__breadcrumb">SONGAOGE / AI视频 / 游戏CG / 地平线6 · 东京GTR</div>
+      </div>
+      <div class="game-cg-detail__content">
+        <header class="game-cg-detail__header">
+          <span class="game-cg-detail__tag">游戏CG</span>
+          <h1 id="game-cg-detail-title">地平线6 · 东京GTR</h1>
+        </header>
+        <div class="game-cg-detail__columns">
+          <section class="game-cg-detail__video-column" aria-labelledby="game-cg-video-title">
+            <h2 id="game-cg-video-title"><span>01</span>视频</h2>
+            <div class="tvc-player game-cg-player" id="game-cg-player">
+              <video class="tvc-player__video" id="game-cg-video" playsinline preload="metadata" poster="./assets/works/design/game-cg/forza-gtr/cover.jpg">
+                <source src="./assets/works/design/game-cg/forza-gtr/video.mp4" type="video/mp4">
+              </video>
+              <button class="tvc-player__center-play" type="button" aria-label="播放视频">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+              </button>
+              <div class="tvc-player__controls">
+                <button class="tvc-player__button tvc-player__play" type="button" aria-label="播放视频">
+                  <svg class="tvc-player__icon tvc-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"></path></svg>
+                </button>
+                <span class="tvc-player__time"><span id="game-cg-current">00:00</span><span aria-hidden="true"> / </span><span id="game-cg-duration">00:00</span></span>
+                <input class="tvc-player__range tvc-player__seek" id="game-cg-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="播放进度">
+                <button class="tvc-player__button tvc-player__mute" type="button" aria-label="静音">
+                  <svg class="tvc-player__icon tvc-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="M17 9a4 4 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="m17 10 4 4M21 10l-4 4"></path></svg>
+                </button>
+                <input class="tvc-player__range tvc-player__volume" id="game-cg-volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+                <button class="tvc-player__button tvc-player__fullscreen" type="button" aria-label="全屏">
+                  <svg class="tvc-player__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4"></path></svg>
+                </button>
+              </div>
+            </div>
+          </section>
+          <section class="game-cg-detail__intro-column" aria-labelledby="game-cg-intro-title">
+            <h2 id="game-cg-intro-title"><span>02</span>内容介绍</h2>
+            <p>这支 20 秒的同人游戏 CG，把《极限竞速：地平线 6》的舞台搬到了东京。全片只有一台主角车——日产 GTR，环境随两段分镜切换：第一段是涩谷的雨夜，霓虹泡在湿漉漉的街面上，GTR 在车流与路口之间甩出漂移；第二段转上首都高速，天边泛起日出，车迎着晨光全速收尾。镜头按游戏宣传片的语言走：贴身跟拍、低机位、甩镜追车，让速度感和东京的夜与晨在一支片子里接上。</p>
+          </section>
+        </div>
+        <section class="game-cg-detail__stills" id="game-cg-stills" aria-labelledby="game-cg-stills-title" hidden>
+          <h2 id="game-cg-stills-title"><span>03</span>剧照</h2>
+          <div class="game-cg-detail__stills-grid" id="game-cg-stills-grid"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-cg-lightbox" id="game-cg-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="查看剧照">
+    <button class="game-cg-lightbox__close" type="button" aria-label="关闭大图">×</button>
+    <button class="game-cg-lightbox__nav game-cg-lightbox__nav--prev" type="button" aria-label="上一张">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 4-8 8 8 8"></path></svg>
+    </button>
+    <figure class="game-cg-lightbox__figure">
+      <img id="game-cg-lightbox-image" alt="">
+    </figure>
+    <button class="game-cg-lightbox__nav game-cg-lightbox__nav--next" type="button" aria-label="下一张">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 4 8 8-8 8"></path></svg>
+    </button>
+  </div>
+
   <script src="./data/works.js" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
@@ -781,5 +871,6 @@
   <script src="./js/ecommerce.js?v=rolex2" defer></script>
   <script src="./js/tvc.js?v=1" defer></script>
   <script src="./js/workflow.js?v=1" defer></script>
+  <script src="./js/ai-video.js?v=1" defer></script>
 </body>
 </html>
