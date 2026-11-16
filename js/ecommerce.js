@@ -58,7 +58,7 @@
     {
       brand: "劳力士 ROLEX",
       subtitle: "SUBMARINER DATE",
-      banner: `${root}/rolex/banner.jpg`,
+      banner: `${root}/rolex/banner.jpg?v=rolex2`,
       concept: "",
       images: [
         { src: `${root}/rolex/第一张.png`, category: "产品详情页" },

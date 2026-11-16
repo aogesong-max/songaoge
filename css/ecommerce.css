@@ -35,6 +35,14 @@
   object-fit: cover;
 }
 
+.ecommerce-showcase__card[data-ecommerce-index="2"] .ecommerce-showcase__cover {
+  background: #04131d;
+}
+
+.ecommerce-showcase__card[data-ecommerce-index="2"] .ecommerce-showcase__cover img {
+  object-fit: contain;
+}
+
 .ecommerce-showcase__meta {
   display: flex;
   flex-direction: column;
@@ -102,9 +110,11 @@ body.ecommerce-detail-open {
   color: var(--text-2);
   cursor: pointer;
   font-size: 13px;
+  transition: color 180ms ease;
 }
 
-.ecommerce-detail__back:hover {
+.ecommerce-detail__back:hover,
+.ecommerce-detail__back:focus-visible {
   color: var(--text-1);
 }
 
@@ -217,10 +227,13 @@ body.ecommerce-detail-open {
 }
 
 .ecommerce-carousel__stage > img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
 }
 
 .ecommerce-carousel__category,
@@ -257,10 +270,14 @@ body.ecommerce-detail-open {
   color: var(--text-1);
   cursor: pointer;
   translate: 0 -50%;
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
 }
 
-.ecommerce-carousel__arrow:hover {
+.ecommerce-carousel__arrow:hover,
+.ecommerce-carousel__arrow:focus-visible {
   border-color: var(--pink);
+  background: rgba(29, 30, 40, 0.94);
+  box-shadow: 0 0 0 4px rgba(212, 160, 174, 0.1);
 }
 
 .ecommerce-carousel__arrow--prev {
@@ -308,6 +325,7 @@ body.ecommerce-detail-open {
   border-radius: 7px;
   background: var(--surface);
   cursor: pointer;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .ecommerce-carousel__thumb img {
@@ -315,6 +333,12 @@ body.ecommerce-detail-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.ecommerce-carousel__thumb:hover,
+.ecommerce-carousel__thumb:focus-visible {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px rgba(212, 160, 174, 0.1);
 }
 
 .ecommerce-carousel__thumb.is-active {
@@ -348,6 +372,14 @@ body.ecommerce-detail-open {
   color: var(--text-4);
   font-family: var(--mono);
   font-size: 10px;
+}
+
+body.ecommerce-detail-open .site-cursor {
+  z-index: 6000;
+}
+
+html.has-site-cursor .ecommerce-detail button {
+  cursor: pointer !important;
 }
 
 @media (max-width: 1024px) {
