@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./css/core-skills.css">
   <link rel="stylesheet" href="./css/design-overview.css">
   <link rel="stylesheet" href="./css/creative-showcase.css">
+  <link rel="stylesheet" href="./css/ecommerce.css">
   <link rel="stylesheet" href="./css/ip-design.css">
   <script>
     document.documentElement.classList.add("js");
@@ -455,6 +456,35 @@
         </section>
         <section class="design-placeholder" id="design-ecommerce" aria-labelledby="design-ecommerce-title">
           <h3 id="design-ecommerce-title">电商套图</h3>
+          <div class="ecommerce-showcase" aria-label="电商套图作品">
+            <button class="ecommerce-showcase__card" type="button" data-ecommerce-index="0" aria-label="查看 TOM FORD 电商套图">
+              <span class="ecommerce-showcase__cover">
+                <img src="./assets/works/design/ecommerce/tom-ford/banner.jpg" alt="TOM FORD 烟草香草" loading="lazy" decoding="async">
+              </span>
+              <span class="ecommerce-showcase__meta">
+                <strong>TOM FORD</strong>
+                <span>烟草香草 Tobacco Vanille</span>
+              </span>
+            </button>
+            <button class="ecommerce-showcase__card" type="button" data-ecommerce-index="1" aria-label="查看 GPW5 电商套图">
+              <span class="ecommerce-showcase__cover">
+                <img src="./assets/works/design/ecommerce/gpw5/banner.jpg" alt="GPW5 雪豹重磅新品" loading="lazy" decoding="async">
+              </span>
+              <span class="ecommerce-showcase__meta">
+                <strong>GPW5</strong>
+                <span>雪豹 · 重磅新品</span>
+              </span>
+            </button>
+            <button class="ecommerce-showcase__card" type="button" data-ecommerce-index="2" aria-label="查看劳力士 ROLEX 电商套图">
+              <span class="ecommerce-showcase__cover">
+                <img src="./assets/works/design/ecommerce/rolex/banner.jpg" alt="劳力士 ROLEX SUBMARINER DATE" loading="lazy" decoding="async">
+              </span>
+              <span class="ecommerce-showcase__meta">
+                <strong>劳力士 ROLEX</strong>
+                <span>SUBMARINER DATE</span>
+              </span>
+            </button>
+          </div>
         </section>
         <section class="design-placeholder" id="design-workflow" aria-labelledby="design-workflow-title">
           <h3 id="design-workflow-title">工作流</h3>
@@ -527,11 +557,52 @@
     </button>
   </div>
 
+  <div class="ecommerce-detail" id="ecommerce-detail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="ecommerce-detail-title">
+    <div class="ecommerce-detail__panel">
+      <div class="ecommerce-detail__topbar">
+        <button class="ecommerce-detail__back" type="button">← 返回</button>
+        <div class="ecommerce-detail__breadcrumb" id="ecommerce-detail-breadcrumb"></div>
+      </div>
+      <div class="ecommerce-detail__content">
+        <img class="ecommerce-detail__hero" id="ecommerce-detail-hero" alt="">
+        <header class="ecommerce-detail__header">
+          <span class="ecommerce-detail__tag">电商套图</span>
+          <h1 id="ecommerce-detail-title"></h1>
+          <p id="ecommerce-detail-subtitle"></p>
+        </header>
+        <section class="ecommerce-detail__concept" id="ecommerce-detail-concept" hidden>
+          <h2><span>01</span>设计概念</h2>
+          <p></p>
+        </section>
+        <section class="ecommerce-detail__carousel" aria-label="电商套图轮播">
+          <div class="ecommerce-carousel__stage">
+            <img id="ecommerce-carousel-image" alt="">
+            <span class="ecommerce-carousel__category" id="ecommerce-carousel-category"></span>
+            <span class="ecommerce-carousel__count" id="ecommerce-carousel-count"></span>
+            <button class="ecommerce-carousel__arrow ecommerce-carousel__arrow--prev" type="button" aria-label="上一张">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 4-8 8 8 8"></path></svg>
+            </button>
+            <button class="ecommerce-carousel__arrow ecommerce-carousel__arrow--next" type="button" aria-label="下一张">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 4 8 8-8 8"></path></svg>
+            </button>
+          </div>
+          <p class="ecommerce-carousel__caption" id="ecommerce-carousel-caption"></p>
+          <div class="ecommerce-carousel__thumbs" id="ecommerce-carousel-thumbs" aria-label="套图缩略图"></div>
+        </section>
+        <section class="ecommerce-detail__contents">
+          <h2><span>02</span>包含内容</h2>
+          <ul id="ecommerce-detail-summary"></ul>
+        </section>
+      </div>
+    </div>
+  </div>
+
   <script src="./data/works.js" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
   <script src="./js/core-skills.js" defer></script>
   <script src="./js/main.js" defer></script>
   <script src="./js/creative-lightbox.js" defer></script>
+  <script src="./js/ecommerce.js" defer></script>
 </body>
 </html>
