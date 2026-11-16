@@ -2,7 +2,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: clamp(96px, 10vw, 148px) var(--page-content-inset) clamp(84px, 9vw, 132px);
+  padding: calc(clamp(96px, 10vw, 148px) + 100px) var(--page-content-inset) clamp(84px, 9vw, 132px);
   scroll-margin-top: 88px;
 }
 
@@ -10,6 +10,29 @@
   position: absolute;
   top: 88px;
   left: 0;
+}
+
+.about-basic__manifesto {
+  width: min(100%, 880px);
+  margin: 0 0 clamp(76px, 8vw, 112px);
+}
+
+.about-basic__manifesto-title {
+  margin: 0;
+  color: var(--text-1);
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+
+.about-basic__manifesto-copy {
+  max-width: 760px;
+  margin: clamp(24px, 2.6vw, 34px) 0 0;
+  color: var(--text-3);
+  font-size: clamp(15px, 1.25vw, 16px);
+  line-height: 1.9;
 }
 
 .about-basic__inner {
@@ -104,6 +127,17 @@
   line-height: 1.05;
 }
 
+.about-basic__content-title {
+  margin: 0;
+  color: var(--text-1);
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.1vw, 40px);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.25;
+}
+
 .about-basic__copy {
   min-height: 142px;
   margin-top: 28px;
@@ -113,12 +147,12 @@
   min-height: 1.9em;
   margin: 0;
   color: var(--text-3);
-  font-size: 15px;
-  line-height: 1.95;
+  font-size: 16px;
+  line-height: 1.9;
 }
 
 .about-basic__copy p + p {
-  margin-top: 12px;
+  margin-top: 18px;
 }
 
 .about-basic__contact-rule {
@@ -168,7 +202,11 @@
 
 @media (max-width: 768px) {
   .about-basic {
-    padding: 88px var(--page-content-inset) 90px;
+    padding: 188px var(--page-content-inset) 90px;
+  }
+
+  .about-basic__manifesto {
+    margin-bottom: 76px;
   }
 
   .about-basic__inner {
@@ -187,7 +225,15 @@
 
 @media (max-width: 560px) {
   .about-basic {
-    padding: 78px var(--page-content-inset) 82px;
+    padding: 178px var(--page-content-inset) 82px;
+  }
+
+  .about-basic__manifesto {
+    margin-bottom: 64px;
+  }
+
+  .about-basic__manifesto-title {
+    font-size: 46px;
   }
 
   .about-basic__inner {
@@ -213,7 +259,7 @@
   }
 
   .about-basic__copy p {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .about-basic__contact-rule {
