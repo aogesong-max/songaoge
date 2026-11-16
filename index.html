@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="./css/creative-showcase.css">
   <link rel="stylesheet" href="./css/ecommerce.css?v=rolex2">
   <link rel="stylesheet" href="./css/tvc.css?v=1">
+  <link rel="stylesheet" href="./css/workflow.css?v=1">
   <link rel="stylesheet" href="./css/ip-design.css">
   <script>
     document.documentElement.classList.add("js");
@@ -553,6 +554,42 @@
         </section>
         <section class="design-placeholder" id="design-workflow" aria-labelledby="design-workflow-title">
           <h3 id="design-workflow-title">工作流</h3>
+          <div class="workflow-showcase" aria-label="工作流作品">
+            <button class="workflow-card" type="button" data-workflow-index="0" aria-label="查看室内设计风格转换工作流" data-cursor="查看">
+              <span class="workflow-card__frame">
+                <span class="workflow-card__flipper">
+                  <span class="workflow-card__face workflow-card__face--front">
+                    <img src="./assets/works/design/workflow/interior-style/display-05-result-final.png" alt="室内设计风格转换成品图" loading="lazy" decoding="async">
+                  </span>
+                  <span class="workflow-card__face workflow-card__face--back" aria-hidden="true">
+                    <strong>室内设计风格转换</strong>
+                    <span>点击查看制作过程</span>
+                  </span>
+                </span>
+              </span>
+              <span class="workflow-card__meta">
+                <strong>室内设计风格转换</strong>
+                <span>室内风格转换工作流 · ComfyUI</span>
+              </span>
+            </button>
+            <button class="workflow-card" type="button" data-workflow-index="1" aria-label="查看换装工作流" data-cursor="查看">
+              <span class="workflow-card__frame">
+                <span class="workflow-card__flipper">
+                  <span class="workflow-card__face workflow-card__face--front">
+                    <img src="./assets/works/design/workflow/outfit-swap/display-04-person-result.png" alt="一键换装工作流成品图" loading="lazy" decoding="async">
+                  </span>
+                  <span class="workflow-card__face workflow-card__face--back" aria-hidden="true">
+                    <strong>换装工作流</strong>
+                    <span>点击查看制作过程</span>
+                  </span>
+                </span>
+              </span>
+              <span class="workflow-card__meta">
+                <strong>换装工作流</strong>
+                <span>一键换装工作流 · FLUX.2</span>
+              </span>
+            </button>
+          </div>
         </section>
       </div>
     </section>
@@ -709,6 +746,32 @@
     </div>
   </div>
 
+  <div class="workflow-detail" id="workflow-detail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="workflow-detail-title">
+    <div class="workflow-detail__panel">
+      <div class="workflow-detail__topbar">
+        <button class="workflow-detail__back" type="button">← 返回</button>
+        <div class="workflow-detail__breadcrumb" id="workflow-detail-breadcrumb"></div>
+      </div>
+      <div class="workflow-detail__content">
+        <header class="workflow-detail__header">
+          <span class="workflow-detail__tag">工作流</span>
+          <h1 id="workflow-detail-title"></h1>
+          <p id="workflow-detail-subtitle"></p>
+        </header>
+        <div class="workflow-detail__columns">
+          <section class="workflow-detail__gallery-column" aria-labelledby="workflow-detail-gallery-title">
+            <h2 id="workflow-detail-gallery-title"><span>01</span>效果展示</h2>
+            <div class="workflow-detail__gallery" id="workflow-detail-gallery"></div>
+          </section>
+          <section class="workflow-detail__process-column" aria-labelledby="workflow-detail-process-title">
+            <h2 id="workflow-detail-process-title"><span>02</span>制作过程</h2>
+            <div class="workflow-detail__process" id="workflow-detail-process"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="./data/works.js" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
@@ -717,5 +780,6 @@
   <script src="./js/creative-lightbox.js" defer></script>
   <script src="./js/ecommerce.js?v=rolex2" defer></script>
   <script src="./js/tvc.js?v=1" defer></script>
+  <script src="./js/workflow.js?v=1" defer></script>
 </body>
 </html>
