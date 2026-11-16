@@ -155,10 +155,10 @@ body.creative-lightbox-open {
 
 .creative-lightbox__figure > img {
   display: block;
-  width: auto;
+  width: min(88vw, calc(80vh * var(--creative-image-aspect, 0.6667)));
   height: auto;
-  max-width: 90vw;
-  max-height: calc(90vh - 160px);
+  max-width: 88vw;
+  max-height: 80vh;
   object-fit: contain;
   border: 1px solid var(--line-strong);
   border-radius: 12px;
@@ -255,10 +255,6 @@ html.has-site-cursor:has(.creative-showcase__media:hover, .creative-lightbox__cl
 @media (max-width: 560px) {
   .creative-lightbox {
     padding: 64px 18px 24px;
-  }
-
-  .creative-lightbox__figure > img {
-    max-height: calc(90vh - 190px);
   }
 
   .creative-lightbox__caption {

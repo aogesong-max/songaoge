@@ -19,6 +19,13 @@
   let returnFocus = null;
   let savedScrollY = 0;
 
+  function syncImageAspect() {
+    const ratio = lightboxImage.naturalWidth / lightboxImage.naturalHeight;
+    if (Number.isFinite(ratio) && ratio > 0) {
+      lightboxImage.style.setProperty("--creative-image-aspect", String(ratio));
+    }
+  }
+
   function render(index) {
     currentIndex = (index + triggers.length) % triggers.length;
     const trigger = triggers[currentIndex];
@@ -29,6 +36,7 @@
 
     lightboxImage.src = sourceImage.currentSrc || sourceImage.src;
     lightboxImage.alt = title;
+    if (lightboxImage.complete) syncImageAspect();
     lightboxTitle.textContent = title;
     lightboxText.textContent = text;
   }
@@ -65,6 +73,7 @@
   closeButton.addEventListener("click", close);
   previousButton.addEventListener("click", () => step(-1));
   nextButton.addEventListener("click", () => step(1));
+  lightboxImage.addEventListener("load", syncImageAspect);
 
   lightbox.addEventListener("click", (event) => {
     if (event.target === lightbox) close();
