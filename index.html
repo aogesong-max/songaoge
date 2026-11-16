@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="./css/dance-remake.css?v=1">
   <link rel="stylesheet" href="./css/apl-mv.css?v=1">
   <link rel="stylesheet" href="./css/ip-design.css">
+  <link rel="stylesheet" href="./css/vinyl.css?v=1">
   <script>
     document.documentElement.classList.add("js");
     window.__bootDismiss = function (recordSession) {
@@ -155,9 +156,10 @@
       <figure class="hero-sigil" aria-label="宋傲阁个人视觉标识" data-cursor="主视觉">
         <span class="hero-sigil__orbit" aria-hidden="true"></span>
         <span class="hero-sigil__label">AI CREATIVE</span>
-        <div class="hero-sigil__portrait" aria-hidden="true">
-          <img src="./assets/hero/hero-background-poster.jpg" alt="" loading="eager" decoding="async">
-          <span>宋</span>
+        <div class="hero-sigil__portrait" role="button" tabindex="0" aria-label="点击黑胶唱片播放音符">
+          <div class="hero-sigil__record" aria-hidden="true">
+            <span class="hero-sigil__record-label"><span>宋</span></span>
+          </div>
         </div>
         <figcaption>
           <strong>宋傲阁</strong>
@@ -1073,6 +1075,7 @@
   <script src="./data/works.js?v=dongbei-assets-1" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
+  <script src="./js/vinyl.js?v=1" defer></script>
   <script src="./js/core-skills.js" defer></script>
   <script src="./js/main.js?v=dongbei-assets-1" defer></script>
   <script src="./js/creative-lightbox.js" defer></script>

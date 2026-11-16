@@ -1,0 +1,211 @@
+.hero-sigil__portrait {
+  position: relative;
+  overflow: visible;
+  border: 1px solid rgba(232, 230, 236, 0.26);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    0 24px 65px rgba(0, 0, 0, 0.38),
+    0 0 34px rgba(107, 143, 181, 0.08);
+  cursor: pointer !important;
+  touch-action: manipulation;
+  user-select: none;
+  transform: scale(1);
+  transition:
+    transform 260ms var(--ease-out),
+    box-shadow 260ms var(--ease-out);
+}
+
+.hero-sigil__portrait::before {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0.16) 0 2%, transparent 14% 62%, rgba(107, 143, 181, 0.1) 79%, transparent 91%),
+    radial-gradient(circle at 35% 27%, rgba(255, 255, 255, 0.1), transparent 27%);
+  content: "";
+  mix-blend-mode: screen;
+  opacity: 0.76;
+  pointer-events: none;
+}
+
+.hero-sigil__portrait::after {
+  content: none;
+}
+
+.hero-sigil__record {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.1), transparent 22%),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      #070809 0 2.4px,
+      #1a1b1e 2.7px 3.1px,
+      #090a0c 3.4px 5.7px,
+      #141519 6px 6.35px
+    );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 0 32px rgba(0, 0, 0, 0.9);
+  animation: vinyl-spin 9s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.hero-sigil__record::before {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 18deg,
+    transparent 0deg 18deg,
+    rgba(255, 255, 255, 0.09) 31deg,
+    transparent 48deg 152deg,
+    rgba(107, 143, 181, 0.08) 176deg,
+    transparent 198deg 274deg,
+    rgba(212, 160, 174, 0.06) 294deg,
+    transparent 322deg 360deg
+  );
+  content: "";
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-sigil__record::after {
+  position: absolute;
+  inset: 3.5%;
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 50%;
+  content: "";
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+}
+
+.hero-sigil__record-label {
+  position: absolute;
+  z-index: 2;
+  inset: 33%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.26), transparent 27%),
+    radial-gradient(circle at 50% 50%, #789ec1 0%, var(--cyan) 54%, #49677f 100%);
+  box-shadow:
+    0 0 0 3px rgba(7, 8, 9, 0.72),
+    0 0 26px rgba(107, 143, 181, 0.18),
+    inset 0 0 18px rgba(7, 8, 9, 0.16);
+}
+
+.hero-sigil__record-label::after {
+  position: absolute;
+  inset: 8%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.hero-sigil__record-label > span {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.4vw, 46px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1;
+  text-shadow: 0 5px 18px rgba(7, 8, 9, 0.34);
+}
+
+.hero-sigil:hover .hero-sigil__portrait,
+.hero-sigil__portrait:focus-visible {
+  border-radius: 50%;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.44),
+    0 0 42px rgba(107, 143, 181, 0.14);
+  outline: none;
+  transform: scale(1.03);
+}
+
+.hero-sigil__portrait:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(107, 143, 181, 0.38),
+    0 28px 72px rgba(0, 0, 0, 0.44);
+}
+
+.vinyl-note-layer {
+  position: fixed;
+  z-index: 2400;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-sigil__note {
+  position: fixed;
+  top: var(--note-y);
+  left: var(--note-x);
+  color: var(--note-color);
+  font-family: Georgia, "Songti SC", serif;
+  font-size: var(--note-size);
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 11px currentColor;
+  transform: translate3d(-50%, -50%, 0) scale(0.45);
+  animation: vinyl-note-drift var(--note-duration) cubic-bezier(0.16, 0.72, 0.32, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes vinyl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vinyl-note-drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.45) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.94;
+    transform: translate3d(
+        calc(-50% + var(--note-mid-x)),
+        calc(-50% + var(--note-mid-y)),
+        0
+      )
+      scale(1)
+      rotate(var(--note-mid-rotation));
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(
+        calc(-50% + var(--note-end-x)),
+        calc(-50% + var(--note-end-y)),
+        0
+      )
+      scale(0.78)
+      rotate(var(--note-end-rotation));
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-sigil__record-label {
+    inset: 31%;
+  }
+
+  .hero-sigil__record-label > span {
+    font-size: 24px;
+  }
+}
