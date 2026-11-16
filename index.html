@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="./css/workflow.css?v=1">
   <link rel="stylesheet" href="./css/ai-video.css?v=1">
   <link rel="stylesheet" href="./css/dance-remake.css?v=1">
+  <link rel="stylesheet" href="./css/apl-mv.css?v=1">
   <link rel="stylesheet" href="./css/ip-design.css">
   <script>
     document.documentElement.classList.add("js");
@@ -646,6 +647,30 @@
           </button>
         </div>
       </div>
+      <div class="game-cg-block apl-mv-block" aria-labelledby="apl-mv-title">
+        <h3 class="game-cg-block__title" id="apl-mv-title">女团MV</h3>
+        <div class="drama-list game-cg-list">
+          <button class="drama-card game-cg-card apl-mv-card" type="button" data-apl-mv-open data-cursor="播放" aria-label="打开作品 APL 女团MV">
+            <span class="media-frame ratio-16-9">
+              <img src="./assets/works/design/ai-video/apl-mv/最终版MV-封面.jpg" alt="APL 女团MV 封面" loading="lazy" decoding="async">
+              <span class="play-mark" aria-hidden="true">▶</span>
+            </span>
+            <span class="drama-card__copy">
+              <span class="drama-card__index">女团MV / GIRL GROUP MV</span>
+              <strong class="drama-card__title">APL 女团MV</strong>
+              <span class="drama-card__section">
+                <span class="drama-card__label">简介</span>
+                <span class="drama-card__text">AI 女团 APL 音乐 MV，全长 40 秒，四段分镜剪辑而成：Intro 全员登场、MIRA 主唱 Verse、LUNA 韩文 Rap 特写、Chorus 全员齐舞收尾。</span>
+              </span>
+              <span class="drama-card__section">
+                <span class="drama-card__label">制作流程</span>
+                <span class="drama-card__text">遵循「策划—资产—分镜—生成—校验—后期」六步：ChatGPT 梳理歌词结构与创意、AI 音乐平台生成歌曲，Image 2.5 锁定四位成员人物资产与黑金霓虹紫镜面舞台资产，LibTV 以 Seedance 2.5 分段生成，Premiere Pro 拼接与音画对轨，DaVinci Resolve 统一调色并完成成片包装。</span>
+              </span>
+              <span class="drama-card__link">查看作品 <span aria-hidden="true">→</span></span>
+            </span>
+          </button>
+        </div>
+      </div>
     </section>
 
     <section class="works-section drama-section" id="drama" aria-labelledby="drama-title">
@@ -969,6 +994,73 @@
     </div>
   </div>
 
+  <div class="game-cg-detail apl-mv-detail" id="apl-mv-detail" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="apl-mv-detail-title">
+    <div class="game-cg-detail__panel">
+      <div class="game-cg-detail__topbar">
+        <button class="game-cg-detail__back" type="button">← 返回</button>
+        <div class="game-cg-detail__breadcrumb">SONGAOGE / AI视频 / 女团MV / APL 女团MV</div>
+      </div>
+      <div class="game-cg-detail__content">
+        <header class="game-cg-detail__header">
+          <span class="game-cg-detail__tag">女团MV</span>
+          <h1 id="apl-mv-detail-title">APL 女团MV</h1>
+        </header>
+        <div class="game-cg-detail__columns">
+          <section class="game-cg-detail__video-column" aria-labelledby="apl-mv-video-title">
+            <h2 id="apl-mv-video-title"><span>01</span>视频</h2>
+            <div class="tvc-player" id="apl-mv-player">
+              <video class="tvc-player__video" id="apl-mv-video" playsinline preload="metadata" poster="./assets/works/design/ai-video/apl-mv/最终版MV-封面.jpg">
+                <source src="./assets/works/design/ai-video/apl-mv/APL女团MV.mp4" type="video/mp4">
+              </video>
+              <button class="tvc-player__center-play" type="button" aria-label="播放视频">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+              </button>
+              <div class="tvc-player__controls">
+                <button class="tvc-player__button tvc-player__play" type="button" aria-label="播放视频">
+                  <svg class="tvc-player__icon tvc-player__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6V6Z"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v12M16 6v12"></path></svg>
+                </button>
+                <span class="tvc-player__time"><span id="apl-mv-current">00:00</span><span aria-hidden="true"> / </span><span id="apl-mv-duration">00:00</span></span>
+                <input class="tvc-player__range tvc-player__seek" id="apl-mv-seek" type="range" min="0" max="1000" value="0" step="1" aria-label="播放进度">
+                <button class="tvc-player__button tvc-player__mute" type="button" aria-label="静音">
+                  <svg class="tvc-player__icon tvc-player__icon--volume" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="M17 9a4 4 0 0 1 0 6M19.5 6.5a8 8 0 0 1 0 11"></path></svg>
+                  <svg class="tvc-player__icon tvc-player__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10v4h4l5 4V6l-5 4H5Z"></path><path d="m17 10 4 4M21 10l-4 4"></path></svg>
+                </button>
+                <input class="tvc-player__range tvc-player__volume" id="apl-mv-volume" type="range" min="0" max="1" value="1" step="0.01" aria-label="音量">
+                <button class="tvc-player__button tvc-player__fullscreen" type="button" aria-label="全屏">
+                  <svg class="tvc-player__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v4M16 4h4v4M8 20H4v-4M16 20h4v-4"></path></svg>
+                </button>
+              </div>
+            </div>
+          </section>
+          <section class="game-cg-detail__intro-column" aria-labelledby="apl-mv-intro-title">
+            <h2 id="apl-mv-intro-title"><span>02</span>内容介绍</h2>
+            <p>AI 女团 APL 的单曲 MV《NEON CROWN》，全长 40 秒。四位成员——队长主唱 AYA、主 Rapper LUNA、主舞 RIN、副唱 MIRA——在黑金霓虹紫的镜面舞台上完成四段式表演：Intro 全员登场、MIRA 的主唱 Verse、LUNA 的韩文 Rap 特写，最后 Chorus 全员齐舞收尾。歌词英文为主、英韩混合，镜面地板的倒影和霓虹光一起，是一支按 K-pop 女团规格做的 AI MV。</p>
+            <h2 class="apl-mv-detail__process-heading" id="apl-mv-process-title"><span>03</span>制作过程</h2>
+            <p>AI 女团 APL 音乐 MV，全长 40 秒，由四段分镜剪辑而成。制作流程遵循「策划—资产—分镜—生成—校验—后期」六步：先用 ChatGPT 完成歌词结构与创意梳理，在 AI 音乐平台生成歌曲，再以 Image 2.5 锁定四位成员人物资产、以 Image 2.5 锁定黑金霓虹紫镜面舞台资产，随后按歌曲段落拆分分镜并逐镜撰写生成提示词，在 LibTV 视频平台以 Seedance 2.5 分段生成——第一段 Intro 全员登场，第二段 MIRA 主唱 Verse，第三段 LUNA 韩文 Rap 特写，第四段 Chorus 全员齐舞收尾；成片逐帧校验人数与服装、面孔的跨段一致性，最后在 Premiere Pro 中完成拼接与音画对轨，在 DaVinci Resolve 中统一调色并完成成片包装。</p>
+          </section>
+        </div>
+        <section class="game-cg-detail__stills apl-mv-detail__assets" aria-labelledby="apl-mv-assets-title">
+          <h2 id="apl-mv-assets-title"><span>04</span>资产图</h2>
+          <div class="apl-mv-detail__asset-grid" id="apl-mv-asset-grid"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="game-cg-lightbox apl-mv-asset-lightbox" id="apl-mv-asset-lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="查看 APL 资产图">
+    <button class="game-cg-lightbox__close" type="button" aria-label="关闭大图">×</button>
+    <button class="game-cg-lightbox__nav game-cg-lightbox__nav--prev" type="button" aria-label="上一张">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 4-8 8 8 8"></path></svg>
+    </button>
+    <figure class="game-cg-lightbox__figure">
+      <img id="apl-mv-asset-lightbox-image" alt="">
+    </figure>
+    <button class="game-cg-lightbox__nav game-cg-lightbox__nav--next" type="button" aria-label="下一张">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 4 8 8-8 8"></path></svg>
+    </button>
+  </div>
+
   <script src="./data/works.js" defer></script>
   <script src="./js/cursor.js" defer></script>
   <script src="./js/interactions.js" defer></script>
@@ -980,5 +1072,6 @@
   <script src="./js/workflow.js?v=1" defer></script>
   <script src="./js/ai-video.js?v=1" defer></script>
   <script src="./js/dance-remake.js?v=1" defer></script>
+  <script src="./js/apl-mv.js?v=1" defer></script>
 </body>
 </html>
