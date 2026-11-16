@@ -20,7 +20,24 @@
         "全片人物资产由 GPT Image 2.5 制作，环境资产由 Midjourney 和 Image 2.5 制作，全片由小云雀 Seedance 2.5 制作。",
       cover: `${dramaRoot}/boxer/cover.jpg`,
       video: `${dramaRoot}/boxer/video.mp4`,
-      stills: range(`${dramaRoot}/boxer`, "still", 3),
+      assetGallery: {
+        characters: [
+          `${dramaRoot}/boxer/assets/character-01.jpg`,
+          `${dramaRoot}/boxer/assets/character-02.jpg`,
+          `${dramaRoot}/boxer/assets/character-03.jpg`,
+          `${dramaRoot}/boxer/assets/character-04.jpg`,
+          `${dramaRoot}/boxer/assets/character-05.jpg`,
+          `${dramaRoot}/boxer/assets/character-06.jpg`
+        ],
+        environments: [
+          `${dramaRoot}/boxer/assets/environment-01.jpg`,
+          `${dramaRoot}/boxer/assets/environment-02.jpg`,
+          `${dramaRoot}/boxer/assets/environment-03.jpg`,
+          `${dramaRoot}/boxer/assets/environment-04.jpg`,
+          `${dramaRoot}/boxer/assets/environment-05.jpg`,
+          `${dramaRoot}/boxer/assets/environment-06.jpg`
+        ]
+      },
       process: [],
       workflow: [`${dramaRoot}/boxer/workflow/workflow-01.jpg`],
       assets: []

@@ -21,6 +21,8 @@
   const lightbox = document.getElementById("image-lightbox");
   const lightboxImage = document.getElementById("lightbox-image");
   const lightboxClose = document.getElementById("lightbox-close");
+  const lightboxPrev = document.getElementById("lightbox-prev");
+  const lightboxNext = document.getElementById("lightbox-next");
   const siteHeader = document.getElementById("site-header");
   const worksMenu = document.getElementById("works-menu");
   const worksMenuTrigger = document.getElementById("works-menu-trigger");
@@ -31,6 +33,11 @@
   const detailState = {
     open: false,
     scrollY: 0,
+    trigger: null
+  };
+  const lightboxState = {
+    items: [],
+    index: 0,
     trigger: null
   };
 
@@ -323,6 +330,52 @@
     `;
   }
 
+  function dramaAssetGalleryMarkup(gallery, title) {
+    if (!gallery) return "";
+
+    const groups = [
+      { label: "人物", images: gallery.characters || [] },
+      { label: "环境", images: gallery.environments || [] }
+    ];
+    const rows = groups.flatMap((group) =>
+      Array.from({ length: 2 }, (_, rowIndex) => ({
+        ...group,
+        imageOffset: rowIndex * 3,
+        images: group.images.slice(rowIndex * 3, rowIndex * 3 + 3)
+      }))
+    );
+
+    return `
+      <div class="drama-asset-grid" data-lightbox-group="boxer-assets">
+        ${rows
+          .map(
+            (row) => `
+              <div class="drama-asset-row">
+                ${Array.from({ length: 3 }, (_, columnIndex) => {
+                  const src = row.images[columnIndex];
+                  if (!src) return `<span class="drama-asset-slot" aria-hidden="true"></span>`;
+                  const alt = `${title} ${row.label}资产 ${row.imageOffset + columnIndex + 1}`;
+                  return `
+                    <button
+                      type="button"
+                      class="drama-asset-card"
+                      data-lightbox-src="${escapeHtml(src)}"
+                      data-lightbox-alt="${escapeHtml(alt)}"
+                      data-lightbox-group="boxer-assets"
+                      aria-label="查看${escapeHtml(alt)}"
+                    >
+                      ${imageMarkup(src, alt)}
+                    </button>
+                  `;
+                }).join("")}
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
   function renderDrama(index, preserveScroll = false) {
     const drama = works.dramas[index];
     if (!drama) return;
@@ -333,7 +386,14 @@
       title: "视频",
       content: dramaVideoMarkup(drama)
     });
-    if (drama.stills?.length) {
+    if (drama.assetGallery) {
+      sections.push({
+        id: "detail-assets",
+        number: "02",
+        title: "资产图",
+        content: dramaAssetGalleryMarkup(drama.assetGallery, drama.title)
+      });
+    } else if (drama.stills?.length) {
       sections.push({
         id: "detail-stills",
         number: "02",
@@ -357,7 +417,7 @@
     if (drama.workflow?.length) {
       sections.push({
         id: "detail-workflow",
-        number: "04",
+        number: drama.assetGallery ? "03" : "04",
         title: "工作流",
         content: `<div class="workflow-gallery">${drama.workflow
           .map(
@@ -646,20 +706,54 @@
     openDetail(trigger);
   }
 
-  function openLightbox(src, alt) {
+  function setLightboxItem(items, index) {
+    lightboxState.items = items;
+    lightboxState.index = index;
+    const item = items[index];
+    lightboxImage.src = item.src;
+    lightboxImage.alt = item.alt || "";
+    const canBrowse = items.length > 1;
+    lightboxPrev.hidden = !canBrowse;
+    lightboxNext.hidden = !canBrowse;
+  }
+
+  function openLightbox(src, alt, group = "") {
     if (!src) return;
-    lightboxImage.src = src;
-    lightboxImage.alt = alt || "";
+    lightboxState.trigger = document.activeElement;
+    const items = group
+      ? Array.from(detailContent.querySelectorAll("[data-lightbox-src][data-lightbox-group]"))
+          .filter((button) => button.dataset.lightboxGroup === group)
+          .map((button) => ({
+            src: button.dataset.lightboxSrc,
+            alt: button.dataset.lightboxAlt
+          }))
+      : [];
+    const currentIndex = items.findIndex((item) => item.src === src);
+    setLightboxItem(
+      currentIndex >= 0 ? items : [{ src, alt }],
+      currentIndex >= 0 ? currentIndex : 0
+    );
     body.classList.add("lightbox-open");
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     lightboxClose.focus({ preventScroll: true });
   }
 
+  function stepLightbox(step) {
+    if (lightboxState.items.length < 2) return;
+    const nextIndex =
+      (lightboxState.index + step + lightboxState.items.length) % lightboxState.items.length;
+    setLightboxItem(lightboxState.items, nextIndex);
+  }
+
   function closeLightbox() {
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
     lightboxImage.removeAttribute("src");
+    lightboxPrev.hidden = true;
+    lightboxNext.hidden = true;
+    lightboxState.items = [];
+    lightboxState.index = 0;
     if (!detailState.open) body.classList.remove("lightbox-open");
   }
 
@@ -705,7 +799,11 @@
   detailContent.addEventListener("click", (event) => {
     const galleryButton = event.target.closest("[data-lightbox-src]");
     if (galleryButton) {
-      openLightbox(galleryButton.dataset.lightboxSrc, galleryButton.dataset.lightboxAlt);
+      openLightbox(
+        galleryButton.dataset.lightboxSrc,
+        galleryButton.dataset.lightboxAlt,
+        galleryButton.dataset.lightboxGroup
+      );
       return;
     }
     const tocLink = event.target.closest(".detail-toc a");
@@ -747,11 +845,22 @@
   detailClose.addEventListener("click", closeDetail);
   detailBack.addEventListener("click", closeDetail);
   lightboxClose.addEventListener("click", closeLightbox);
+  lightboxPrev.addEventListener("click", () => stepLightbox(-1));
+  lightboxNext.addEventListener("click", () => stepLightbox(1));
   lightbox.addEventListener("click", (event) => {
     if (event.target === lightbox) closeLightbox();
   });
 
   document.addEventListener("keydown", (event) => {
+    if (
+      lightbox.classList.contains("is-open") &&
+      lightboxState.items.length > 1 &&
+      (event.key === "ArrowLeft" || event.key === "ArrowRight")
+    ) {
+      event.preventDefault();
+      stepLightbox(event.key === "ArrowLeft" ? -1 : 1);
+      return;
+    }
     if (event.key !== "Escape") return;
     if (lightbox.classList.contains("is-open")) {
       closeLightbox();
