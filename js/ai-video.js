@@ -26,8 +26,18 @@
   const lightboxPrevious = lightbox.querySelector(".game-cg-lightbox__nav--prev");
   const lightboxNext = lightbox.querySelector(".game-cg-lightbox__nav--next");
 
-  // Add project still filenames here when the corresponding image assets are supplied.
-  const stillFiles = [];
+  const stillFiles = [
+    "timeline/frame-01-01s.jpg",
+    "timeline/frame-02-03s.jpg",
+    "timeline/frame-03-05s.jpg",
+    "timeline/frame-04-07s.jpg",
+    "timeline/frame-05-09s.jpg",
+    "timeline/frame-06-11s.jpg",
+    "timeline/frame-07-13s.jpg",
+    "timeline/frame-08-15s.jpg",
+    "timeline/frame-09-17s.jpg",
+    "timeline/frame-10-19s.jpg"
+  ];
   const stillRoot = "./assets/works/design/game-cg/forza-gtr";
 
   const state = {

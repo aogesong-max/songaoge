@@ -279,26 +279,42 @@ body.game-cg-detail-open {
 
 .game-cg-detail__stills-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
 }
 
 .game-cg-detail__still {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
   padding: 0;
   overflow: hidden;
   border: 1px solid var(--line-strong);
   border-radius: 12px;
   background: var(--surface);
-  cursor: zoom-in;
+  cursor: pointer;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
 }
 
 .game-cg-detail__still img {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 300ms var(--ease-out), filter 300ms ease;
+}
+
+.game-cg-detail__still:hover,
+.game-cg-detail__still:focus-visible {
+  border-color: rgba(232, 230, 236, 0.68);
+  box-shadow: 0 0 0 1px rgba(232, 230, 236, 0.12);
+}
+
+.game-cg-detail__still:hover img,
+.game-cg-detail__still:focus-visible img {
+  filter: brightness(1.06);
+  transform: scale(1.04);
 }
 
 .game-cg-lightbox {
@@ -434,10 +450,6 @@ html.has-site-cursor .game-cg-lightbox button {
 
   .game-cg-detail__columns {
     margin-top: 44px;
-  }
-
-  .game-cg-detail__stills-grid {
-    grid-template-columns: 1fr;
   }
 
   .game-cg-lightbox {
