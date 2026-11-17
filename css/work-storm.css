@@ -3,11 +3,11 @@
   --storm-gold-bright: #f2d77c;
   --storm-cyan: #63d6df;
   --storm-scale: 1;
-  --storm-stage-height: 700px;
+  --storm-stage-height: 940px;
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 780px;
+  min-height: 1020px;
   padding: 0;
   overflow: hidden;
   isolation: isolate;
@@ -16,22 +16,23 @@
 .work-storm::before {
   position: absolute;
   z-index: -1;
-  top: 16%;
+  top: 12%;
   left: 50%;
   width: min(980px, 112vw);
-  height: 76%;
+  height: 84%;
   background:
-    radial-gradient(ellipse at 50% 48%, rgba(212, 175, 55, 0.07), transparent 43%),
-    radial-gradient(ellipse at 50% 86%, rgba(99, 214, 223, 0.055), transparent 38%);
+    radial-gradient(ellipse at 38% 40%, rgba(99, 214, 223, 0.065), transparent 36%),
+    radial-gradient(ellipse at 63% 58%, rgba(212, 175, 55, 0.07), transparent 39%),
+    linear-gradient(180deg, transparent, rgba(8, 11, 20, 0.3), transparent);
   content: "";
-  filter: blur(38px);
+  filter: blur(42px);
   pointer-events: none;
   transform: translateX(-50%);
 }
 
 .work-storm__heading {
   position: relative;
-  z-index: 8;
+  z-index: 20;
   margin: 0 0 20px;
   text-align: center;
 }
@@ -76,80 +77,126 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 820px;
-  height: 700px;
+  width: 800px;
+  height: 940px;
   overflow: hidden;
   transform: translateX(-50%) scale(var(--storm-scale));
   transform-origin: top center;
 }
 
-.work-storm__cone {
+.work-storm__ambient {
   position: absolute;
   z-index: 0;
-  top: 81px;
+  top: 32px;
   left: 50%;
-  width: 684px;
-  height: 552px;
+  width: 620px;
+  height: 875px;
   background:
-    linear-gradient(180deg, rgba(212, 175, 55, 0.095), rgba(99, 214, 223, 0.018) 65%, transparent);
-  clip-path: polygon(7% 0, 93% 0, 58% 100%, 42% 100%);
-  filter: blur(20px);
-  opacity: 0.72;
+    radial-gradient(ellipse at 44% 24%, rgba(99, 214, 223, 0.09), transparent 34%),
+    radial-gradient(ellipse at 58% 68%, rgba(212, 175, 55, 0.085), transparent 39%);
+  filter: blur(35px);
+  opacity: 0.78;
   pointer-events: none;
   transform: translateX(-50%);
 }
 
-.work-storm__cone::after {
+.work-storm__axis {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(242, 215, 124, 0.075), transparent);
-  content: "";
+  z-index: 1;
+  top: 42px;
+  left: 50%;
+  width: 2px;
+  height: 842px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(99, 214, 223, 0.15) 9%,
+    rgba(242, 215, 124, 0.28) 49%,
+    rgba(99, 214, 223, 0.12) 91%,
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(99, 214, 223, 0.14);
+  opacity: 0.68;
+  pointer-events: none;
+  transform: translateX(-50%);
 }
 
-.work-storm__funnel {
+.work-storm__axis::after {
   position: absolute;
-  z-index: 3;
   inset: 0;
-  animation: work-storm-sway 7.4s ease-in-out infinite alternate;
-  transform-origin: 50% 55%;
-  will-change: transform;
+  background: linear-gradient(180deg, transparent, rgba(242, 215, 124, 0.24), transparent);
+  content: "";
+  filter: blur(7px);
+}
+
+.work-storm__helix {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.work-storm__rung {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(99, 214, 223, 0.34), rgba(232, 230, 236, 0.11), rgba(242, 215, 124, 0.34));
+  box-shadow:
+    0 0 7px rgba(99, 214, 223, 0.12),
+    0 0 12px rgba(242, 215, 124, 0.07);
+  opacity: 0.52;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  will-change: width, transform, opacity;
 }
 
 .work-storm__card {
-  --storm-card-width: 148px;
-  --storm-card-height: 222px;
+  --storm-card-width: 150px;
+  --storm-card-height: 210px;
   position: absolute;
+  z-index: 5;
   top: 0;
   left: 0;
   width: var(--storm-card-width);
   height: var(--storm-card-height);
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  border: 1px solid rgba(242, 215, 124, 0.76);
-  border-radius: 9px;
-  background: #111218;
-  box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.42),
-    0 0 0 1px rgba(212, 175, 55, 0.08),
-    inset 0 0 18px rgba(242, 215, 124, 0.04);
-  opacity: var(--storm-card-opacity, 1);
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
   transform-origin: 50% 50%;
   will-change: transform, opacity;
 }
 
-.work-storm__card::after {
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.2);
-  content: "";
-  pointer-events: none;
+.work-storm__motion {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-.work-storm__card img {
+.work-storm__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(242, 215, 124, 0.58);
+  border-radius: 7px;
+  background: #101117;
+  box-shadow:
+    -8px 0 20px rgba(74, 211, 224, 0.14),
+    8px 0 20px rgba(212, 175, 55, 0.15),
+    0 15px 28px rgba(0, 0, 0, 0.38);
+  isolation: isolate;
+}
+
+.work-storm__frame img {
   position: absolute;
+  z-index: 0;
   inset: 0;
   display: block;
   width: 100%;
@@ -161,65 +208,82 @@
   -webkit-user-drag: none;
 }
 
-.work-storm__card.is-horizontal img {
+.work-storm__card.is-rotated img {
   top: 50%;
   left: 50%;
   width: var(--storm-card-height);
   height: var(--storm-card-width);
-  object-fit: cover;
   transform: translate(-50%, -50%) rotate(90deg);
 }
 
-.work-storm__glow {
+.work-storm__frame::before {
   position: absolute;
-  z-index: 1;
-  top: 584px;
-  left: 50%;
-  width: 390px;
-  height: 106px;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at 38% 54%, rgba(94, 218, 228, 0.34), transparent 46%),
-    radial-gradient(ellipse at 64% 50%, rgba(212, 175, 55, 0.3), transparent 48%),
-    radial-gradient(ellipse at 50% 50%, rgba(107, 213, 224, 0.2), transparent 68%);
-  filter: blur(23px);
-  opacity: 0.84;
+  z-index: 3;
+  top: -24%;
+  left: -55%;
+  width: 26%;
+  height: 148%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 250, 218, 0.05) 25%,
+    rgba(255, 250, 226, 0.28) 52%,
+    rgba(103, 220, 230, 0.09) 74%,
+    transparent
+  );
+  content: "";
+  filter: blur(4px);
+  mix-blend-mode: screen;
   pointer-events: none;
-  transform: translateX(-50%);
+  transform: translateX(-250%) rotate(12deg);
+  animation: work-storm-gloss var(--storm-gloss-duration, 5.6s) ease-in-out var(--storm-gloss-delay, -1.3s) infinite;
 }
 
-.work-storm__dust {
+.work-storm__frame::after {
   position: absolute;
-  z-index: 6;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(99, 214, 223, 0.12), transparent 14%, transparent 86%, rgba(242, 215, 124, 0.13)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.12));
+  box-shadow:
+    inset 9px 0 16px -14px rgba(99, 214, 223, 0.7),
+    inset -9px 0 16px -14px rgba(242, 215, 124, 0.72);
+  content: "";
+  pointer-events: none;
+}
+
+.work-storm__sparks {
+  position: absolute;
+  z-index: 9;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
 
-.work-storm__particle {
+.work-storm__spark {
   position: absolute;
   top: 0;
   left: 0;
-  width: var(--storm-particle-size, 3px);
-  height: var(--storm-particle-size, 3px);
+  width: var(--storm-spark-size, 3px);
+  height: var(--storm-spark-size, 3px);
   border-radius: 50%;
-  background: var(--storm-particle-color, var(--storm-gold-bright));
-  box-shadow: 0 0 9px var(--storm-particle-color, var(--storm-gold-bright));
-  opacity: var(--storm-particle-opacity, 0.64);
+  background: var(--storm-spark-color, var(--storm-gold-bright));
+  box-shadow: 0 0 10px var(--storm-spark-color, var(--storm-gold-bright));
+  opacity: var(--storm-spark-opacity, 0.64);
   will-change: transform, opacity;
 }
 
-.work-storm.is-paused .work-storm__funnel {
-  animation-play-state: paused;
-}
-
-@keyframes work-storm-sway {
-  from {
-    transform: translate3d(-3px, 0, 0) rotate(-0.32deg);
+@keyframes work-storm-gloss {
+  0%,
+  62% {
+    transform: translateX(-250%) rotate(12deg);
   }
 
-  to {
-    transform: translate3d(3px, 0, 0) rotate(0.32deg);
+  88%,
+  100% {
+    transform: translateX(720%) rotate(12deg);
   }
 }
 
@@ -241,11 +305,5 @@
   .work-storm__subtitle {
     margin-top: 8px;
     font-size: 11px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .work-storm__funnel {
-    animation: none;
   }
 }

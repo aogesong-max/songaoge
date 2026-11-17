@@ -3,173 +3,346 @@
 
   const section = document.getElementById("work-storm");
   const viewport = section?.querySelector("[data-storm-viewport]");
-  const funnel = section?.querySelector("[data-storm-funnel]");
-  const dust = section?.querySelector("[data-storm-dust]");
+  const helix = section?.querySelector("[data-storm-helix]");
+  const sparksLayer = section?.querySelector("[data-storm-sparks]");
 
-  if (!section || !viewport || !funnel || !dust) return;
+  if (!section || !viewport || !helix || !sparksLayer) return;
 
-  const works = [
-    { src: "./assets/recent-works/01-astronaut.jpg", label: "异星双面" },
-    { src: "./assets/works/design/ip/xingdeng/main.jpg", label: "星灯 IP" },
-    { src: "./assets/works/drama/boxer/cover.jpg", label: "这个拳手不太冷" },
-    { src: "./assets/works/design/ecommerce/gpw5/image-01.jpg", label: "GPW5 电商套图" },
-    { src: "./assets/works/design/fire.jpg", label: "FIRE" },
-    { src: "./assets/works/design/ai-video/apl-mv/1.png", label: "APL MV" },
-    { src: "./assets/works/design/qiongding.jpg", label: "穹顶天环" },
-    { src: "./assets/works/drama/ai-sisters/cover.jpg", label: "全世界只有我有 AI" },
-    { src: "./assets/recent-works/02-jellyfish.jpg", label: "临空水母" },
-    { src: "./assets/works/design/ip/qirong/main.jpg", label: "奇绒 IP" },
-    { src: "./assets/works/drama/sixth-second/cover.jpg", label: "第六秒" },
-    { src: "./assets/works/design/ecommerce/tom-ford/image-01.jpg", label: "Tom Ford 电商套图" },
-    { src: "./assets/works/design/shendian.jpg", label: "神殿之眼" },
-    { src: "./assets/works/design/ai-video/apl-mv/4.png", label: "APL MV" },
-    { src: "./assets/works/design/ecommerce/wassup/image-05.jpg", label: "Wassup 电商套图" },
-    { src: "./assets/recent-works/03-mecha.jpg", label: "霓虹灰烬" },
-    { src: "./assets/works/design/ip/nake-chronos/main.jpg", label: "纳克时计 IP" },
-    { src: "./assets/works/drama/sixth-second/still-02.jpg", label: "第六秒剧照" },
-    { src: "./assets/works/design/ai-video/dance-remake/cover.jpg", label: "舞蹈复刻" },
-    { src: "./assets/works/design/hongmo.jpg", label: "红膜" },
-    { src: "./assets/works/design/ip/xingdeng/detail-02.jpg", label: "星灯 IP 设计" },
-    { src: "./assets/recent-works/04-deer.jpg", label: "雾林巨鹿" },
-    { src: "./assets/works/design/ip/qirong/view-01.jpg", label: "奇绒 IP 视图" },
-    { src: "./assets/works/design/game-cg/forza-gtr/cover.jpg", label: "Forza GTR" },
-    { src: "./assets/works/design/ecommerce/rolex/主图佩戴图.png", label: "Rolex 电商套图" },
-    { src: "./assets/works/design/jingjie.jpg", label: "镜界" },
-    { src: "./assets/recent-works/05-hourglass.jpg", label: "天海沙漏" },
-    { src: "./assets/works/design/ip/nake-chronos/detail-05.jpg", label: "纳克时计 IP 设计" },
-    { src: "./assets/works/drama/boxer/still-01.jpg", label: "这个拳手不太冷剧照" },
-    { src: "./assets/recent-works/06-wave.jpg", label: "冻浪灯塔" }
+  const layers = [
+    [
+      { src: "./assets/recent-works/01-astronaut.jpg", width: 168, height: 220 },
+      { src: "./assets/works/design/ip/xingdeng/main.jpg", width: 98, height: 124 }
+    ],
+    [
+      { src: "./assets/works/drama/boxer/cover.jpg", width: 94, height: 126 },
+      { src: "./assets/works/design/ecommerce/gpw5/image-01.jpg", width: 158, height: 206 }
+    ],
+    [
+      { src: "./assets/works/design/fire.jpg", width: 174, height: 218 },
+      { src: "./assets/works/design/ai-video/apl-mv/1.png", width: 124, height: 94 }
+    ],
+    [
+      { src: "./assets/works/design/qiongding.jpg", width: 120, height: 92 },
+      { src: "./assets/works/drama/ai-sisters/cover.jpg", width: 166, height: 224 }
+    ],
+    [
+      { src: "./assets/recent-works/02-jellyfish.jpg", width: 152, height: 220 },
+      { src: "./assets/works/design/ip/nake-chronos/main.jpg", width: 96, height: 96 }
+    ],
+    [
+      { src: "./assets/works/design/ecommerce/tom-ford/image-01.jpg", width: 128, height: 96 },
+      { src: "./assets/works/design/ai-video/dance-remake/cover.jpg", width: 170, height: 216 }
+    ],
+    [
+      { src: "./assets/recent-works/06-wave.jpg", width: 160, height: 206 },
+      { src: "./assets/works/design/game-cg/forza-gtr/cover.jpg", width: 126, height: 94 }
+    ]
   ];
 
-  const rings = [
-    { count: 8, radius: 320, y: 118, width: 148, height: 222, offset: 0.18 },
-    { count: 7, radius: 251, y: 251, width: 123, height: 185, offset: 0.54 },
-    { count: 6, radius: 191, y: 374, width: 102, height: 153, offset: 0.81 },
-    { count: 5, radius: 137, y: 482, width: 81, height: 122, offset: 1.08 },
-    { count: 4, radius: 88, y: 582, width: 62, height: 93, offset: 0.35 }
-  ];
-
-  const stageWidth = 820;
-  const stageHeight = 700;
+  const layerY = [115, 232, 349, 466, 583, 700, 817];
+  const stageWidth = 800;
+  const stageHeight = 940;
   const centerX = stageWidth / 2;
-  const cards = [];
-  let workIndex = 0;
+  const radius = 218;
+  const totalTurns = 2.35;
+  const baseAngle = 0.38;
+  const layerRecords = [];
 
-  rings.forEach((ring, ringIndex) => {
-    for (let itemIndex = 0; itemIndex < ring.count; itemIndex += 1) {
-      const work = works[workIndex];
-      if (!work) break;
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
 
+  function createWind(index) {
+    const direction = index % 3 === 0 || index % 7 === 4 ? 1 : -1;
+    const durationMs = 5200 + (index % 6) * 710 + (index % 3) * 130;
+    const glossDuration = 4.7 + (index % 4) * 1.16;
+
+    return {
+      direction,
+      durationMs,
+      phase: index * 1.17 + (index % 3) * 0.42,
+      ryAmplitude: 34 + ((index * 7) % 25),
+      ryBias: direction * (4 + (index % 4) * 3),
+      rxAmp: 8 + (index % 5) * 2.1,
+      rxPhase: index * 0.73,
+      rzAmp: 3.5 + (index % 4) * 2.2,
+      rzPhase: index * 1.41,
+      glossDuration
+    };
+  }
+
+  function getProjectedSize(width, height, rotationX, rotationY, rotationZ) {
+    const radians = Math.PI / 180;
+    const rx = rotationX * radians;
+    const ry = rotationY * radians;
+    const rz = rotationZ * radians;
+    const cosX = Math.cos(rx);
+    const sinX = Math.sin(rx);
+    const cosY = Math.cos(ry);
+    const sinY = Math.sin(ry);
+    const cosZ = Math.cos(rz);
+    const sinZ = Math.sin(rz);
+    const corners = [
+      [-width / 2, -height / 2],
+      [width / 2, -height / 2],
+      [width / 2, height / 2],
+      [-width / 2, height / 2]
+    ].map(([x, y]) => {
+      const rotatedX = x * cosZ - y * sinZ;
+      const rotatedY = x * sinZ + y * cosZ;
+      const yAfterY = rotatedY;
+      const zAfterY = -rotatedX * sinY;
+      const xAfterY = rotatedX * cosY;
+      const yAfterX = yAfterY * cosX - zAfterY * sinX;
+      const zAfterX = yAfterY * sinX + zAfterY * cosX;
+      const perspective = 1 / Math.max(0.62, 1 - zAfterX / 760);
+      return [xAfterY * perspective, yAfterX * perspective];
+    });
+    const xs = corners.map((corner) => corner[0]);
+    const ys = corners.map((corner) => corner[1]);
+    return {
+      width: Math.max(...xs) - Math.min(...xs),
+      height: Math.max(...ys) - Math.min(...ys)
+    };
+  }
+
+  function updateWind(card, elapsed) {
+    const wind = card.wind;
+    const phase = (elapsed / wind.durationMs) * Math.PI * 2 + wind.phase;
+    const rotationY = wind.ryBias + Math.sin(phase) * wind.ryAmplitude * wind.direction;
+    const rotationX = 3 + Math.sin(phase * 0.72 + wind.rxPhase) * wind.rxAmp;
+    const rotationZ = Math.sin(phase * 0.54 + wind.rzPhase) * wind.rzAmp;
+    card.motion.style.transform =
+      `perspective(760px) rotateX(${rotationX.toFixed(2)}deg) rotateY(${rotationY.toFixed(2)}deg) rotateZ(${rotationZ.toFixed(2)}deg)`;
+    return getProjectedSize(card.width, card.height, rotationX, rotationY, rotationZ);
+  }
+
+  layers.forEach((pair, layerIndex) => {
+    const rung = document.createElement("i");
+    rung.className = "work-storm__rung";
+    helix.append(rung);
+
+    const cards = pair.map((item, strandIndex) => {
       const card = document.createElement("figure");
+      const motion = document.createElement("div");
+      const frame = document.createElement("div");
       const image = document.createElement("img");
+      const globalIndex = layerIndex * 2 + strandIndex;
+
       card.className = "work-storm__card";
-      card.style.setProperty("--storm-card-width", `${ring.width}px`);
-      card.style.setProperty("--storm-card-height", `${ring.height}px`);
-      image.src = work.src;
+      motion.className = "work-storm__motion";
+      frame.className = "work-storm__frame";
+      const wind = createWind(globalIndex);
+      card.style.setProperty("--storm-card-width", `${item.width}px`);
+      card.style.setProperty("--storm-card-height", `${item.height}px`);
+      card.style.setProperty("--storm-gloss-duration", `${wind.glossDuration.toFixed(2)}s`);
+      card.style.setProperty(
+        "--storm-gloss-delay",
+        `${(-((globalIndex * 1.17) % wind.glossDuration)).toFixed(2)}s`
+      );
+
+      image.src = item.src;
       image.alt = "";
-      image.loading = "lazy";
+      image.loading = "eager";
       image.decoding = "async";
       image.draggable = false;
-      card.append(image);
-      funnel.append(card);
+      frame.append(image);
+      motion.append(frame);
+      card.append(motion);
+      helix.append(card);
 
-      const detectOrientation = () => {
-        card.classList.toggle("is-horizontal", image.naturalWidth > image.naturalHeight);
+      const updateImageOrientation = () => {
+        const rotateForPortraitFrame = image.naturalWidth > image.naturalHeight && item.width < item.height;
+        card.classList.toggle("is-rotated", rotateForPortraitFrame);
       };
-      image.addEventListener("load", detectOrientation, { once: true });
-      if (image.complete) detectOrientation();
+      image.addEventListener("load", updateImageOrientation, { once: true });
+      if (image.complete) updateImageOrientation();
 
-      cards.push({
+      return {
         element: card,
-        ringIndex,
-        radius: ring.radius,
-        y: ring.y,
-        angle: ring.offset + (Math.PI * 2 * itemIndex) / ring.count
-      });
-      workIndex += 1;
-    }
+        motion,
+        wind,
+        width: item.width,
+        height: item.height,
+        strand: strandIndex
+      };
+    });
+
+    layerRecords.push({
+      rung,
+      cards,
+      y: layerY[layerIndex],
+      angle: baseAngle + (Math.PI * 2 * totalTurns * layerIndex) / (layerY.length - 1)
+    });
   });
 
-  const particles = Array.from({ length: 38 }, (_, index) => {
-    const progress = (index + 0.5) / 38;
-    const radius = 48 + (1 - progress) * 310 + ((index % 5) - 2) * 24;
-    const size = 1.8 + (index % 4) * 0.7;
-    const isCyan = index % 3 !== 1;
-    const particle = document.createElement("i");
-    particle.className = "work-storm__particle";
-    particle.style.setProperty("--storm-particle-size", `${size}px`);
-    particle.style.setProperty(
-      "--storm-particle-color",
-      isCyan ? "rgba(103, 220, 230, 0.82)" : "rgba(242, 215, 124, 0.88)"
+  const sparks = Array.from({ length: 28 }, (_, index) => {
+    const progress = (index + 0.5) / 28;
+    const y = 72 + progress * 798 + ((index % 4) - 1.5) * 8;
+    const sparkRadius = radius + ((index % 5) - 2) * 17;
+    const spark = document.createElement("i");
+    const size = 1.5 + (index % 4) * 0.55;
+    const isCyan = index % 3 !== 0;
+
+    spark.className = "work-storm__spark";
+    spark.style.setProperty("--storm-spark-size", `${size}px`);
+    spark.style.setProperty(
+      "--storm-spark-color",
+      isCyan ? "rgba(103, 220, 230, 0.86)" : "rgba(242, 215, 124, 0.9)"
     );
-    dust.append(particle);
+    sparksLayer.append(spark);
+
     return {
-      element: particle,
-      radius,
-      y: 42 + progress * 602,
-      angle: index * 2.399 + progress * 0.8
+      element: spark,
+      y,
+      radius: sparkRadius,
+      angle: baseAngle + progress * totalTurns * Math.PI * 2 + (index % 2) * 0.42
     };
   });
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let spinElapsed = 0;
-  let dustElapsed = 0;
-  let lastFrame = performance.now();
-  let paused = false;
+  const startTime = performance.now();
+
+  function resolveCollisions(positions) {
+    for (let pass = 0; pass < 48; pass += 1) {
+      for (let firstIndex = 0; firstIndex < positions.length; firstIndex += 1) {
+        for (let secondIndex = firstIndex + 1; secondIndex < positions.length; secondIndex += 1) {
+          const first = positions[firstIndex];
+          const second = positions[secondIndex];
+          const overlapX = first.width / 2 + second.width / 2 + 28 - Math.abs(first.x - second.x);
+          const overlapY = first.height / 2 + second.height / 2 + 20 - Math.abs(first.y - second.y);
+
+          if (overlapX <= 0 || overlapY <= 0) continue;
+
+          if (overlapX < overlapY) {
+            const direction = first.x === second.x ? (firstIndex < secondIndex ? -1 : 1) : first.x < second.x ? -1 : 1;
+            const push = overlapX / 2 + 0.6;
+            first.x += direction * push;
+            second.x -= direction * push;
+          } else {
+            const direction = first.y === second.y ? (firstIndex < secondIndex ? -1 : 1) : first.y < second.y ? -1 : 1;
+            const push = overlapY / 2 + 0.6;
+            first.y += direction * push;
+            second.y -= direction * push;
+          }
+
+          [first, second].forEach((position) => {
+            position.x = clamp(
+              position.x,
+              position.width / 2 + 7,
+              stageWidth - position.width / 2 - 7
+            );
+            position.y = clamp(
+              position.y,
+              position.height / 2 + 7,
+              stageHeight - position.height / 2 - 7
+            );
+          });
+        }
+      }
+    }
+  }
 
   function render(now) {
-    const delta = Math.min(now - lastFrame, 64);
-    lastFrame = now;
+    const elapsed = now - startTime;
+    const spin = (elapsed / 46000) * Math.PI * 2;
+    const floatY = Math.sin(elapsed / 6100) * 7;
+    helix.style.transform = `translate3d(0, ${floatY.toFixed(2)}px, 0)`;
 
-    if (!paused && !reduceMotion.matches) {
-      spinElapsed += delta;
-      dustElapsed += delta;
-    }
+    const framePositions = [];
 
-    const spin = (spinElapsed / 42000) * Math.PI * 2;
-    const dustSpin = (dustElapsed / 17000) * Math.PI * 2;
+    layerRecords.forEach((layer, layerIndex) => {
+      const theta = layer.angle + spin;
+      const projected = Math.sin(theta) * radius;
+      const depthA = (Math.cos(theta) + 1) / 2;
+      const depthB = (Math.cos(theta + Math.PI) + 1) / 2;
+      const first = layer.cards[0];
+      const second = layer.cards[1];
+      const scaleA = 0.79 + depthA * 0.21;
+      const scaleB = 0.79 + depthB * 0.21;
+      const flippedA = updateWind(first, elapsed);
+      const flippedB = updateWind(second, elapsed);
+      const projectedGap = Math.abs(projected * 2);
+      const horizontalClearance = (first.width + second.width) / 2 + 24;
+      const collisionMix = clamp(1 - projectedGap / horizontalClearance, 0, 1);
+      const verticalClearance = (first.height + second.height) / 2 + 22;
+      const separation = (verticalClearance * collisionMix) / 2;
 
-    cards.forEach((card) => {
-      const angle = card.angle + spin;
-      const depth = (Math.cos(angle) + 1) / 2;
-      const x = centerX + Math.sin(angle) * card.radius;
-      const scale = 0.78 + depth * 0.22;
-      card.element.style.transform =
-        `translate3d(${x}px, ${card.y}px, 0) translate(-50%, -50%) scale(${scale})`;
-      card.element.style.opacity = `${0.76 + depth * 0.24}`;
-      card.element.style.zIndex = `${Math.round(depth * 100) + card.ringIndex}`;
+      const positions = [
+        {
+          x: centerX + projected,
+          y: layer.y - separation,
+          depth: depthA,
+          card: first,
+          layerIndex,
+          strandIndex: 0,
+          width: flippedA.width * scaleA,
+          height: flippedA.height * scaleA
+        },
+        {
+          x: centerX - projected,
+          y: layer.y + separation,
+          depth: depthB,
+          card: second,
+          layerIndex,
+          strandIndex: 1,
+          width: flippedB.width * scaleB,
+          height: flippedB.height * scaleB
+        }
+      ];
+
+      positions.forEach((position) => {
+        framePositions.push(position);
+      });
     });
 
-    particles.forEach((particle) => {
-      const angle = particle.angle - dustSpin;
+    resolveCollisions(framePositions);
+
+    layerRecords.forEach((layer, layerIndex) => {
+      const positions = framePositions.filter((position) => position.layerIndex === layerIndex);
+
+      positions.forEach((position) => {
+        const card = position.card;
+        const scale = 0.79 + position.depth * 0.21;
+        card.element.style.transform =
+          `translate3d(${position.x.toFixed(2)}px, ${position.y.toFixed(2)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(3)})`;
+        card.element.style.opacity = `${(0.77 + position.depth * 0.23).toFixed(3)}`;
+        card.element.style.zIndex = `${10 + Math.round(position.depth * 100) + layerIndex}`;
+      });
+
+      const x1 = positions[0].x;
+      const y1 = positions[0].y;
+      const x2 = positions[1].x;
+      const y2 = positions[1].y;
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const lineLength = Math.hypot(dx, dy);
+      const lineAngle = Math.atan2(dy, dx);
+      layer.rung.style.width = `${Math.max(1, lineLength).toFixed(2)}px`;
+      layer.rung.style.transform =
+        `translate3d(${((x1 + x2) / 2).toFixed(2)}px, ${((y1 + y2) / 2).toFixed(2)}px, 0) translate(-50%, -50%) rotate(${lineAngle.toFixed(4)}rad)`;
+      layer.rung.style.opacity = `${(0.46 + Math.min(1, lineLength / 360) * 0.3).toFixed(3)}`;
+    });
+
+    sparks.forEach((spark, index) => {
+      const angle = spark.angle + spin;
       const depth = (Math.cos(angle) + 1) / 2;
-      const x = centerX + Math.sin(angle) * particle.radius;
-      const y = particle.y + Math.sin(angle * 1.7 + dustSpin) * 3.5;
-      const scale = 0.72 + depth * 0.55;
-      particle.element.style.transform =
-        `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
-      particle.element.style.opacity = `${0.22 + depth * 0.48}`;
+      const x = centerX + Math.sin(angle) * spark.radius;
+      const y = spark.y + Math.sin(angle * 1.8 + elapsed / 2400) * 2.5;
+      const scale = 0.72 + depth * 0.45;
+      spark.element.style.transform =
+        `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) translate(-50%, -50%) scale(${scale.toFixed(2)})`;
+      spark.element.style.opacity = `${(0.22 + depth * 0.52 + (index % 3) * 0.03).toFixed(3)}`;
     });
 
     requestAnimationFrame(render);
   }
 
-  function setPaused(nextPaused) {
-    paused = nextPaused;
-    section.classList.toggle("is-paused", paused);
-  }
-
   function updateScale() {
     const width = viewport.clientWidth;
-    const scale = Math.min(1, Math.max(0.28, (width - 18) / stageWidth));
+    const scale = Math.min(1, Math.max(0.26, (width - 18) / stageWidth));
     section.style.setProperty("--storm-scale", scale.toFixed(4));
     section.style.setProperty("--storm-stage-height", `${Math.ceil(stageHeight * scale)}px`);
   }
-
-  section.addEventListener("pointerenter", () => setPaused(true));
-  section.addEventListener("pointerleave", () => setPaused(false));
-  section.addEventListener("focusin", () => setPaused(true));
-  section.addEventListener("focusout", () => setPaused(false));
 
   if ("ResizeObserver" in window) {
     new ResizeObserver(updateScale).observe(viewport);
