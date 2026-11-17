@@ -510,28 +510,144 @@ a {
   overflow: hidden;
   isolation: isolate;
   background: #0c0c0e;
+  touch-action: pan-y;
 }
 
-.hero-background {
+.hero-stage {
   position: absolute;
   z-index: 0;
-  inset: 0;
-  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 810px;
   background: #080910;
   pointer-events: none;
+  transform-origin: 0 0;
+  will-change: transform;
 }
 
-.hero-background img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  animation: hero-background-breathe 24s ease-in-out infinite;
+.hero-stage__world {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  animation: hero-stage-breathe 24s ease-in-out infinite;
   transform-origin: center;
   will-change: transform;
 }
 
-@keyframes hero-background-breathe {
+.hero-stage__background,
+.hero-stage__head,
+.hero-stage__helmet,
+.hero-stage__button {
+  position: absolute;
+}
+
+.hero-stage__background {
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-stage__head {
+  z-index: 2;
+  top: 255px;
+  left: 510px;
+  width: 435px;
+  height: 450px;
+  object-fit: fill;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 600ms ease;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0 72%, transparent 99%);
+  mask-image: radial-gradient(ellipse at center, #000 0 72%, transparent 99%);
+}
+
+.hero-stage__head.is-visible {
+  opacity: 1;
+}
+
+.hero-stage__helmet {
+  z-index: 3;
+  top: 288px;
+  left: 533px;
+  width: 360px;
+  height: 360px;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transform: translateY(-70px);
+  transition:
+    transform 720ms cubic-bezier(0.18, 0.86, 0.28, 1.14),
+    opacity 720ms ease;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0 76%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 0 76%, transparent 92%);
+  will-change: transform, opacity;
+}
+
+.hero-stage__helmet.is-worn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-stage__button {
+  z-index: 4;
+  top: 720px;
+  left: 675px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  padding: 0;
+  border: 4px solid rgba(31, 10, 13, 0.86);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 27%, rgba(255, 255, 255, 0.9) 0 4%, transparent 15%),
+    radial-gradient(circle at 50% 42%, #ff5b4e 0%, #e22431 50%, #9d1025 78%, #5d0c1a 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.54),
+    inset 0 3px 5px rgba(255, 255, 255, 0.28),
+    inset 0 -5px 7px rgba(54, 4, 10, 0.45),
+    0 5px 10px rgba(0, 0, 0, 0.48);
+  color: #fff;
+  cursor: pointer;
+  font-family: "Urbanist", var(--sans);
+  font-size: 16.5px;
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: 0.02em;
+  pointer-events: auto;
+  touch-action: manipulation;
+  transition:
+    box-shadow 320ms ease,
+    filter 320ms ease;
+}
+
+.hero-stage__button:hover {
+  filter: brightness(1.06);
+}
+
+.hero-stage__button[aria-pressed="true"] {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.64),
+    inset 0 3px 5px rgba(255, 255, 255, 0.3),
+    inset 0 -5px 7px rgba(54, 4, 10, 0.45),
+    0 0 12px rgba(255, 54, 62, 0.88),
+    0 0 26px rgba(255, 44, 54, 0.52),
+    0 5px 10px rgba(0, 0, 0, 0.48);
+}
+
+.hero-stage__button.is-pressing {
+  animation: hero-stage-button-press 320ms ease;
+}
+
+@keyframes hero-stage-breathe {
   0%,
   100% {
     transform: scale(1);
@@ -539,6 +655,17 @@ a {
 
   50% {
     transform: scale(1.06);
+  }
+}
+
+@keyframes hero-stage-button-press {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(0.88);
   }
 }
 
@@ -3265,8 +3392,19 @@ a {
     display: none !important;
   }
 
-  .hero-background img {
+  .hero-stage__world {
     animation: none;
     transform: scale(1);
   }
+
+  .hero-stage__head,
+  .hero-stage__helmet,
+  .hero-stage__button {
+    display: none;
+  }
+
+  .hero-stage__helmet {
+    transform: translateY(0);
+  }
+
 }

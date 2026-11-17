@@ -10,7 +10,11 @@
   <title>SONGAOGE — Selected Works</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0d14'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-size='23' font-weight='900' fill='%23e8e6ec'%3ESG%3C/text%3E%3C/svg%3E">
   <style>html,body{margin:0;min-height:100%;background:#0c0d14;color:#e8e6ec}</style>
-  <link rel="stylesheet" href="./css/style.css?v=hero-image-20261117">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@700&display=swap">
+  <link rel="stylesheet" href="./css/style.css?v=hero-stage-20261117">
   <link rel="stylesheet" href="./css/cursor.css">
   <link rel="stylesheet" href="./css/interactions.css">
   <link rel="stylesheet" href="./css/about-basic.css?v=about-copy-20261116">
@@ -127,8 +131,16 @@
 
   <main id="main-content">
     <section class="hero" id="home">
-      <div class="hero-background" aria-hidden="true">
-        <img src="./assets/hero/hero-background.jpg" alt="" loading="eager" decoding="async" fetchpriority="high">
+      <div class="hero-stage" id="hero-stage">
+        <div class="hero-stage__world">
+          <img class="hero-stage__background" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/a194141a-44ba-44bb-8372-e6720af994ca.jpg" alt="" loading="eager" decoding="async" fetchpriority="high" aria-hidden="true">
+          <video class="hero-stage__head" data-head-src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e1b48476-24ab-456a-bb12-13e63bc60973.mp4" muted playsinline preload="auto" aria-hidden="true"></video>
+          <img class="hero-stage__helmet" src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e8c78660-4497-41b9-82ae-a4738a5edd11.jpg" alt="" loading="lazy" decoding="async" aria-hidden="true">
+          <button class="hero-stage__button" id="hero-stage-button" type="button" aria-pressed="false" aria-label="戴上玻璃头盔" data-cursor="穿戴">
+            <span>PUSH</span>
+            <span>ME</span>
+          </button>
+        </div>
       </div>
       <div class="hero__grid" aria-hidden="true"></div>
       <div class="hero__side" aria-label="作品集">
@@ -1291,6 +1303,7 @@
   <script src="./js/interactions.js" defer></script>
   <script src="./js/vinyl.js?v=1" defer></script>
   <script src="./js/core-skills.js" defer></script>
+  <script src="./js/hero-stage.js?v=20261117" defer></script>
   <script src="./js/main.js?v=dongbei-assets-1" defer></script>
   <script src="./js/recent-works.js?v=1" defer></script>
   <script src="./js/work-storm.js?v=3" defer></script>
