@@ -957,15 +957,6 @@
   renderHome();
   primeImageFallbacks();
 
-  const heroBackgroundVideo = document.getElementById("hero-background-video");
-  if (heroBackgroundVideo) {
-    if (reduceMotion.matches) {
-      heroBackgroundVideo.pause();
-    } else {
-      heroBackgroundVideo.play().catch(() => {});
-    }
-  }
-
   const bootLayer = document.getElementById("boot-layer");
   const bootVideo = document.getElementById("boot-video");
   const bootSkip = document.getElementById("boot-skip");
