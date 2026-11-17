@@ -1,13 +1,13 @@
 .work-storm {
   --storm-gold: #d4af37;
   --storm-gold-bright: #f2d77c;
-  --storm-cyan: #63d6df;
+  --storm-cyan: #70dce7;
   --storm-scale: 1;
-  --storm-stage-height: 940px;
+  --storm-stage-height: 900px;
   position: relative;
   z-index: 1;
   width: 100%;
-  min-height: 1020px;
+  min-height: 990px;
   padding: 0;
   overflow: hidden;
   isolation: isolate;
@@ -16,23 +16,23 @@
 .work-storm::before {
   position: absolute;
   z-index: -1;
-  top: 12%;
+  top: 11%;
   left: 50%;
-  width: min(980px, 112vw);
-  height: 84%;
+  width: min(1380px, 120vw);
+  height: 86%;
   background:
-    radial-gradient(ellipse at 38% 40%, rgba(99, 214, 223, 0.065), transparent 36%),
-    radial-gradient(ellipse at 63% 58%, rgba(212, 175, 55, 0.07), transparent 39%),
-    linear-gradient(180deg, transparent, rgba(8, 11, 20, 0.3), transparent);
+    radial-gradient(ellipse at 38% 43%, rgba(99, 214, 223, 0.05), transparent 39%),
+    radial-gradient(ellipse at 64% 56%, rgba(212, 175, 55, 0.055), transparent 41%),
+    linear-gradient(180deg, transparent, rgba(6, 9, 17, 0.18), transparent);
   content: "";
-  filter: blur(42px);
+  filter: blur(40px);
   pointer-events: none;
   transform: translateX(-50%);
 }
 
 .work-storm__heading {
   position: relative;
-  z-index: 20;
+  z-index: 30;
   margin: 0 0 20px;
   text-align: center;
 }
@@ -77,106 +77,139 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 800px;
-  height: 940px;
+  width: 1180px;
+  height: 900px;
   overflow: hidden;
+  opacity: 0;
   transform: translateX(-50%) scale(var(--storm-scale));
   transform-origin: top center;
+  transition: opacity 420ms ease;
 }
 
-.work-storm__ambient {
+.work-storm.is-ready .work-storm__stage {
+  opacity: 1;
+}
+
+.work-storm__glow {
   position: absolute;
-  z-index: 0;
-  top: 32px;
+  z-index: 2;
+  top: 762px;
   left: 50%;
-  width: 620px;
-  height: 875px;
+  width: 920px;
+  height: 156px;
+  border-radius: 50%;
   background:
-    radial-gradient(ellipse at 44% 24%, rgba(99, 214, 223, 0.09), transparent 34%),
-    radial-gradient(ellipse at 58% 68%, rgba(212, 175, 55, 0.085), transparent 39%);
-  filter: blur(35px);
-  opacity: 0.78;
+    radial-gradient(ellipse at 42% 54%, rgba(93, 218, 229, 0.25), transparent 43%),
+    radial-gradient(ellipse at 61% 50%, rgba(212, 175, 55, 0.2), transparent 46%),
+    radial-gradient(ellipse at 50% 50%, rgba(117, 172, 214, 0.12), transparent 68%);
+  filter: blur(28px);
+  opacity: 0.82;
   pointer-events: none;
   transform: translateX(-50%);
 }
 
-.work-storm__axis {
-  position: absolute;
-  z-index: 1;
-  top: 42px;
-  left: 50%;
-  width: 2px;
-  height: 842px;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(99, 214, 223, 0.15) 9%,
-    rgba(242, 215, 124, 0.28) 49%,
-    rgba(99, 214, 223, 0.12) 91%,
-    transparent
-  );
-  box-shadow: 0 0 20px rgba(99, 214, 223, 0.14);
-  opacity: 0.68;
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
-.work-storm__axis::after {
+.work-storm__stars,
+.work-storm__meteors {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent, rgba(242, 215, 124, 0.24), transparent);
-  content: "";
-  filter: blur(7px);
+  overflow: hidden;
+  pointer-events: none;
 }
 
-.work-storm__helix {
-  position: absolute;
-  z-index: 4;
-  inset: 0;
-  transform-style: preserve-3d;
+.work-storm__stars {
+  z-index: 3;
 }
 
-.work-storm__rung {
-  position: absolute;
+.work-storm__stars--back,
+.work-storm__meteors--back {
   z-index: 1;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(99, 214, 223, 0.34), rgba(232, 230, 236, 0.11), rgba(242, 215, 124, 0.34));
-  box-shadow:
-    0 0 7px rgba(99, 214, 223, 0.12),
-    0 0 12px rgba(242, 215, 124, 0.07);
-  opacity: 0.52;
-  pointer-events: none;
-  transform-origin: 50% 50%;
-  will-change: width, transform, opacity;
 }
 
-.work-storm__card {
-  --storm-card-width: 150px;
-  --storm-card-height: 210px;
+.work-storm__stars--front,
+.work-storm__meteors--front {
+  z-index: 12;
+}
+
+.work-storm__star {
   position: absolute;
-  z-index: 5;
+  width: var(--storm-star-size, 2px);
+  height: var(--storm-star-size, 2px);
+  border-radius: 50%;
+  background: var(--storm-star-color, #f2d77c);
+  box-shadow: 0 0 8px var(--storm-star-color, #f2d77c);
+  opacity: 0;
+  will-change: opacity;
+}
+
+.work-storm__meteor {
+  position: absolute;
   top: 0;
   left: 0;
-  width: var(--storm-card-width);
-  height: var(--storm-card-height);
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  border: 0;
-  background: transparent;
-  pointer-events: none;
-  transform-origin: 50% 50%;
+  width: var(--storm-tail-length, 76px);
+  height: 2px;
+  opacity: 0.58;
+  transform-origin: 100% 50%;
   will-change: transform, opacity;
 }
 
-.work-storm__motion {
+.work-storm__meteor-tail {
+  position: absolute;
+  top: 50%;
+  right: 1px;
   width: 100%;
-  height: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--storm-meteor-color, #f2d77c));
+  filter: blur(0.5px);
+  transform: translateY(-50%);
+}
+
+.work-storm__meteor-head {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fffdf2;
+  box-shadow:
+    0 0 7px var(--storm-meteor-color, #f2d77c),
+    0 0 15px var(--storm-meteor-color, #f2d77c);
+  transform: translate(50%, -50%);
+}
+
+.work-storm__cylinder-scene {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  perspective: 2400px;
+  perspective-origin: 50% 48%;
+  pointer-events: none;
+}
+
+.work-storm__rotator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
   transform-style: preserve-3d;
   will-change: transform;
+}
+
+.work-storm__card {
+  --storm-card-width: 190px;
+  --storm-card-height: 230px;
+  position: absolute;
+  top: var(--storm-card-y, 0px);
+  left: 0;
+  width: var(--storm-card-width);
+  height: var(--storm-card-height);
+  margin: calc(var(--storm-card-height) / -2) 0 0 calc(var(--storm-card-width) / -2);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .work-storm__frame {
@@ -184,14 +217,15 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border: 1px solid rgba(242, 215, 124, 0.58);
-  border-radius: 7px;
+  border: 1px solid rgba(242, 215, 124, 0.52);
+  border-radius: 8px;
   background: #101117;
   box-shadow:
-    -8px 0 20px rgba(74, 211, 224, 0.14),
-    8px 0 20px rgba(212, 175, 55, 0.15),
-    0 15px 28px rgba(0, 0, 0, 0.38);
+    -8px 0 18px rgba(74, 211, 224, 0.12),
+    8px 0 18px rgba(212, 175, 55, 0.13),
+    0 14px 28px rgba(0, 0, 0, 0.34);
   isolation: isolate;
+  transform: scale(0.96);
 }
 
 .work-storm__frame img {
@@ -220,23 +254,23 @@
   position: absolute;
   z-index: 3;
   top: -24%;
-  left: -55%;
-  width: 26%;
+  left: -58%;
+  width: 28%;
   height: 148%;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 250, 218, 0.05) 25%,
-    rgba(255, 250, 226, 0.28) 52%,
-    rgba(103, 220, 230, 0.09) 74%,
+    rgba(255, 250, 226, 0.05) 25%,
+    rgba(255, 252, 236, 0.3) 52%,
+    rgba(103, 220, 230, 0.08) 74%,
     transparent
   );
   content: "";
   filter: blur(4px);
   mix-blend-mode: screen;
   pointer-events: none;
-  transform: translateX(-250%) rotate(12deg);
-  animation: work-storm-gloss var(--storm-gloss-duration, 5.6s) ease-in-out var(--storm-gloss-delay, -1.3s) infinite;
+  transform: translateX(-260%) rotate(12deg);
+  animation: work-storm-gloss var(--storm-gloss-duration, 5.8s) ease-in-out var(--storm-gloss-delay, -1.4s) infinite;
 }
 
 .work-storm__frame::after {
@@ -245,8 +279,8 @@
   inset: 0;
   border-radius: inherit;
   background:
-    linear-gradient(90deg, rgba(99, 214, 223, 0.12), transparent 14%, transparent 86%, rgba(242, 215, 124, 0.13)),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 22%, transparent 78%, rgba(0, 0, 0, 0.12));
+    linear-gradient(90deg, rgba(99, 214, 223, 0.12), transparent 15%, transparent 85%, rgba(242, 215, 124, 0.14)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 24%, transparent 78%, rgba(0, 0, 0, 0.1));
   box-shadow:
     inset 9px 0 16px -14px rgba(99, 214, 223, 0.7),
     inset -9px 0 16px -14px rgba(242, 215, 124, 0.72);
@@ -254,31 +288,10 @@
   pointer-events: none;
 }
 
-.work-storm__sparks {
-  position: absolute;
-  z-index: 9;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.work-storm__spark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--storm-spark-size, 3px);
-  height: var(--storm-spark-size, 3px);
-  border-radius: 50%;
-  background: var(--storm-spark-color, var(--storm-gold-bright));
-  box-shadow: 0 0 10px var(--storm-spark-color, var(--storm-gold-bright));
-  opacity: var(--storm-spark-opacity, 0.64);
-  will-change: transform, opacity;
-}
-
 @keyframes work-storm-gloss {
   0%,
   62% {
-    transform: translateX(-250%) rotate(12deg);
+    transform: translateX(-260%) rotate(12deg);
   }
 
   88%,
