@@ -2559,66 +2559,6 @@ a {
   border-radius: 16px;
 }
 
-.boot-layer {
-  position: fixed;
-  z-index: 3000;
-  inset: 0;
-  display: none;
-  overflow: hidden;
-  background: #010103;
-  opacity: 1;
-  transition: opacity 600ms ease;
-}
-
-.js .boot-layer {
-  display: block;
-}
-
-.boot-video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #010103;
-}
-
-.boot-skip {
-  position: absolute;
-  right: 28px;
-  bottom: 22px;
-  padding: 10px 0;
-  background: transparent;
-  color: var(--text-3);
-  cursor: pointer;
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.1em;
-}
-
-.boot-skip:hover {
-  color: var(--text-1);
-}
-
-.boot-layer.is-fading,
-.boot-layer.is-skipped {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.boot-forced .boot-layer,
-.boot-session-seen .boot-layer {
-  display: none !important;
-}
-
-.js.boot-active body {
-  overflow: hidden;
-}
-
-@media (max-aspect-ratio: 4 / 3) {
-  .boot-video {
-    object-fit: cover;
-  }
-}
-
 @media (max-width: 1024px) {
   :root {
     --gutter: 28px;
@@ -3386,10 +3326,6 @@ a {
 
   .marquee__track {
     animation: none;
-  }
-
-  .boot-layer {
-    display: none !important;
   }
 
   .hero-stage__world {

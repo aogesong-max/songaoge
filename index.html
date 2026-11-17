@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://d2ol7oe51mr4n9.cloudfront.net" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@700&display=swap">
   <link rel="stylesheet" href="./css/style.css?v=hero-stage-20261117">
+  <link rel="stylesheet" href="./css/boot.css?v=boot-20261117">
   <link rel="stylesheet" href="./css/cursor.css">
   <link rel="stylesheet" href="./css/interactions.css">
   <link rel="stylesheet" href="./css/about-basic.css?v=about-copy-20261116">
@@ -35,27 +36,6 @@
   <link rel="stylesheet" href="./css/vinyl.css?v=1">
   <script>
     document.documentElement.classList.add("js");
-    window.__bootDismiss = function (recordSession) {
-      window.clearTimeout(window.__bootSafetyTimer);
-      document.documentElement.classList.remove("boot-active");
-      document.documentElement.classList.add("boot-forced");
-      document.body.classList.remove("boot-locked");
-      var bootLayer = document.getElementById("boot-layer");
-      if (bootLayer) bootLayer.setAttribute("aria-hidden", "true");
-      if (recordSession) {
-        try {
-          window.sessionStorage.setItem("songaoge-boot-played-v5", "1");
-        } catch (error) {}
-      }
-    };
-    window.__bootSafetyTimer = window.setTimeout(function () {
-      window.__bootDismiss(false);
-    }, 8500);
-    try {
-      if (window.sessionStorage.getItem("songaoge-boot-played-v5") === "1") {
-        document.documentElement.classList.add("boot-session-seen");
-      }
-    } catch (error) {}
   </script>
   <noscript>
     <style>
@@ -69,10 +49,48 @@
 <body>
   <a class="skip-link" href="#main-content">跳到主要内容</a>
 
-  <div class="boot-layer" id="boot-layer" role="dialog" aria-label="SONGAOGE 启动动画" aria-hidden="false">
-    <video class="boot-video" id="boot-video" src="./assets/intro/startup.mp4" poster="./assets/intro/poster.jpg" muted playsinline preload="auto" aria-hidden="true"></video>
-    <button class="boot-skip" id="boot-skip" type="button" onclick="window.__bootDismiss &amp;&amp; window.__bootDismiss(true)">跳过 SKIP <span aria-hidden="true">→</span></button>
+  <div class="boot-layer" id="boot-layer" role="dialog" aria-modal="true" aria-label="SONGAOGE 开机动画" tabindex="-1">
+    <span class="boot-sr-only">按 ESC 或点击任意位置跳过开机动画。</span>
+    <span class="boot-layer__ambient" aria-hidden="true"></span>
+    <div class="boot-frame" aria-hidden="true">
+      <span class="boot-frame__edge"></span>
+      <span class="boot-frame__corner boot-frame__corner--tl"></span>
+      <span class="boot-frame__corner boot-frame__corner--tr"></span>
+      <span class="boot-frame__corner boot-frame__corner--bl"></span>
+      <span class="boot-frame__corner boot-frame__corner--br"></span>
+      <span class="boot-frame__label boot-frame__label--tl"><i id="boot-rec-dot"></i>REC</span>
+      <span class="boot-frame__label boot-frame__label--tr">SONGAOGE</span>
+      <span class="boot-frame__label boot-frame__label--bl">AIGC · FILM</span>
+      <span class="boot-frame__label boot-frame__label--br">4K · 24FPS</span>
+      <span class="boot-frame__focus"></span>
+    </div>
+    <canvas class="boot-particles" id="boot-particles" aria-hidden="true"></canvas>
+    <div class="boot-shockwave" id="boot-shockwave" aria-hidden="true"></div>
+    <div class="boot-loader" id="boot-loader">
+      <svg class="boot-loader__ring" viewBox="0 0 240 240" aria-hidden="true">
+        <defs>
+          <linearGradient id="boot-ring-gradient" x1="22" y1="218" x2="218" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#3ee7f2"></stop>
+            <stop offset="0.52" stop-color="#ff6dbb"></stop>
+            <stop offset="1" stop-color="#ff7047"></stop>
+          </linearGradient>
+          <filter id="boot-ring-blur" x="-35%" y="-35%" width="170%" height="170%">
+            <feGaussianBlur stdDeviation="5"></feGaussianBlur>
+          </filter>
+        </defs>
+        <circle class="boot-loader__track" cx="120" cy="120" r="112"></circle>
+        <circle class="boot-loader__inner" cx="120" cy="120" r="96"></circle>
+        <circle class="boot-loader__progress-glow" id="boot-progress-glow" cx="120" cy="120" r="112" pathLength="100"></circle>
+        <circle class="boot-loader__progress" id="boot-progress" cx="120" cy="120" r="112" pathLength="100"></circle>
+      </svg>
+      <div class="boot-loader__content">
+        <span class="boot-loader__name">宋傲阁</span>
+        <span class="boot-loader__latin">SONGAOGE</span>
+        <span class="boot-loader__percent" id="boot-percent">0%</span>
+      </div>
+    </div>
   </div>
+  <script src="./js/boot.js?v=boot-20261117"></script>
 
   <header class="site-header" id="site-header">
     <div class="site-header__inner">

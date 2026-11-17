@@ -1,7 +1,6 @@
 (() => {
   "use strict";
 
-  const root = document.documentElement;
   const body = document.body;
   const works = window.SONGAOGE_WORKS || { dramas: [], designSections: [] };
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -957,65 +956,4 @@
   renderHome();
   primeImageFallbacks();
 
-  const bootLayer = document.getElementById("boot-layer");
-  const bootVideo = document.getElementById("boot-video");
-  const bootSkip = document.getElementById("boot-skip");
-  let bootFinished = false;
-  let bootFrame = 0;
-
-  function dismissBoot(recordSession = false) {
-    if (bootFinished) return;
-    bootFinished = true;
-    cancelAnimationFrame(bootFrame);
-    clearTimeout(window.__bootSafetyTimer);
-    if (bootVideo) bootVideo.pause();
-    root.classList.remove("boot-active");
-    root.classList.add("boot-forced");
-    body.classList.remove("boot-locked");
-    if (bootLayer) {
-      bootLayer.classList.add("is-skipped");
-      bootLayer.setAttribute("aria-hidden", "true");
-    }
-    if (recordSession) {
-      try {
-        sessionStorage.setItem("songaoge-boot-played-v5", "1");
-      } catch (error) {}
-    }
-  }
-
-  function startBoot() {
-    if (!bootLayer || reduceMotion.matches) {
-      dismissBoot(false);
-      return;
-    }
-    let alreadyPlayed = false;
-    try {
-      alreadyPlayed = sessionStorage.getItem("songaoge-boot-played-v5") === "1";
-    } catch (error) {}
-    if (alreadyPlayed || !bootVideo) {
-      dismissBoot(false);
-      return;
-    }
-
-    root.classList.add("boot-active");
-    body.classList.add("boot-locked");
-    bootVideo.currentTime = 0;
-    bootVideo.play().catch(() => dismissBoot(false));
-
-    const tick = () => {
-      if (bootFinished) return;
-      if (bootVideo.currentTime >= 5.35) bootLayer.classList.add("is-fading");
-      if (bootVideo.currentTime >= 5.95 || bootVideo.ended) {
-        dismissBoot(true);
-        return;
-      }
-      bootFrame = requestAnimationFrame(tick);
-    };
-    bootVideo.addEventListener("ended", () => dismissBoot(true), { once: true });
-    bootVideo.addEventListener("error", () => dismissBoot(false), { once: true });
-    bootFrame = requestAnimationFrame(tick);
-  }
-
-  bootSkip?.addEventListener("click", () => dismissBoot(true));
-  startBoot();
 })();

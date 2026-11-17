@@ -9,7 +9,8 @@
 - `css/style.css`：首页编辑式版式、全站视觉、断点与详情层样式
 - `css/cursor.css`：旋转粒子光标、悬停状态与点击爆发效果
 - `css/interactions.css`：标题视差、磁吸按钮与作品卡片倾斜效果
-- `js/main.js`：首页渲染、导航菜单、详情层、灯箱、轮播、视频和开机动画
+- `js/main.js`：首页渲染、导航菜单、详情层、灯箱、轮播和视频
+- `js/boot.js`：开机动画粒子、进度与退场时间轴
 - `js/cursor.js`：自定义粒子光标的指针跟踪与反馈
 - `js/interactions.js`：首页及作品列表的轻量鼠标交互
 
@@ -27,7 +28,7 @@ python -m http.server 8080
 
 - 头像目标路径为 `assets/avatar.jpg`。当前文件不存在，页面显示不带裂图的空头像框。
 - 首页 Hero 背景继续使用 `assets/hero/hero-background.mp4` 与对应海报。
-- 开机动画继续使用 `assets/intro/startup.mp4` 与对应海报。
+- 开机动画由 `css/boot.css` 与 `js/boot.js` 实时绘制，不依赖视频或图片素材。
 - Hero 个人信息来自作品集第 4 页，常用软件图标位于 `assets/icons/software/`。
 - 短剧、IP、创意图、国内电商套图、工作流和视频资源均位于 `assets/works/`。
 - 电商套图使用 TOM FORD、GPW5、WASSUP 三组国内电商素材。
